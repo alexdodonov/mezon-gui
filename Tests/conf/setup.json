@@ -1,0 +1,46 @@
+{
+	"id": {
+		"type": "integer",
+		"disabled": 1,
+		"title": "record id"
+	},
+	"title": {
+		"type": "string",
+		"required": 1
+	},
+	"user_id": {
+		"type": "external",
+		"disabled": 0,
+		"remote-source": "https://auth-service"
+	},
+	"label": {
+		"type": "label"
+	},
+	"description": {
+		"type": "string",
+		"custom": 1,
+		"control": "textarea"
+	},
+	"created": {
+		"type": "date",
+		"title": "creation date"
+	},
+	"avatar": {
+		"type": "file",
+		"title": "avatar file content"
+	},
+	"parts": {
+		"type": "external",
+		"title": "",
+		"remote-source": "https://auth-service"
+	},
+	"extensions": {
+		"type": "custom",
+		"title": "Extensions",
+		"fields": {
+			"balance": {
+				"type": "integer"
+			}
+		}
+	}
+}

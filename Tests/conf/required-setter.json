@@ -1,0 +1,11 @@
+{
+	"name": "field-name" , 
+	"required" : 1 , 
+	"name-prefix" : "prefix",
+	"custom" : 1 , 
+	"batch" : 1 , 
+	"disabled" : 1 , 
+	"toggler" : "select" , 
+	"toggle-value" : 2 , 
+	"type" : "integer"
+}

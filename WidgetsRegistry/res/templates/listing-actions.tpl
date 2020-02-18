@@ -1,0 +1,1 @@
+<td style="text-align: center;">{actions}</td>

@@ -1,0 +1,1 @@
+<th class="column-title no-link last col-md-1"><span class="nobr">Действие</span></th>

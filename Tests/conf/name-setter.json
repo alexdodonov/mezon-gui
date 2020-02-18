@@ -1,0 +1,5 @@
+{
+	"name": "field-name" , 
+	"name-prefix" : "prefix" , 
+	"type" : "integer"
+}

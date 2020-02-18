@@ -1,0 +1,29 @@
+{
+	"width": 10,
+	"rows" : [
+		{
+			"id" : {
+				"width" : 2
+			},
+			"title" : {
+				"width" : 2
+			},
+			"description" : {
+				"width" : 2
+			},
+			"type" : {
+				"width" : 2
+			},
+			"avatar" : {
+				"width" : 2
+			}
+		} , 
+		{
+			"creation_date" : {
+				"width" : 2
+			},
+			"invisible_field" : {
+			}
+		}
+	]
+}
