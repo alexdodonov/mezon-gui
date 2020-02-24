@@ -12,7 +12,7 @@ class RowsFieldUnitTest extends \PHPUnit\Framework\TestCase
         $field = new \Mezon\Gui\FormBuilder\RowsField([
             'title' => [
                 'type' => 'string'
-            ],
+            ]
         ], 'author');
 
         // test bodyy
@@ -20,5 +20,21 @@ class RowsFieldUnitTest extends \PHPUnit\Framework\TestCase
 
         // assertionss
         $this->assertStringContainsString('add_element_by_template', $content, 'Necessary JavaScripts were not found');
+    }
+
+    /**
+     * Testing fillAllRow method
+     */
+    public function testFillAllRow(): void
+    {
+        // setupp
+        $field = new \Mezon\Gui\FormBuilder\RowsField([
+            'title' => [
+                'type' => 'string'
+            ]
+        ], 'author');
+
+        // test body and assertionss
+        $this->assertTrue($field->fillAllRow());
     }
 }
