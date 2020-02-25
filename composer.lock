@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92a97fa7fc730211f5d9dd853d36b144",
+    "content-hash": "247f6922d06fae827ac564d0525cfec9",
     "packages": [
         {
             "name": "mezon/functional",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexdodonov/mezon-functional.git",
-                "reference": "9f92bb4084d140e7d34d208e6fdc7e370c292d37"
+                "reference": "3cae5c7de9beabadadf39efc806caf67d5d1fb85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexdodonov/mezon-functional/zipball/9f92bb4084d140e7d34d208e6fdc7e370c292d37",
-                "reference": "9f92bb4084d140e7d34d208e6fdc7e370c292d37",
+                "url": "https://api.github.com/repos/alexdodonov/mezon-functional/zipball/3cae5c7de9beabadadf39efc806caf67d5d1fb85",
+                "reference": "3cae5c7de9beabadadf39efc806caf67d5d1fb85",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,46 @@
             ],
             "description": "Small and fast framework for functional programming",
             "homepage": "https://github.com/alexdodonov/mezon-functional",
-            "time": "2020-02-13T21:26:22+00:00"
+            "time": "2020-02-25T15:31:54+00:00"
+        },
+        {
+            "name": "mezon/list-builder-adapter",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexdodonov/mezon-list-builder-adapter.git",
+                "reference": "2be695faf3789b080e5813d25acf7ab0f70ba6ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexdodonov/mezon-list-builder-adapter/zipball/2be695faf3789b080e5813d25acf7ab0f70ba6ff",
+                "reference": "2be695faf3789b080e5813d25acf7ab0f70ba6ff",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mezon\\Gui\\ListBuilder\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dodonov Alexey",
+                    "email": "alexey@dodonov.pro",
+                    "homepage": "http://gdzone.ru",
+                    "role": "Founder"
+                }
+            ],
+            "description": "List builder adapter interface",
+            "homepage": "https://github.com/alexdodonov/mezon-list-builder-adapter",
+            "time": "2020-02-25T19:39:44+00:00"
         },
         {
             "name": "mezon/security",

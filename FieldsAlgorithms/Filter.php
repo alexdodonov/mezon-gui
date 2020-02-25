@@ -150,7 +150,7 @@ class Filter
      *            Conditions
      * @return array Conditions
      */
-    public static function addFilterCondition($where)
+    public static function addFilterCondition(array $where): array
     {
         if (! isset($_GET['filter'])) {
             return $where;
