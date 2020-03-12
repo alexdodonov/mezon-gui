@@ -12,3 +12,15 @@ composer require mezon/gui
 ```
 
 And that's all )
+
+## Usage
+
+### DateTimeUtils class
+
+This class provides utilities for date and time tasks. For example this call:
+
+```PHP
+Mezon\Class\DateTimeUtils::isToday('2020-02-02');
+```
+
+Will return true if the passed date is a today and false otherwise.

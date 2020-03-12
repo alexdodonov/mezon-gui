@@ -8,15 +8,15 @@ class TextFieldUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructor()
     {
-        // setupp
+        // setup
         $field = new \Mezon\Gui\Field\TextField([
             'text' => 'name'
         ]);
 
-        // test bodyy
+        // test body
         $content = $field->html();
 
-        // assertionss
+        // assertions
         $this->assertEquals('name', $content, 'Text was not fetched');
     }
 

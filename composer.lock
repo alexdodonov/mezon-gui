@@ -125,16 +125,16 @@
         },
         {
             "name": "mezon/template-engine",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexdodonov/mezon-template-engine.git",
-                "reference": "152bb2017495a23bf697faff92e851ad299e21fd"
+                "reference": "86dcf12fe4d88e4f75c1fad35640748ab57c7e19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexdodonov/mezon-template-engine/zipball/152bb2017495a23bf697faff92e851ad299e21fd",
-                "reference": "152bb2017495a23bf697faff92e851ad299e21fd",
+                "url": "https://api.github.com/repos/alexdodonov/mezon-template-engine/zipball/86dcf12fe4d88e4f75c1fad35640748ab57c7e19",
+                "reference": "86dcf12fe4d88e4f75c1fad35640748ab57c7e19",
                 "shasum": ""
             },
             "require": {
@@ -161,7 +161,7 @@
             ],
             "description": "https://github.com/alexdodonov/mezon-template-engine",
             "homepage": "https://github.com/alexdodonov/mezon-template-engine",
-            "time": "2020-02-13T21:30:46+00:00"
+            "time": "2020-02-25T21:18:55+00:00"
         }
     ],
     "packages-dev": [],
