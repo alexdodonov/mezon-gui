@@ -286,6 +286,21 @@ class Field
     }
 
     /**
+     * Method fetches field type
+     *
+     * @param array $fieldDescription
+     *            Field description
+     */
+    protected function initType(array $fieldDescription): void
+    {
+        if (isset($fieldDescription['type'])) {
+            $this->type = $fieldDescription['type'];
+        } else {
+            throw (new \Exception('Field type must be set', - 2));
+        }
+    }
+
+    /**
      * Constructor
      *
      * @param array $fieldDescription
@@ -295,6 +310,8 @@ class Field
      */
     public function __construct(array $fieldDescription, string $value = '')
     {
+        $this->initType($fieldDescription);
+
         $this->initName($fieldDescription);
 
         $this->initClass($fieldDescription);
@@ -320,8 +337,6 @@ class Field
         $this->initHasLabel($fieldDescription);
 
         $this->value = $value;
-
-        $this->type = $fieldDescription['type'];
     }
 
     /**

@@ -34,6 +34,8 @@ class Select extends \Mezon\Gui\Field
      */
     public function __construct(array $fieldDescription, string $value = '')
     {
+        $fieldDescription['type'] = isset($fieldDescription['type']) ? $fieldDescription['type'] : 'integer';
+
         parent::__construct($fieldDescription, $value);
 
         $itemsSource = $fieldDescription['items'];
@@ -53,7 +55,7 @@ class Select extends \Mezon\Gui\Field
      */
     public function html(): string
     {
-        $content = '<select class="'.$this->class.'"';
+        $content = '<select class="' . $this->class . '"';
         $content .= $this->required ? ' required="required"' : '';
         $content .= ' type="text" name="' . $this->getNamePrefix() . $this->name .
             ($this->batch ? '[{_creation_form_items_counter}]' : '') . '"';
