@@ -9,33 +9,35 @@ class FilterUnitTest extends \PHPUnit\Framework\TestCase
     function testAddFilterConditionFromArr(): void
     {
         // setup and test body
-        $result = \Mezon\Gui\FieldsAlgorithms\Filter::addFilterConditionFromArr([
+        $result = \Mezon\Gui\FieldsAlgorithms\Filter::addFilterConditionFromArr(
             [
-                'arg1' => '$id',
-                'op' => '>',
-                'arg2' => '1'
-            ],
-            [
-                'arg1' => '$id',
-                'op' => 'in',
-                'arg2' => [
-                    1,
-                    2
-                ]
-            ],
-            [
-                'arg1' => [
+                [
+                    'arg1' => '$id',
+                    'op' => '>',
+                    'arg2' => '1'
+                ],
+                [
                     'arg1' => '$id',
                     'op' => 'in',
                     'arg2' => [
-                        3,
-                        4
+                        1,
+                        2
                     ]
                 ],
-                'op' => '=',
-                'arg2' => 'true'
-            ]
-        ], []);
+                [
+                    'arg1' => [
+                        'arg1' => '$id',
+                        'op' => 'in',
+                        'arg2' => [
+                            3,
+                            4
+                        ]
+                    ],
+                    'op' => '=',
+                    'arg2' => 'true'
+                ]
+            ],
+            []);
 
         // asssertions
         $this->assertContains('id > 1', $result);
@@ -52,13 +54,15 @@ class FilterUnitTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Exception::class);
 
         // setup and test body
-        \Mezon\Gui\FieldsAlgorithms\Filter::addFilterConditionFromArr([
+        \Mezon\Gui\FieldsAlgorithms\Filter::addFilterConditionFromArr(
             [
-                'arg1' => '$id',
-                'op' => '<>',
-                'arg2' => '1'
-            ]
-        ], []);
+                [
+                    'arg1' => '$id',
+                    'op' => '<>',
+                    'arg2' => '1'
+                ]
+            ],
+            []);
     }
 
     /**
@@ -67,12 +71,14 @@ class FilterUnitTest extends \PHPUnit\Framework\TestCase
     function testAddFilterConditionFromArrSimple(): void
     {
         // setup and test body
-        $result = \Mezon\Gui\FieldsAlgorithms\Filter::addFilterConditionFromArr([
-            'field1' => 1,
-            'field2' => 'null',
-            'field3' => 'not null',
-            'field4' => 'some string'
-        ], []);
+        $result = \Mezon\Gui\FieldsAlgorithms\Filter::addFilterConditionFromArr(
+            [
+                'field1' => 1,
+                'field2' => 'null',
+                'field3' => 'not null',
+                'field4' => 'some string'
+            ],
+            []);
 
         // asssertions
         $this->assertContains('field1 = 1', $result, 'Integer compilation error');
@@ -100,5 +106,24 @@ class FilterUnitTest extends \PHPUnit\Framework\TestCase
         // assertions
         $this->assertEquals('1 = 2', $result[0]);
         $this->assertEquals('$id = 1', $result[1]);
+    }
+
+    /**
+     * Testing additing conditions with default branch
+     */
+    function testAddFilterConditionDefault(): void
+    {
+        // setup
+        $where = [
+            '1 = 2'
+        ];
+        unset($_GET['filter']);
+
+        // test body
+        $result = \Mezon\Gui\FieldsAlgorithms\Filter::addFilterCondition($where);
+
+        // assertions
+        $this->assertEquals('1 = 2', $result[0]);
+        $this->assertCount(1, $result);
     }
 }

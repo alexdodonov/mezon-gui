@@ -37,3 +37,26 @@ But we also can get name of the month by it's code:
 Mezon\Class\DateTimeUtils::locale = 'ru';
 var_dump(Mezon\Class\DateTimeUtils::dayMonth('2020-02-02'));
 ```
+
+### Fields algorithms
+
+This class provides routines for operation with form fields. To init this class use constructor:
+
+```PHP
+$fields = new \Mezon\Gui\FieldsAlgorithms([
+    'id'=>['type'=>'int'],
+    'description'=>['type'=>'string']
+]);
+```
+
+Here we define two fields.
+
+### Form builder
+
+Form builder is obviously used for building forms )
+
+It can be done like this:
+
+```PHP
+$form = new \Mezon\Gui\FormBuilder();
+```

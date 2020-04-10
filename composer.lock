@@ -4,20 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "247f6922d06fae827ac564d0525cfec9",
+    "content-hash": "0fe0930d3570afc1a56a266069e2b678",
     "packages": [
         {
-            "name": "mezon/functional",
-            "version": "1.0.2",
+            "name": "mezon/fields-set",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/alexdodonov/mezon-functional.git",
-                "reference": "3cae5c7de9beabadadf39efc806caf67d5d1fb85"
+                "url": "https://github.com/alexdodonov/mezon-fields-set.git",
+                "reference": "348740a29ed2dc68dd14b8e3771a1f70a9e265ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexdodonov/mezon-functional/zipball/3cae5c7de9beabadadf39efc806caf67d5d1fb85",
-                "reference": "3cae5c7de9beabadadf39efc806caf67d5d1fb85",
+                "url": "https://api.github.com/repos/alexdodonov/mezon-fields-set/zipball/348740a29ed2dc68dd14b8e3771a1f70a9e265ab",
+                "reference": "348740a29ed2dc68dd14b8e3771a1f70a9e265ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mezon\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dodonov Alexey",
+                    "email": "alexey@dodonov.pro",
+                    "homepage": "http://gdzone.ru",
+                    "role": "Founder"
+                }
+            ],
+            "description": "Set of typed fields",
+            "homepage": "https://github.com/alexdodonov/mezon-fields-set",
+            "time": "2020-04-10T12:21:41+00:00"
+        },
+        {
+            "name": "mezon/functional",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexdodonov/mezon-functional.git",
+                "reference": "e1573d1e5f807a6f3a7f2aea3a544a9ed98f25cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexdodonov/mezon-functional/zipball/e1573d1e5f807a6f3a7f2aea3a544a9ed98f25cb",
+                "reference": "e1573d1e5f807a6f3a7f2aea3a544a9ed98f25cb",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +82,7 @@
             ],
             "description": "Small and fast framework for functional programming",
             "homepage": "https://github.com/alexdodonov/mezon-functional",
-            "time": "2020-02-25T15:31:54+00:00"
+            "time": "2020-03-27T16:21:15+00:00"
         },
         {
             "name": "mezon/list-builder-adapter",
@@ -171,7 +210,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2.0"
+        "php": "^7.2"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

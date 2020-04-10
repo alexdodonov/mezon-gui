@@ -14,7 +14,7 @@ namespace Mezon\Gui;
 /**
  * Class constructs forms
  */
-class FieldsAlgorithms
+class FieldsAlgorithms extends \Mezon\FieldsSet
 {
 
     /**
@@ -31,12 +31,16 @@ class FieldsAlgorithms
      */
     protected $entityName = false;
 
+    // TODO make private
+
     /**
      * Session Id
      *
      * @var string
      */
     protected $sessionId = '';
+
+    // TODO make private
 
     /**
      * Constructor
@@ -48,9 +52,11 @@ class FieldsAlgorithms
      */
     public function __construct(array $fields = [], string $entityName = '')
     {
+        parent::__construct($fields);
+
         $this->entityName = $entityName;
 
-        foreach ($fields as $name => $field) {
+        foreach ($this->getFields() as $name => $field) {
             $field['name'] = $name;
             $field['name-prefix'] = $this->entityName;
 
@@ -88,23 +94,6 @@ class FieldsAlgorithms
         }
 
         return $value;
-    }
-
-    /**
-     * Method returns true if the entity has custom fields
-     * False otherwise
-     *
-     * @return bool true if the entity has custom fields
-     */
-    public function hasCustomFields(): bool
-    {
-        foreach ($this->fieldObjects as $field) {
-            if ($field->getType() == 'custom') {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -148,19 +137,6 @@ class FieldsAlgorithms
         }
 
         return $result;
-    }
-
-    /**
-     * Method validates if the field $field exists
-     *
-     * @param string $field
-     *            Field name
-     */
-    public function validateFieldExistance(string $field)
-    {
-        if (! isset($this->fieldObjects[$field])) {
-            throw (new \Exception('Field "' . $field . '" was not found'));
-        }
     }
 
     /**
@@ -232,12 +208,16 @@ class FieldsAlgorithms
     /**
      * Method removes field
      *
-     * @param string $name
+     * @param string $fieldName
      *            Field name
      */
-    public function removeField($name)
+    public function removeField($fieldName)
     {
-        unset($this->fieldObjects[$name]);
+        parent::removeField($fieldName);
+
+        if (isset($this->fieldObjects[$fieldName])) {
+            unset($this->fieldObjects[$fieldName]);
+        }
     }
 
     /**
@@ -258,6 +238,7 @@ class FieldsAlgorithms
         $nestedFields = $this->fieldObjects[$name]->getFields();
 
         foreach ($nestedFields as $name => $field) {
+            // TODO here and furhter if $this->entityName is not set then the field name must be $name but not '-'.$name
             if (isset($_POST[$this->entityName . '-' . $name])) {
                 $record[$name] = $this->getTypedValue($field['type'], $_POST[$this->entityName . '-' . $name], true);
             }
@@ -362,30 +343,6 @@ class FieldsAlgorithms
         $control = $this->getObject($name);
 
         return $control->html();
-    }
-
-    /**
-     * Method returns array of fields names
-     *
-     * @return array
-     */
-    public function getFieldsNames(): array
-    {
-        return array_keys($this->fieldObjects);
-    }
-
-    /**
-     * Method returns true if the field exists
-     *
-     * @param string $fieldName
-     *            Field name
-     * @return bool
-     */
-    public function hasField(string $fieldName): bool
-    {
-        // @codeCoverageIgnoreStart
-        return isset($this->fieldObjects[$fieldName]);
-        // @codeCoverageIgnoreEnd
     }
 
     /**

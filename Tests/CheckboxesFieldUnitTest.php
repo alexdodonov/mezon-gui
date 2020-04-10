@@ -8,7 +8,11 @@ class CheckboxesFieldUnitTest extends \PHPUnit\Framework\TestCase
      *
      * @return object mock object of the custom field
      */
-    protected function getFieldMock(): object
+    protected function getFieldMock(array $items = [
+        [
+            'id' => 1
+        ]
+    ]): object
     {
         $mock = $this->getMockBuilder(\Mezon\Gui\Field\CheckboxesField::class)
             ->setConstructorArgs(
@@ -35,11 +39,7 @@ class CheckboxesFieldUnitTest extends \PHPUnit\Framework\TestCase
         ])
             ->getMock();
 
-        $mock->method('getExternalRecords')->willReturn([
-            [
-                'id' => 1
-            ]
-        ]);
+        $mock->method('getExternalRecords')->willReturn($items);
 
         return $mock;
     }
@@ -58,5 +58,25 @@ class CheckboxesFieldUnitTest extends \PHPUnit\Framework\TestCase
         // assertions
         $this->assertStringContainsString('type="checkbox"', $content);
         $this->assertStringContainsString('class="cls"', $content);
+    }
+
+    /**
+     * Testing constructor
+     */
+    public function testConstructorWithTitle()
+    {
+        // setup
+        $field = $this->getFieldMock([
+            [
+                'id' => 1,
+                'title' => 'item-title'
+            ]
+        ]);
+
+        // test body
+        $content = $field->html();
+
+        // assertions
+        $this->assertStringContainsString('item-title', $content);
     }
 }
