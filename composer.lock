@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0fe0930d3570afc1a56a266069e2b678",
+    "content-hash": "9fc5102e71a96d725f305fa1fc22c62a",
     "packages": [
         {
             "name": "mezon/fields-set",
@@ -210,7 +210,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2"
+        "php": ">=7.2.0"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
