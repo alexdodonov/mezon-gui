@@ -58,5 +58,14 @@ Form builder is obviously used for building forms )
 It can be done like this:
 
 ```PHP
-$form = new \Mezon\Gui\FormBuilder();
+$form = new \Mezon\Gui\FormBuilder([
+	'id' => [
+		'type' => 'int',
+		'title' => 'our entity's id'
+	],
+	'title' => [
+		'type' => 'string',
+		'title' => 'our entity's title'
+	]
+]);
 ```

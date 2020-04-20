@@ -147,14 +147,16 @@ class ListBuilderUnitTest extends \PHPUnit\Framework\TestCase
                 [
                     '>id<',
                     '>1<',
-                    '>2<'
+                    '>2<',
+                    '/create-endpoint/'
                 ]
             ],
             [
                 0,
                 [],
                 [
-                    'class="no-items-title"'
+                    'class="no-items-title"',
+                    '../create/'
                 ]
             ]
         ];
@@ -174,7 +176,8 @@ class ListBuilderUnitTest extends \PHPUnit\Framework\TestCase
     public function testListingForm(int $createButton, array $records, array $asserts): void
     {
         // setup
-        $_GET['create_button'] = $createButton;
+        $_GET['create-page-endpoint'] = $createButton ? '/create-endpoint/' : null;
+        $_GET['create-button'] = $createButton;
         $listBuilder = new \Mezon\Gui\ListBuilder\ListBuilder($this->getFields(), new FakeAdapter($records));
 
         // test body
@@ -228,8 +231,8 @@ class ListBuilderUnitTest extends \PHPUnit\Framework\TestCase
     public function testSimpleListingForm(array $records, array $asserts): void
     {
         // setup
-        $_GET['update_button'] = 1;
-        $_GET['create_button'] = 1;
+        $_GET['update-button'] = 1;
+        $_GET['create-button'] = 1;
         $listBuilder = new \Mezon\Gui\ListBuilder\ListBuilder($this->getFields(), new FakeAdapter($records));
 
         // test body

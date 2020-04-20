@@ -20,27 +20,37 @@ class FormBuilder
     /**
      * Fields algorithms
      */
-    protected $fieldsAlgorithms = false; //TODO make private
+    protected $fieldsAlgorithms = false;
+
+    // TODO make private
 
     /**
      * Session id
      */
-    protected $sessionId = false; //TODO make private
+    protected $sessionId = false;
+
+    // TODO make private
 
     /**
      * Entity name
      */
-    protected $entityName = false; //TODO make private
+    protected $entityName = false;
+
+    // TODO make private
 
     /**
      * Layout
      */
-    protected $layout = false; //TODO make private
+    protected $layout = false;
+
+    // TODO make private
 
     /**
      * Multiple forms
      */
-    protected $batch = false; //TODO make private
+    protected $batch = false;
+
+    // TODO make private
 
     /**
      * Constructor
@@ -58,9 +68,9 @@ class FormBuilder
      */
     public function __construct(
         \Mezon\Gui\FieldsAlgorithms $fieldsAlgorithms,
-        string $sessionId,
-        string $entityName,
-        array $layout,
+        string $sessionId = '',
+        string $entityName = 'default',
+        $layout = false,
         bool $batch = false)
     {
         $this->fieldsAlgorithms = $fieldsAlgorithms;

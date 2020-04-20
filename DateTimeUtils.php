@@ -1,6 +1,8 @@
 <?php
 namespace Mezon\Gui;
 
+// TODO extract it to the separate package
+
 /**
  * Class DateTimeUtils
  *

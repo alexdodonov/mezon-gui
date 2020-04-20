@@ -113,7 +113,7 @@ class ListBuilder
      */
     protected function needActions(): bool
     {
-        if (@$_GET['update_button'] == 1 || @$_GET['delete_button'] == 1) {
+        if (@$_GET['update-button'] == 1 || @$_GET['delete-button'] == 1) {
             return true;
         } else {
             return false;
@@ -242,7 +242,7 @@ class ListBuilder
      */
     protected function listingHeaderContent(): string
     {
-        if (@$_GET['create_button'] == 1) {
+        if (@$_GET['create-button'] == 1) {
             $content = \Mezon\Gui\WidgetsRegistry\BootstrapWidgets::get('listing-header');
 
             $content = str_replace('{create-page-endpoint}', $this->getCreatePageEndpoint(), $content);
