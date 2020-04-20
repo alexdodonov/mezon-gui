@@ -20,37 +20,27 @@ class FormBuilder
     /**
      * Fields algorithms
      */
-    protected $fieldsAlgorithms = false;
-
-    // TODO make private
+    private $fieldsAlgorithms = false;
 
     /**
      * Session id
      */
-    protected $sessionId = false;
-
-    // TODO make private
+    private $sessionId = false;
 
     /**
      * Entity name
      */
-    protected $entityName = false;
-
-    // TODO make private
+    private $entityName = false;
 
     /**
      * Layout
      */
-    protected $layout = false;
-
-    // TODO make private
+    private $layout = false;
 
     /**
      * Multiple forms
      */
-    protected $batch = false;
-
-    // TODO make private
+    private $batch = false;
 
     /**
      * Constructor
