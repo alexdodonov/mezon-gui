@@ -1,4 +1,5 @@
-# GUI [![Build Status](https://travis-ci.com/alexdodonov/mezon-gui.svg?branch=master)](https://travis-ci.com/alexdodonov/mezon-gui) [![codecov](https://codecov.io/gh/alexdodonov/mezon-gui/branch/master/graph/badge.svg)](https://codecov.io/gh/alexdodonov/mezon-gui)
+# GUI
+[![Build Status](https://travis-ci.com/alexdodonov/mezon-gui.svg?branch=master)](https://travis-ci.com/alexdodonov/mezon-gui) [![codecov](https://codecov.io/gh/alexdodonov/mezon-gui/branch/master/graph/badge.svg)](https://codecov.io/gh/alexdodonov/mezon-gui) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/alexdodonov/mezon-gui/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/alexdodonov/mezon-gui/?branch=master)
 ## Intro
 
 Mezon provides set of classes for GUI creation.
