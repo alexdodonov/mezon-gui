@@ -22,25 +22,21 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      *
      * @var array
      */
-    protected $fieldObjects = [];
+    private $fieldObjects = [];
 
     /**
      * Entity name
      *
      * @var string
      */
-    protected $entityName = false;
-
-    // TODO make private
+    private $entityName = false;
 
     /**
      * Session Id
      *
      * @var string
      */
-    protected $sessionId = '';
-
-    // TODO make private
+    private $sessionId = '';
 
     /**
      * Constructor
@@ -238,9 +234,10 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
         $nestedFields = $this->fieldObjects[$name]->getFields();
 
         foreach ($nestedFields as $name => $field) {
-            // TODO here and furhter if $this->entityName is not set then the field name must be $name but not '-'.$name
-            if (isset($_POST[$this->entityName . '-' . $name])) {
-                $record[$name] = $this->getTypedValue($field['type'], $_POST[$this->entityName . '-' . $name], true);
+            $fieldName = $this->entityName === '' ? $name : $this->entityName . '-' . $name;
+
+            if (isset($_POST[$fieldName])) {
+                $record[$name] = $this->getTypedValue($field['type'], $_POST[$fieldName], true);
             }
         }
 
