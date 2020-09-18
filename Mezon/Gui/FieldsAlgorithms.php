@@ -1,6 +1,18 @@
 <?php
 namespace Mezon\Gui;
 
+use Mezon\Gui\Field\CheckboxesField;
+use Mezon\Gui\Field\RecordField;
+use Mezon\Gui\Field\InputFile;
+use Mezon\Gui\Field\InputDate;
+use Mezon\Gui\Field\CustomField;
+use Mezon\Gui\FormBuilder\FormHeader;
+use Mezon\Gui\Field\LabelField;
+use Mezon\Gui\Field\Select;
+use Mezon\Gui\Field\InputText;
+use Mezon\Gui\Field\Textarea;
+use Mezon\Gui\FormBuilder\RowsField;
+
 /**
  * Class FieldsAlgorithms
  *
@@ -268,22 +280,23 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      *
      * @param array $field
      *            field description
-     * @return \Mezon\Gui\Field|\Mezon\Gui\Control constructed control
+     * @return Field|Control constructed control
      */
     protected function constructControl(array $field)
     {
+        // TODO remove type map and use class names CheckboxesField::class directly
         $typeMap = [
-            'external' => \Mezon\Gui\Field\CheckboxesField::class,
-            'records' => \Mezon\Gui\Field\RecordField::class,
-            'file' => \Mezon\Gui\Field\InputFile::class,
-            'date' => \Mezon\Gui\Field\InputDate::class,
-            'custom' => \Mezon\Gui\Field\CustomField::class,
-            'header' => \Mezon\Gui\FormBuilder\FormHeader::class,
-            'label' => \Mezon\Gui\Field\LabelField::class
+            'external' => CheckboxesField::class,
+            'records' => RecordField::class,
+            'file' => InputFile::class,
+            'date' => InputDate::class,
+            'custom' => CustomField::class,
+            'header' => FormHeader::class,
+            'label' => LabelField::class
         ];
 
         if (isset($field['items'])) {
-            return new \Mezon\Gui\Field\Select($field);
+            return new Select($field);
         } elseif (isset($field['type'])) {
             if (in_array($field['type'], array_keys($typeMap))) {
                 $className = $typeMap[$field['type']];
@@ -292,7 +305,7 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
 
                 return new $className($field);
             } else {
-                return new \Mezon\Gui\Field\InputText($field);
+                return new InputText($field);
             }
         }
     }
@@ -307,9 +320,9 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
     protected function initObject(array $field)
     {
         if (isset($field['control']) && $field['control'] == 'textarea') {
-            $control = new \Mezon\Gui\Field\Textarea($field);
+            $control = new Textarea($field);
         } elseif ($field['type'] == 'rows') {
-            $control = new \Mezon\Gui\FormBuilder\RowsField($field['type']['rows'], $this->entityName);
+            $control = new RowsField($field['type']['rows'], $this->entityName);
         } else {
             $control = $this->constructControl($field);
         }
