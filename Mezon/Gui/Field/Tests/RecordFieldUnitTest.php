@@ -1,6 +1,10 @@
 <?php
+namespace Mezon\Gui\Field\Tests;
 
-class RecordFieldUnitTest extends \PHPUnit\Framework\TestCase
+use Mezon\Gui\Field\RecordField;
+use PHPUnit\Framework\TestCase;
+
+class RecordFieldUnitTest extends TestCase
 {
 
     /**
@@ -10,7 +14,7 @@ class RecordFieldUnitTest extends \PHPUnit\Framework\TestCase
      */
     protected function getFieldMock(): object
     {
-        $mock = $this->getMockBuilder(\Mezon\Gui\Field\RecordField::class)
+        $mock = $this->getMockBuilder(RecordField::class)
             ->setConstructorArgs(
             [
                 [

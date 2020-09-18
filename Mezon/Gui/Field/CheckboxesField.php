@@ -1,6 +1,8 @@
 <?php
 namespace Mezon\Gui\Field;
 
+use Mezon\Functional\Fetcher;
+
 /**
  * Class CheckboxesField
  *
@@ -14,8 +16,11 @@ namespace Mezon\Gui\Field;
 /**
  * Checkboxes field control
  */
-class CheckboxesField extends \Mezon\Gui\Field\RemoteField
+class CheckboxesField extends RemoteField
 {
+    // TODO unbind dependency - make possible to initialize list of records 
+    // - statically
+    // - locally
 
     /**
      * Getting list of records
@@ -38,10 +43,10 @@ class CheckboxesField extends \Mezon\Gui\Field\RemoteField
      */
     protected function getExternalTitle(array $record): string
     {
-        if (\Mezon\Functional\Functional::getField($record, 'title') !== null) {
-            return \Mezon\Functional\Functional::getField($record, 'title');
+        if (Fetcher::getField($record, 'title') !== null) {
+            return Fetcher::getField($record, 'title');
         } else {
-            return 'id : ' . \Mezon\Functional\Functional::getField($record, 'id');
+            return 'id : ' . Fetcher::getField($record, 'id');
         }
     }
 
@@ -57,7 +62,7 @@ class CheckboxesField extends \Mezon\Gui\Field\RemoteField
         $records = $this->getExternalRecords();
 
         foreach ($records as $item) {
-            $id = \Mezon\Functional\Functional::getField($item, 'id');
+            $id = Fetcher::getField($item, 'id');
 
             $content .= '<label>
                 <input type="checkbox" class="'.$this->class.'" name="' . $this->getNamePrefix() . $this->name . '[]" value="' .

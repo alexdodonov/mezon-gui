@@ -1,5 +1,7 @@
 <?php
+namespace Mezon\Gui\FormBuilder\Tests;
 
+use Mezon\Gui\FormBuilder\FormBuilder;
 define('SESSION_ID', 'session-id');
 
 class FormBuilderUnitTest extends \PHPUnit\Framework\TestCase
@@ -48,7 +50,7 @@ class FormBuilderUnitTest extends \PHPUnit\Framework\TestCase
      */
     protected function getFormBuilder(bool $hasLayout = true): object
     {
-        $formBuilder = $this->getMockBuilder(\Mezon\Gui\FormBuilder::class)
+        $formBuilder = $this->getMockBuilder(FormBuilder::class)
             ->setMethods([
             'get_external_records'
         ])

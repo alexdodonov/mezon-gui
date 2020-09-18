@@ -1,6 +1,7 @@
 <?php
+namespace Mezon\Gui\Field\Tests;
 
-class InputDateUnitTest extends \PHPUnit\Framework\TestCase
+class InputTextUnitTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -9,7 +10,7 @@ class InputDateUnitTest extends \PHPUnit\Framework\TestCase
     public function testConstructor()
     {
         // setup
-        $field = new \Mezon\Gui\Field\InputDate(
+        $field = new \Mezon\Gui\Field\InputText(
             [
                 'name' => 'name',
                 'required' => 1,
@@ -18,7 +19,7 @@ class InputDateUnitTest extends \PHPUnit\Framework\TestCase
                 'batch' => 1,
                 'toggler' => 'toggler-name',
                 'toggle-value' => 3,
-                'type' => 'date',
+                'type' => 'string',
                 'class' => 'cls'
             ],
             '');
@@ -29,12 +30,11 @@ class InputDateUnitTest extends \PHPUnit\Framework\TestCase
         // assertions
         $this->assertStringContainsString('<input ', $content);
         $this->assertStringContainsString('type="text"', $content);
-        $this->assertStringContainsString('date-input', $content);
         $this->assertStringContainsString('name="prefix-name[{_creation_form_items_counter}]"', $content);
         $this->assertStringContainsString('required="required"', $content);
         $this->assertStringContainsString('disabled', $content);
         $this->assertStringContainsString('toggler="toggler-name"', $content);
         $this->assertStringContainsString('toggle-value="3"', $content);
-        $this->assertStringContainsString('class="cls date', $content);
+        $this->assertStringContainsString('class="cls"', $content);
     }
 }

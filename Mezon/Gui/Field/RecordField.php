@@ -1,6 +1,10 @@
 <?php
 namespace Mezon\Gui\Field;
 
+use Mezon\Gui\FieldsAlgorithms;
+use Mezon\Gui\FormBuilder\FormBuilder;
+
+//TODO extract to separate package
 /**
  * Class RecordField
  *
@@ -14,7 +18,7 @@ namespace Mezon\Gui\Field;
 /**
  * Record field control
  */
-class RecordField extends \Mezon\Gui\Field\RemoteField
+class RecordField extends RemoteField
 {
 
     /**
@@ -98,11 +102,11 @@ class RecordField extends \Mezon\Gui\Field\RemoteField
     public function html(): string
     {
         // getting fields
-        $formFields = new \Mezon\Gui\FieldsAlgorithms($this->getFields(), $this->namePrefix);
+        $formFields = new FieldsAlgorithms($this->getFields(), $this->namePrefix);
         $formFields->removeField($this->bindField);
 
         // getting form
-        $formBuilder = new \Mezon\Gui\FormBuilder(
+        $formBuilder = new FormBuilder(
             $formFields,
             $this->sessionId,
             $this->namePrefix,

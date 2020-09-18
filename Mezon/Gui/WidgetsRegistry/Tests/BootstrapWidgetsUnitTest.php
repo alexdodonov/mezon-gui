@@ -1,4 +1,5 @@
 <?php
+namespace Mezon\Gui\WidgetsRegistry\Tests;
 
 class BootstrapWidgetsUnitTest extends \PHPUnit\Framework\TestCase
 {

@@ -1,6 +1,7 @@
 <?php
+namespace Mezon\Gui\Field\Tests;
 
-class InputTextUnitTest extends \PHPUnit\Framework\TestCase
+class TextareaUnitTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -9,7 +10,7 @@ class InputTextUnitTest extends \PHPUnit\Framework\TestCase
     public function testConstructor()
     {
         // setup
-        $field = new \Mezon\Gui\Field\InputText(
+        $field = new \Mezon\Gui\Field\Textarea(
             [
                 'name' => 'name',
                 'required' => 1,
@@ -27,13 +28,12 @@ class InputTextUnitTest extends \PHPUnit\Framework\TestCase
         $content = $field->html();
 
         // assertions
-        $this->assertStringContainsString('<input ', $content);
-        $this->assertStringContainsString('type="text"', $content);
+        $this->assertStringContainsString('<textarea ', $content);
         $this->assertStringContainsString('name="prefix-name[{_creation_form_items_counter}]"', $content);
         $this->assertStringContainsString('required="required"', $content);
         $this->assertStringContainsString('disabled', $content);
         $this->assertStringContainsString('toggler="toggler-name"', $content);
         $this->assertStringContainsString('toggle-value="3"', $content);
-        $this->assertStringContainsString('class="cls"', $content);
+        $this->assertStringContainsString(' cls"', $content);
     }
 }

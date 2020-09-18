@@ -1,4 +1,5 @@
 <?php
+namespace Mezon\Gui\Field\Tests;
 
 class LabelFieldUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -17,7 +18,10 @@ class LabelFieldUnitTest extends \PHPUnit\Framework\TestCase
         $content = $field->html();
 
         // assertions
-        $this->assertStringContainsString('<label class="control-label">name</label>', $content, 'Label was not generated');
+        $this->assertStringContainsString(
+            '<label class="control-label">name</label>',
+            $content,
+            'Label was not generated');
     }
 
     /**

@@ -9,7 +9,16 @@
 
 	<testsuites>
 		<testsuite name="All Tests">
-			<directory suffix="UnitTest.php">./Tests</directory>
+			<directory suffix="UnitTest.php">./Mezon/Gui/Tests</directory>
+			<directory suffix="UnitTest.php">
+				./Mezon/Gui/FormBuilder/Tests
+			</directory>
+			<directory suffix="UnitTest.php">
+				./Mezon/Gui/WidgetsRegistry/Tests
+			</directory>
+			<directory suffix="UnitTest.php">
+				./Mezon/Gui/Field/Tests
+			</directory>
 		</testsuite>
 	</testsuites>
 

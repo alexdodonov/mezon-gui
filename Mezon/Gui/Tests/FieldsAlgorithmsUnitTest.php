@@ -1,4 +1,5 @@
 <?php
+namespace Mezon\Gui\Tests;
 
 define('ID_FIELD_NAME', 'id');
 define('TITLE_FIELD_NAME', 'title');
@@ -154,7 +155,7 @@ class FieldsAlgorithmsUnitTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(2, $typedValue);
 
         // assertion unexisting
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $fieldsAlgorithms->getTypedValue('unexisting', '1');
     }
 
@@ -167,10 +168,10 @@ class FieldsAlgorithmsUnitTest extends \PHPUnit\Framework\TestCase
         $fieldsAlgorithms = new \Mezon\Gui\FieldsAlgorithms($this->getFields1(), 'entity');
 
         // test body and assertions
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $fieldsAlgorithms->validateFieldExistance('unexisting-field');
 
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $fieldsAlgorithms->validateFieldExistance('id');
     }
 
@@ -336,15 +337,15 @@ class FieldsAlgorithmsUnitTest extends \PHPUnit\Framework\TestCase
         $fields = $fieldsAlgorithms->getFieldsNames();
 
         // assertions
-        $this->assertContains('id',$fields);
-        $this->assertContains('title',$fields);
-        $this->assertContains('user_id',$fields);
-        $this->assertContains('label',$fields);
-        $this->assertContains('description',$fields);
-        $this->assertContains('created',$fields);
-        $this->assertContains('avatar',$fields);
-        $this->assertContains('parts',$fields);
-        $this->assertContains('extensions',$fields);
+        $this->assertContains('id', $fields);
+        $this->assertContains('title', $fields);
+        $this->assertContains('user_id', $fields);
+        $this->assertContains('label', $fields);
+        $this->assertContains('description', $fields);
+        $this->assertContains('created', $fields);
+        $this->assertContains('avatar', $fields);
+        $this->assertContains('parts', $fields);
+        $this->assertContains('extensions', $fields);
     }
 
     /**

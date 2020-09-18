@@ -1,4 +1,5 @@
 <?php
+namespace Mezon\Gui\FormBuilder\Tests;
 
 class FormHeaderUnitTest extends \PHPUnit\Framework\TestCase
 {

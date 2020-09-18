@@ -1,4 +1,5 @@
 <?php
+namespace Mezon\Gui\Field\Tests;
 
 class TextFieldUnitTest extends \PHPUnit\Framework\TestCase
 {

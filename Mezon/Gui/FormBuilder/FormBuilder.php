@@ -1,5 +1,5 @@
 <?php
-namespace Mezon\Gui;
+namespace Mezon\Gui\FormBuilder;
 
 /**
  * Class FormBuilder

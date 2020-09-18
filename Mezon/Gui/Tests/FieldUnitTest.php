@@ -1,4 +1,5 @@
 <?php
+namespace Mezon\Gui\Tests;
 
 class FieldUnitTest extends \PHPUnit\Framework\TestCase
 {
@@ -8,7 +9,7 @@ class FieldUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testNoNameException()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         new \Mezon\Gui\Field([], '');
     }
 
@@ -17,10 +18,10 @@ class FieldUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testNameSetter()
     {
-        // test bodyy
+        // test body
         $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/conf/name-setter.json'), true), '');
 
-        // assertionss
+        // assertions
         $this->assertStringContainsString('prefixfield-name000', $field->html(), 'Invalid field "name" value');
     }
 
@@ -29,10 +30,10 @@ class FieldUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testRequiredSetter()
     {
-        // test bodyy
+        // test body
         $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/conf/required-setter.json'), true), '');
 
-        // assertionss
+        // assertions
         $this->assertStringContainsString('prefixfield-name1111select2', $field->html(), 'Invalid field "name" value');
     }
 
@@ -41,10 +42,10 @@ class FieldUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testTypeException(): void
     {
-        // setup and assertionss
+        // setup and assertions
         $this->expectExceptionCode(- 2);
 
-        // test bodyy
+        // test body
         new \Mezon\Gui\Field([], '');
     }
 
@@ -53,10 +54,10 @@ class FieldUnitTest extends \PHPUnit\Framework\TestCase
      */
     public function testHasLabelSetter()
     {
-        // test bodyy
+        // test body
         $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/conf/has-label-setter.json'), true), '');
 
-        // assertionss
+        // assertions
         $this->assertTrue($field->hasLabel());
     }
 }

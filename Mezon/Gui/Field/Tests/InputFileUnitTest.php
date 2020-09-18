@@ -1,6 +1,7 @@
 <?php
+namespace Mezon\Gui\Field\Tests;
 
-class TextareaUnitTest extends \PHPUnit\Framework\TestCase
+class InputFileUnitTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -9,7 +10,7 @@ class TextareaUnitTest extends \PHPUnit\Framework\TestCase
     public function testConstructor()
     {
         // setup
-        $field = new \Mezon\Gui\Field\Textarea(
+        $field = new \Mezon\Gui\Field\InputFile(
             [
                 'name' => 'name',
                 'required' => 1,
@@ -18,7 +19,7 @@ class TextareaUnitTest extends \PHPUnit\Framework\TestCase
                 'batch' => 1,
                 'toggler' => 'toggler-name',
                 'toggle-value' => 3,
-                'type' => 'string',
+                'type' => 'file',
                 'class' => 'cls'
             ],
             '');
@@ -27,12 +28,13 @@ class TextareaUnitTest extends \PHPUnit\Framework\TestCase
         $content = $field->html();
 
         // assertions
-        $this->assertStringContainsString('<textarea ', $content);
+        $this->assertStringContainsString('<input ', $content);
+        $this->assertStringContainsString('type="file"', $content);
         $this->assertStringContainsString('name="prefix-name[{_creation_form_items_counter}]"', $content);
         $this->assertStringContainsString('required="required"', $content);
         $this->assertStringContainsString('disabled', $content);
         $this->assertStringContainsString('toggler="toggler-name"', $content);
         $this->assertStringContainsString('toggle-value="3"', $content);
-        $this->assertStringContainsString(' cls"', $content);
+        $this->assertStringContainsString('class="cls"', $content);
     }
 }

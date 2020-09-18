@@ -1,4 +1,5 @@
 <?php
+namespace Mezon\Gui\Field\Tests;
 
 class RowsFieldUnitTest extends \PHPUnit\Framework\TestCase
 {
