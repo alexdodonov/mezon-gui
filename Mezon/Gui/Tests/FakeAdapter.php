@@ -1,7 +1,9 @@
 <?php
-namespace Mezon\Gui\Field\Tests;
+namespace Mezon\Gui\Tests;
 
-class FakeAdapter implements \Mezon\Gui\ListBuilder\ListBuilderAdapter
+use Mezon\Gui\ListBuilder\ListBuilderAdapter;
+
+class FakeAdapter implements ListBuilderAdapter
 {
 
     /**
@@ -26,6 +28,10 @@ class FakeAdapter implements \Mezon\Gui\ListBuilder\ListBuilderAdapter
     ])
     {
         $this->records = $records;
+
+        foreach ($this->records as $i => $record) {
+            $this->records[$i] = (object) $record;
+        }
     }
 
     /**
@@ -55,13 +61,11 @@ class FakeAdapter implements \Mezon\Gui\ListBuilder\ListBuilderAdapter
     }
 
     /**
-     * Record preprocessor
      *
-     * @param array $record
-     *            record to be preprocessed
-     * @return array preprocessed record
+     * {@inheritdoc}
+     * @see \Mezon\Gui\ListBuilder\ListBuilderAdapter::preprocessListItem($record)
      */
-    public function preprocessListItem(array $record): array
+    public function preprocessListItem(object $record): object
     {
         return $record;
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "96d1ee175c863d84f4366ec1f6a9b895",
+    "content-hash": "d31ef97b5c8c77fc1d0f58942f7854e5",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -352,16 +352,16 @@
         },
         {
             "name": "mezon/list-builder-adapter",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexdodonov/mezon-list-builder-adapter.git",
-                "reference": "2be695faf3789b080e5813d25acf7ab0f70ba6ff"
+                "reference": "1321bd47c9f57cd1fe9ce52c82b66a23c96ed0d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexdodonov/mezon-list-builder-adapter/zipball/2be695faf3789b080e5813d25acf7ab0f70ba6ff",
-                "reference": "2be695faf3789b080e5813d25acf7ab0f70ba6ff",
+                "url": "https://api.github.com/repos/alexdodonov/mezon-list-builder-adapter/zipball/1321bd47c9f57cd1fe9ce52c82b66a23c96ed0d6",
+                "reference": "1321bd47c9f57cd1fe9ce52c82b66a23c96ed0d6",
                 "shasum": ""
             },
             "require": {
@@ -370,7 +370,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Mezon\\Gui\\ListBuilder\\": ""
+                    "Mezon\\": "./Mezon/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -392,7 +392,7 @@
                 "issues": "https://github.com/alexdodonov/mezon-list-builder-adapter/issues",
                 "source": "https://github.com/alexdodonov/mezon-list-builder-adapter"
             },
-            "time": "2020-02-25T19:39:44+00:00"
+            "time": "2020-12-04T06:35:09+00:00"
         },
         {
             "name": "mezon/remote-field",

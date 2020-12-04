@@ -1,6 +1,11 @@
 <?php
 namespace Mezon\Gui\ListBuilder;
 
+use Mezon\Functional\Fetcher;
+use Mezon\Gui\WidgetsRegistry\BootstrapWidgets;
+use Mezon\TemplateEngine\TemplateEngine;
+use Mezon\Functional\Functional;
+
 /**
  * Class ListBuilder
  *
@@ -155,9 +160,9 @@ class ListBuilder
      *
      * @param array $record
      *            Transforming record
-     * @return array Transformed record
+     * @return object Transformed record
      */
-    protected function transformRecord(array $record): array
+    protected function transformRecord(object $record): object
     {
         // here we assume that we get from service
         // already transformed
@@ -181,16 +186,16 @@ class ListBuilder
         $content = '';
 
         foreach ($records as $record) {
-            $record['actions'] = $this->listOfButtons(\Mezon\Functional\Functional::getField($record, 'id'));
+            Functional::setField($record, 'actions', $this->listOfButtons(Fetcher::getField($record, 'id')));
 
-            $content .= \Mezon\Gui\WidgetsRegistry\BootstrapWidgets::get('listing-row');
+            $content .= BootstrapWidgets::get('listing-row');
             $content = str_replace('{items}', $this->listingItemsCells(), $content);
 
             $record = $this->transformRecord($record);
 
             $record = $this->listBuilderAdapter->preprocessListItem($record);
 
-            $content = \Mezon\TemplateEngine\TemplateEngine::printRecord($content, $record);
+            $content = TemplateEngine::printRecord($content, $record);
         }
 
         return $content;
@@ -325,7 +330,7 @@ class ListBuilder
             'order' => 'ASC'
         ], isset($_GET['from']) ? $_GET['from'] : 0, isset($_GET['limit']) ? $_GET['limit'] : 100);
 
-        if (!empty($records)) {
+        if (! empty($records)) {
             $header = $this->listingHeader();
 
             $items = $this->listingItems($records);
@@ -347,7 +352,7 @@ class ListBuilder
     {
         $records = $this->listBuilderAdapter->all();
 
-        if (!empty($records)) {
+        if (! empty($records)) {
             $header = $this->simpleListingHeader();
 
             $items = $this->simpleListingItems($records);

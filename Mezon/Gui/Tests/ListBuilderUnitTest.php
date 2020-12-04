@@ -1,7 +1,10 @@
 <?php
-namespace Mezon\Gui\Field\Tests;
+namespace Mezon\Gui\Tests;
 
-class ListBuilderUnitTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+use Mezon\Gui\ListBuilder\ListBuilder;
+
+class ListBuilderUnitTest extends TestCase
 {
 
     /**
@@ -39,7 +42,7 @@ class ListBuilderUnitTest extends \PHPUnit\Framework\TestCase
     public function testConstructorValid(): void
     {
         // setup and test body
-        $listBuilder = new \Mezon\Gui\ListBuilder\ListBuilder($this->getFields(), new FakeAdapter());
+        $listBuilder = new ListBuilder($this->getFields(), new FakeAdapter());
 
         // assertions
         $this->assertIsArray($listBuilder->getFields(), 'Invalid fields list type');
@@ -113,7 +116,7 @@ class ListBuilderUnitTest extends \PHPUnit\Framework\TestCase
         // setup
         $_GET['create-page-endpoint'] = $createButton ? '/create-endpoint/' : null;
         $_GET['create-button'] = $createButton;
-        $listBuilder = new \Mezon\Gui\ListBuilder\ListBuilder($this->getFields(), new FakeAdapter($records));
+        $listBuilder = new ListBuilder($this->getFields(), new FakeAdapter($records));
 
         // test body
         $content = $listBuilder->listingForm();
@@ -168,7 +171,7 @@ class ListBuilderUnitTest extends \PHPUnit\Framework\TestCase
         // setup
         $_GET['update-button'] = 1;
         $_GET['create-button'] = 1;
-        $listBuilder = new \Mezon\Gui\ListBuilder\ListBuilder($this->getFields(), new FakeAdapter($records));
+        $listBuilder = new ListBuilder($this->getFields(), new FakeAdapter($records));
 
         // test body
         $content = $listBuilder->simpleListingForm();
