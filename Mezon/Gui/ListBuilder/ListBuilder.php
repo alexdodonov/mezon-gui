@@ -319,12 +319,13 @@ class ListBuilder
      */
     public function listingForm(): string
     {
+        // TODO split into SimpleListBuilder and ListBuilder
         $records = $this->listBuilderAdapter->getRecords([
             'field' => 'id',
             'order' => 'ASC'
         ], isset($_GET['from']) ? $_GET['from'] : 0, isset($_GET['limit']) ? $_GET['limit'] : 100);
 
-        if (count($records)) {
+        if (!empty($records)) {
             $header = $this->listingHeader();
 
             $items = $this->listingItems($records);
@@ -346,7 +347,7 @@ class ListBuilder
     {
         $records = $this->listBuilderAdapter->all();
 
-        if (count($records)) {
+        if (!empty($records)) {
             $header = $this->simpleListingHeader();
 
             $items = $this->simpleListingItems($records);
