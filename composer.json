@@ -15,7 +15,7 @@
 		"mezon/functional": "1.0.*",
 		"mezon/template-engine": "1.0.*",
 		"mezon/security": "1.0.*",
-		"mezon/list-builder-adapter": "1.0.*",
+		"mezon/list-builder-adapter": "1.1.*",
 		"mezon/fields-set": "1.0.*",
 		"mezon/remote-field": "1.0.*"
 	},
