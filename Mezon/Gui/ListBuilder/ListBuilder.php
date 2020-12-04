@@ -307,6 +307,8 @@ class ListBuilder
                 BootstrapWidgets::get('listing-row'));
 
             $record = $this->transformRecord($record);
+            
+            $record = $this->listBuilderAdapter->preprocessListItem($record);
 
             $content = TemplateEngine::printRecord($content, $record);
         }
