@@ -286,7 +286,7 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
     {
         // TODO remove type map and use class names CheckboxesField::class directly
         $typeMap = [
-            'external' => CheckboxesField::class,
+            //'external' => CheckboxesField::class, // TODO use type map and this type like custom type
             //'records' => RecordField::class, // TODO use type map and this type like custom type
             'file' => InputFile::class,
             'date' => InputDate::class,
