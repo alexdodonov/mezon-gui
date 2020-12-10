@@ -45,6 +45,13 @@ class ListBuilder
     protected $recordTransformer = [];
 
     /**
+     * Custom actions for each record
+     *
+     * @var string
+     */
+    private $customActions = null;
+
+    /**
      * Constructor
      *
      * @param array $fields
@@ -57,6 +64,16 @@ class ListBuilder
         $this->fields = $fields;
 
         $this->listBuilderAdapter = $listBuilderAdapter;
+    }
+
+    /**
+     * Method sets custom actions
+     *
+     * @param string $actions
+     */
+    public function setCustomActions(string $actions): void
+    {
+        $this->customActions = $actions;
     }
 
     /**
@@ -118,21 +135,23 @@ class ListBuilder
      */
     protected function needActions(): bool
     {
-        if (@$_GET['update-button'] == 1 || @$_GET['delete-button'] == 1) {
+        if (@$_GET['update-button'] == 1 || @$_GET['delete-button'] == 1 || $this->customActions !== null) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
      * Method compiles listing items cells
      *
+     * @param array|object $record
+     *            record data
      * @param bool $addActions
      *            Do we need to add actions
      * @return string Compiled row
      */
-    protected function listingItemsCells(bool $addActions = true): string
+    protected function listingItemsCells($record, bool $addActions = true): string
     {
         $content = '';
 
@@ -150,6 +169,11 @@ class ListBuilder
 
         if ($addActions && $this->needActions()) {
             $content .= BootstrapWidgets::get('listing-actions');
+
+            $content = str_replace(
+                '{actions}',
+                $this->customActions === null ? $this->listOfButtons(Fetcher::getField($record, 'id')) : $this->customActions,
+                $content);
         }
 
         return $content;
@@ -186,10 +210,8 @@ class ListBuilder
         $content = '';
 
         foreach ($records as $record) {
-            Functional::setField($record, 'actions', $this->listOfButtons(Fetcher::getField($record, 'id')));
-
             $content .= BootstrapWidgets::get('listing-row');
-            $content = str_replace('{items}', $this->listingItemsCells(), $content);
+            $content = str_replace('{items}', $this->listingItemsCells($record), $content);
 
             $record = $this->transformRecord($record);
 
@@ -303,11 +325,11 @@ class ListBuilder
         foreach ($records as $record) {
             $content .= str_replace(
                 '{items}',
-                $this->listingItemsCells(false),
+                $this->listingItemsCells($record, false),
                 BootstrapWidgets::get('listing-row'));
 
             $record = $this->transformRecord($record);
-            
+
             $record = $this->listBuilderAdapter->preprocessListItem($record);
 
             $content = TemplateEngine::printRecord($content, $record);

@@ -49,6 +49,23 @@ class ListBuilderUnitTest extends TestCase
     }
 
     /**
+     * Method returns testing records
+     *
+     * @return array testing records
+     */
+    private function getRecords(): array
+    {
+        return [
+            [
+                'id' => 1,
+            ],
+            [
+                'id' => 2,
+            ]
+        ];
+    }
+
+    /**
      * Data provider for the testListingForm
      *
      * @return array test data
@@ -58,14 +75,7 @@ class ListBuilderUnitTest extends TestCase
         return [
             [
                 0,
-                [
-                    [
-                        'id' => 1,
-                    ],
-                    [
-                        'id' => 2,
-                    ]
-                ],
+                $this->getRecords(),
                 [
                     '>id<',
                     '>1<',
@@ -74,14 +84,7 @@ class ListBuilderUnitTest extends TestCase
             ],
             [
                 1,
-                [
-                    [
-                        'id' => 1,
-                    ],
-                    [
-                        'id' => 2,
-                    ]
-                ],
+                $this->getRecords(),
                 [
                     '>id<',
                     '>1<',
@@ -140,14 +143,7 @@ class ListBuilderUnitTest extends TestCase
                 ]
             ],
             [
-                [
-                    [
-                        'id' => 1,
-                    ],
-                    [
-                        'id' => 2,
-                    ]
-                ],
+                $this->getRecords(),
                 [
                     '>id<',
                     '>1<',
@@ -178,5 +174,80 @@ class ListBuilderUnitTest extends TestCase
 
         // assertions
         $this->runAssertions($asserts, $content);
+    }
+
+    /**
+     * Testing data provider
+     *
+     * @return array testing data
+     */
+    public function customActionsDataProvider(): array
+    {
+        $setup = function (): object {
+            // setup method
+            $listBuilder = new ListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+
+            $listBuilder->setCustomActions('!{id}!');
+
+            return $listBuilder;
+        };
+
+        $assert = function ($result): void {
+            // asserting method
+            $this->assertStringNotContainsString('!1!', $result);
+            $this->assertStringNotContainsString('!2!', $result);
+        };
+
+        return [
+            // #0, simpleListingForm
+            [
+                $setup,
+                $assert,
+                'simpleListingForm'
+            ],
+            // #1, listingForm
+            [
+                $setup,
+                function ($result): void {
+                    // asserting method
+                    $this->assertStringContainsString('!1!', $result);
+                    $this->assertStringContainsString('!2!', $result);
+                },
+                'listingForm'
+            ],
+            // #2, listingForm, no custom buttons
+            [
+                function (): object {
+                    // setup method
+                    $listBuilder = new ListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+
+                    return $listBuilder;
+                },
+                $assert,
+                'listingForm'
+            ]
+        ];
+    }
+
+    /**
+     * Testing method
+     *
+     * @param callable $setup
+     *            setup method
+     * @param callable $assertions
+     *            assertions method
+     * @paran string $method method to be called
+     * @dataProvider customActionsDataProvider
+     */
+    public function testCustomActions(callable $setup, callable $assertions, string $method): void
+    {
+        // setup
+        $obj = $setup();
+
+        // test body
+        $result = $obj->$method();
+
+        // assertions
+        $assertions($result);
     }
 }
