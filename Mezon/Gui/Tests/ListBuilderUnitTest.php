@@ -251,6 +251,8 @@ class ListBuilderUnitTest extends TestCase
                     $assert($result);
 
                     $this->assertStringContainsString('Id field', $result);
+                    $this->assertStringContainsString('>1<', $result);
+                    $this->assertStringContainsString('>2<', $result);
                 },
                 'listingForm'
             ],

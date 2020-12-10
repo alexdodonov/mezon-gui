@@ -173,7 +173,7 @@ class ListBuilder
             } else {
                 $content .= BootstrapWidgets::get('listing-row-cell');
             }
-            $content = str_replace('{name}', '{' . $data['title'] . '}', $content);
+            $content = str_replace('{name}', '{' . $name . '}', $content);
         }
 
         if ($addActions && $this->needActions()) {
