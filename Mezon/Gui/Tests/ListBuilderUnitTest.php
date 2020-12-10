@@ -142,7 +142,7 @@ class ListBuilderUnitTest extends TestCase
                     'class="no-items-title"'
                 ]
             ],
-            [
+            [ // TODO move this test to the next test and adapter and add validation of the buttons creation
                 $this->getRecords(),
                 [
                     '>id<',
@@ -219,12 +219,57 @@ class ListBuilderUnitTest extends TestCase
             [
                 function (): object {
                     // setup method
-                    $listBuilder = new ListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
-
-                    return $listBuilder;
+                    return new ListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
                 },
                 $assert,
                 'listingForm'
+            ],
+            // #3, listingForm, no custom buttons
+            [
+                function (): object {
+                    // setup method
+                    return new ListBuilder([
+                        'id' => [
+                            'title' => 'Id field'
+                        ]
+                    ], new FakeAdapter($this->getRecords()));
+                },
+                $assert,
+                'listingForm'
+            ],
+            // #3, listingForm, no custom buttons
+            [
+                function (): object {
+                    // setup method
+                    return new ListBuilder([
+                        'id' => [
+                            'title' => 'Id field'
+                        ]
+                    ], new FakeAdapter($this->getRecords()));
+                },
+                function (string $result) use ($assert) {
+                    $assert($result);
+
+                    $this->assertStringContainsString('Id field', $result);
+                },
+                'listingForm'
+            ],
+            // #4, simpleListingForm, no custom buttons
+            [
+                function (): object {
+                    // setup method
+                    return new ListBuilder([
+                        'title' => [
+                            'title' => 'Title field'
+                        ]
+                    ], new FakeAdapter($this->getRecords()));
+                },
+                function (string $result) use ($assert) {
+                    $assert($result);
+
+                    $this->assertStringContainsString('Title field', $result);
+                },
+                'simpleListingForm'
             ]
         ];
     }

@@ -59,9 +59,18 @@ class ListBuilder
      * @param \Mezon\Gui\ListBuilder\ListBuilderAdapter $listBuilderAdapter
      *            Adapter for the data source
      */
-    public function __construct(array $fields, \Mezon\Gui\ListBuilder\ListBuilderAdapter $listBuilderAdapter)
+    public function __construct(array $fields, ListBuilderAdapter $listBuilderAdapter)
     {
-        $this->fields = $fields;
+        $transformedFields = [];
+
+        foreach ($fields as $i => $field) {
+            $key = is_array($field) ? $i : $field;
+            $transformedFields[$key] = is_array($field) ? $field : [
+                'title' => $field
+            ];
+        }
+
+        $this->fields = $transformedFields;
 
         $this->listBuilderAdapter = $listBuilderAdapter;
     }
@@ -155,7 +164,7 @@ class ListBuilder
     {
         $content = '';
 
-        foreach ($this->fields as $name) {
+        foreach ($this->fields as $name => $data) {
             if ($name == 'domain_id') {
                 continue;
             }
@@ -164,7 +173,7 @@ class ListBuilder
             } else {
                 $content .= BootstrapWidgets::get('listing-row-cell');
             }
-            $content = str_replace('{name}', '{' . $name . '}', $content);
+            $content = str_replace('{name}', '{' . $data['title'] . '}', $content);
         }
 
         if ($addActions && $this->needActions()) {
@@ -234,7 +243,7 @@ class ListBuilder
     {
         $content = '';
 
-        foreach ($this->fields as $name) {
+        foreach ($this->fields as $name => $data) {
             if ($name == 'domain_id') {
                 continue;
             }
@@ -247,7 +256,7 @@ class ListBuilder
                 '{title}'
             ], [
                 $idStyle,
-                $name
+                $data['title']
             ], $content);
         }
 
