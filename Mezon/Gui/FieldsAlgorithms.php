@@ -51,6 +51,19 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
     private $sessionId = '';
 
     /**
+     * Supported types
+     * 
+     * @var array
+     */
+    public static $typeMap = [
+        'file' => InputFile::class,
+        'date' => InputDate::class,
+        'custom' => CustomField::class,
+        'header' => FormHeader::class,
+        'label' => LabelField::class
+    ];
+
+    /**
      * Constructor
      *
      * @param array $fields
@@ -284,22 +297,11 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      */
     protected function constructControl(array $field)
     {
-        // TODO remove type map and use class names CheckboxesField::class directly
-        $typeMap = [
-            //'external' => CheckboxesField::class, // TODO use type map and this type like custom type
-            //'records' => RecordField::class, // TODO use type map and this type like custom type
-            'file' => InputFile::class,
-            'date' => InputDate::class,
-            'custom' => CustomField::class,
-            'header' => FormHeader::class,
-            'label' => LabelField::class
-        ];
-
         if (isset($field['items'])) {
             return new Select($field);
         } elseif (isset($field['type'])) {
-            if (in_array($field['type'], array_keys($typeMap))) {
-                $className = $typeMap[$field['type']];
+            if (in_array($field['type'], array_keys(self::$typeMap))) {
+                $className = self::$typeMap[$field['type']];
 
                 $field['session-id'] = $this->sessionId;
 
