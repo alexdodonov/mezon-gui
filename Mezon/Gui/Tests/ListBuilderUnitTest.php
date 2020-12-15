@@ -136,18 +136,10 @@ class ListBuilderUnitTest extends TestCase
     public function simpleListingFormDataProvider(): array
     {
         return [
-            [
+            [// TODO move this test to the next test and adapter and add validation of the buttons creation
                 [],
                 [
                     'class="no-items-title"'
-                ]
-            ],
-            [ // TODO move this test to the next test and adapter and add validation of the buttons creation
-                $this->getRecords(),
-                [
-                    '>id<',
-                    '>1<',
-                    '>2<'
                 ]
             ]
         ];
@@ -230,33 +222,33 @@ class ListBuilderUnitTest extends TestCase
                     // setup method
                     return new ListBuilder([
                         'id' => [
-                            'title' => 'Id field'
+                            'title' => 'Some id field'
                         ]
                     ], new FakeAdapter($this->getRecords()));
                 },
                 $assert,
                 'listingForm'
             ],
-            // #3, listingForm, no custom buttons
+            // #4, listingForm, no custom buttons
             [
                 function (): object {
                     // setup method
                     return new ListBuilder([
                         'id' => [
-                            'title' => 'Id field'
+                            'title' => 'Some id field'
                         ]
                     ], new FakeAdapter($this->getRecords()));
                 },
                 function (string $result) use ($assert) {
                     $assert($result);
 
-                    $this->assertStringContainsString('Id field', $result);
+                    $this->assertStringContainsString('Some id field', $result);
                     $this->assertStringContainsString('>1<', $result);
                     $this->assertStringContainsString('>2<', $result);
                 },
                 'listingForm'
             ],
-            // #4, simpleListingForm, no custom buttons
+            // #5, simpleListingForm, no custom buttons
             [
                 function (): object {
                     // setup method
@@ -270,6 +262,23 @@ class ListBuilderUnitTest extends TestCase
                     $assert($result);
 
                     $this->assertStringContainsString('Title field', $result);
+                },
+                'simpleListingForm'
+            ],
+            // #6, listingForm, default buttons
+            [
+                function (): object {
+                    // setup method
+                    $_GET['update-button'] = 1;
+                    $_GET['create-button'] = 1;
+                    return new ListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                },
+                function (string $result) use ($assert) {
+                    $assert($result);
+
+                    $this->assertStringContainsString('>id<', $result);
+                    $this->assertStringContainsString('>1<', $result);
+                    $this->assertStringContainsString('>2<', $result);
                 },
                 'simpleListingForm'
             ]
