@@ -248,7 +248,7 @@ class ListBuilder
                 continue;
             }
 
-            $idStyle = $name == 'id' ? 'style="text-align: center;"' : '';
+            $idStyle = $name == 'id' ? 'style="text-align: center; width:5%;"' : '';
 
             $content .= BootstrapWidgets::get('listing-header-cell');
             $content = str_replace([
