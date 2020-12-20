@@ -14,14 +14,11 @@ use Mezon\TemplateEngine\TemplateEngine;
  * @version v.1.0 (2019/08/12)
  * @copyright Copyright (c) 2019, aeon.org
  */
-define('DESCRIPTION_FIELD_NAME', 'description');
 
 /**
  * Class constructs grids
- * 
- * @deprecated since 2020-12-20 use ListBuilder/Common or ListBuilder/Simple instead of ListBuilder
  */
-class ListBuilder
+class Common
 {
 
     /**
@@ -29,21 +26,21 @@ class ListBuilder
      *
      * @var array
      */
-    protected $fields = [];
+    private $fields = [];
 
     /**
      * Service logic adapter
      *
      * @var \Mezon\Gui\ListBuilder\ListBuilderAdapter
      */
-    protected $listBuilderAdapter = false;
+    private $listBuilderAdapter = false;
 
     /**
      * List item transformation callback
      *
      * @var array
      */
-    protected $recordTransformer = [];
+    private $recordTransformer = [];
 
     /**
      * Custom actions for each record
@@ -103,7 +100,7 @@ class ListBuilder
      *
      * @return string Create page endpoint
      */
-    protected function getCreatePageEndpoint(): string
+    private function getCreatePageEndpoint(): string
     {
         if (isset($_GET['create-page-endpoint'])) {
             return $_GET['create-page-endpoint'];
@@ -117,7 +114,7 @@ class ListBuilder
      *
      * @return string Compiled list view
      */
-    protected function listingNoItems(): string
+    private function listingNoItems(): string
     {
         $content = BootstrapWidgets::get('listing-no-items');
 
@@ -131,7 +128,7 @@ class ListBuilder
      *            Id of the record
      * @return string Compiled list buttons
      */
-    protected function listOfButtons(int $id): string
+    private function listOfButtons(int $id): string
     {
         $content = BootstrapWidgets::get('list-of-buttons');
 
@@ -143,7 +140,7 @@ class ListBuilder
      *
      * @return bool Do we need add actions
      */
-    protected function needActions(): bool
+    private function needActions(): bool
     {
         if (@$_GET['update-button'] == 1 || @$_GET['delete-button'] == 1 || $this->customActions !== null) {
             return true;
@@ -157,11 +154,9 @@ class ListBuilder
      *
      * @param array|object $record
      *            record data
-     * @param bool $addActions
-     *            Do we need to add actions
      * @return string Compiled row
      */
-    protected function listingItemsCells($record, bool $addActions = true): string
+    private function listingItemsCells($record): string
     {
         $content = '';
 
@@ -177,7 +172,7 @@ class ListBuilder
             $content = str_replace('{name}', '{' . $name . '}', $content);
         }
 
-        if ($addActions && $this->needActions()) {
+        if ($this->needActions()) {
             $content .= BootstrapWidgets::get('listing-actions');
 
             $content = str_replace(
@@ -196,7 +191,7 @@ class ListBuilder
      *            Transforming record
      * @return object Transformed record
      */
-    protected function transformRecord(object $record): object
+    private function transformRecord(object $record): object
     {
         // here we assume that we get from service
         // already transformed
@@ -215,7 +210,7 @@ class ListBuilder
      *            Listof records
      * @return string Compiled list items
      */
-    protected function listingItems(array $records): string
+    private function listingItems(array $records): string
     {
         $content = '';
 
@@ -236,11 +231,9 @@ class ListBuilder
     /**
      * Method compiles header cells
      *
-     * @param bool $addActions
-     *            Do we need to add actions
      * @return string Compiled header
      */
-    protected function listingHeaderCells(bool $addActions = true): string
+    private function listingHeaderCells(): string
     {
         $content = '';
 
@@ -261,7 +254,7 @@ class ListBuilder
             ], $content);
         }
 
-        if ($addActions && $this->needActions()) {
+        if ($this->needActions()) {
             $content .= BootstrapWidgets::get('listing-header-actions');
         }
 
@@ -274,7 +267,7 @@ class ListBuilder
      * @param
      *            string Compiled header
      */
-    protected function listingHeaderContent(): string
+    private function listingHeaderContent(): string
     {
         if (@$_GET['create-button'] == 1) {
             $content = BootstrapWidgets::get('listing-header');
@@ -292,60 +285,16 @@ class ListBuilder
      *
      * @return string Compiled header
      */
-    protected function listingHeader(): string
+    private function listingHeader(): string
     {
         $content = $this->listingHeaderContent();
 
         $content = str_replace(
             '{description}',
-            isset($_GET[DESCRIPTION_FIELD_NAME]) ? $_GET[DESCRIPTION_FIELD_NAME] : 'Выберите необходимое действие',
+            isset($_GET['description']) ? $_GET['description'] : 'Выберите необходимое действие',
             $content);
 
         return str_replace('{cells}', $this->listingHeaderCells(), $content);
-    }
-
-    /**
-     * Method compiles listing header
-     *
-     * @return string Compiled header
-     */
-    protected function simpleListingHeader(): string
-    {
-        $content = BootstrapWidgets::get('simple-listing-header');
-
-        $content = str_replace(
-            '{description}',
-            isset($_GET[DESCRIPTION_FIELD_NAME]) ? $_GET[DESCRIPTION_FIELD_NAME] : 'Выберите необходимое действие',
-            $content);
-
-        return str_replace('{cells}', $this->listingHeaderCells(false), $content);
-    }
-
-    /**
-     * Method compiles listing items
-     *
-     * @param array $records
-     *            List of records
-     * @return string Compiled simple list
-     */
-    protected function simpleListingItems(array $records): string
-    {
-        $content = '';
-
-        foreach ($records as $record) {
-            $content .= str_replace(
-                '{items}',
-                $this->listingItemsCells($record, false),
-                BootstrapWidgets::get('listing-row'));
-
-            $record = $this->transformRecord($record);
-
-            $record = $this->listBuilderAdapter->preprocessListItem($record);
-
-            $content = TemplateEngine::printRecord($content, $record);
-        }
-
-        return $content;
     }
 
     /**
@@ -370,29 +319,6 @@ class ListBuilder
             return $header . $items . $footer;
         } else {
             return $this->listingNoItems();
-        }
-    }
-
-    /**
-     * Method compiles simple_listing form
-     *
-     * @return string Compiled simple listing form
-     */
-    public function simpleListingForm(): string
-    {
-        $records = $this->listBuilderAdapter->all();
-
-        if (! empty($records)) {
-            $header = $this->simpleListingHeader();
-
-            $items = $this->simpleListingItems($records);
-
-            // they are the same with full feature listing
-            $footer = BootstrapWidgets::get('listing-footer');
-
-            return $header . $items . $footer;
-        } else {
-            return BootstrapWidgets::get('listing-no-items');
         }
     }
 
