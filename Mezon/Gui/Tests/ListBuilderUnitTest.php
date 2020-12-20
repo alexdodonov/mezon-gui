@@ -136,7 +136,7 @@ class ListBuilderUnitTest extends TestCase
     public function simpleListingFormDataProvider(): array
     {
         return [
-            [// TODO move this test to the next test and adapter and add validation of the buttons creation
+            [
                 [],
                 [
                     'class="no-items-title"'
