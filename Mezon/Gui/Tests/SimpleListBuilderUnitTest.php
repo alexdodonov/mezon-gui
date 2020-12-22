@@ -3,9 +3,21 @@ namespace Mezon\Gui\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Mezon\Gui\ListBuilder\Simple as SimpleListBuilder;
+use Mezon\Router\Router;
+use Mezon\Transport\Request;
 
 class SimpleListBuilderUnitTest extends TestCase
 {
+
+    /**
+     * This method is called before each test.
+     */
+    protected function setUp(): void
+    {
+        $router = new Router();
+
+        Request::registerRouter($router);
+    }
 
     /**
      * Method returns list of fields

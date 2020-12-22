@@ -21,7 +21,8 @@
 		"mezon/security": "1.0.*",
 		"mezon/list-builder-adapter": "1.1.*",
 		"mezon/fields-set": "1.0.*",
-		"mezon/field": "1.0.*"
+		"mezon/field": "1.0.*",
+		"mezon/http-request-params": "1.0.*"
 	},
 	"support": {
 		"email": "alexey@dodonov.pro",

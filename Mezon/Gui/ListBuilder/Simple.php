@@ -3,6 +3,7 @@ namespace Mezon\Gui\ListBuilder;
 
 use Mezon\Gui\WidgetsRegistry\BootstrapWidgets;
 use Mezon\TemplateEngine\TemplateEngine;
+use Mezon\Transport\Request;
 
 /**
  * Class Simple
@@ -158,10 +159,9 @@ class Simple
     {
         $content = BootstrapWidgets::get('simple-listing-header');
 
-        // TODO use Request
         $content = str_replace(
             '{description}',
-            isset($_GET['description']) ? $_GET['description'] : 'Выберите необходимое действие',
+            Request::getParam('description', 'Выберите необходимое действие'),
             $content);
 
         return str_replace('{cells}', $this->listingHeaderCells(), $content);
