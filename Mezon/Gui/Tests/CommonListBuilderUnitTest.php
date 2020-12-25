@@ -79,7 +79,8 @@ class CommonListBuilderUnitTest extends TestCase
                 [
                     '>id<',
                     '>1<',
-                    '>2<'
+                    '>2<',
+                    '{action-message}'
                 ]
             ],
             [
@@ -89,7 +90,8 @@ class CommonListBuilderUnitTest extends TestCase
                     '>id<',
                     '>1<',
                     '>2<',
-                    '/create-endpoint/'
+                    '/create-endpoint/',
+                    '{action-message}'
                 ]
             ],
             [
@@ -97,7 +99,8 @@ class CommonListBuilderUnitTest extends TestCase
                 [],
                 [
                     'class="no-items-title"',
-                    '../create/'
+                    '../create/',
+                    '{action-message}'
                 ]
             ]
         ];

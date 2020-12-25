@@ -89,7 +89,8 @@ class SimpleListBuilderUnitTest extends TestCase
             [
                 [],
                 [
-                    'class="no-items-title"'
+                    'class="no-items-title"',
+                    '{action-message}'
                 ]
             ],
             // #1, no records
@@ -98,6 +99,7 @@ class SimpleListBuilderUnitTest extends TestCase
                 [
                     '>1<',
                     '>2<',
+                    '{action-message}'
                 ]
             ]
         ];

@@ -16,8 +16,8 @@
                   </div>
                   <div class="x_content">
 					<div class="table-responsive">
-						<a href="{create-page-endpoint}" class="btn btn-success">Создать</a>
-						&nbsp;
+					  {action-message}
+					  <a href="{create-page-endpoint}" class="btn btn-success">Создать</a>
 					</div>
                   </div>
                 </div>
