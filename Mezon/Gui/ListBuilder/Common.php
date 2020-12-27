@@ -4,6 +4,7 @@ namespace Mezon\Gui\ListBuilder;
 use Mezon\Functional\Fetcher;
 use Mezon\Gui\WidgetsRegistry\BootstrapWidgets;
 use Mezon\TemplateEngine\TemplateEngine;
+use Mezon\Transport\Request;
 
 /**
  * Class ListBuilder
@@ -48,6 +49,20 @@ class Common
      * @var string
      */
     private $customActions = null;
+
+    /**
+     * List title
+     *
+     * @var string
+     */
+    public $listTitle = 'Список записей';
+
+    /**
+     * List description
+     *
+     * @var string
+     */
+    public $listDescription = 'Выберите необходимое действие';
 
     /**
      * Constructor
@@ -289,10 +304,13 @@ class Common
     {
         $content = $this->listingHeaderContent();
 
-        $content = str_replace(
-            '{description}',
-            isset($_GET['description']) ? $_GET['description'] : 'Выберите необходимое действие',
-            $content);
+        $content = str_replace([
+            '{list-description}',
+            '{list-title}'
+        ], [
+            Request::getParam('list-description', $this->listDescription),
+            $this->listTitle
+        ], $content);
 
         return str_replace('{cells}', $this->listingHeaderCells(), $content);
     }

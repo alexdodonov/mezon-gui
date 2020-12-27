@@ -66,6 +66,20 @@ class CommonListBuilderUnitTest extends TestCase
     }
 
     /**
+     * Combining substrings to assert
+     *
+     * @param array $specificSubstrings
+     *            specific substrings
+     * @return array total list of substrings
+     */
+    private function commonSubstring(array $specificSubstrings): array
+    {
+        return array_merge([
+            '{action-message}'
+        ], $specificSubstrings);
+    }
+
+    /**
      * Data provider for the testListingForm
      *
      * @return array test data
@@ -76,32 +90,29 @@ class CommonListBuilderUnitTest extends TestCase
             [
                 0,
                 $this->getRecords(),
-                [
+                $this->commonSubstring([
                     '>id<',
                     '>1<',
-                    '>2<',
-                    '{action-message}'
-                ]
+                    '>2<'
+                ])
             ],
             [
                 1,
                 $this->getRecords(),
-                [
+                $this->commonSubstring([
                     '>id<',
                     '>1<',
                     '>2<',
-                    '/create-endpoint/',
-                    '{action-message}'
-                ]
+                    '/create-endpoint/'
+                ])
             ],
             [
                 0,
                 [],
-                [
+                $this->commonSubstring([
                     'class="no-items-title"',
                     '../create/',
-                    '{action-message}'
-                ]
+                ])
             ]
         ];
     }
@@ -132,11 +143,24 @@ class CommonListBuilderUnitTest extends TestCase
     }
 
     /**
+     * Asserting that string contains substrings
+     *
+     * @param array $needles
+     * @param string $haystack
+     */
+    private function assertStringContainsStrings(array $needles, string $haystack): void
+    {
+        foreach ($needles as $needle) {
+            $this->assertStringContainsString($needle, $haystack);
+        }
+    }
+
+    /**
      * Testing data provider
      *
      * @return array testing data
      */
-    public function customActionsDataProvider(): array
+    public function commonBehaviourDataProvider(): array
     {
         $setup = function (): object {
             // setup method
@@ -153,14 +177,22 @@ class CommonListBuilderUnitTest extends TestCase
             $this->assertStringNotContainsString('!2!', $result);
         };
 
+        $headerData = [
+            'id' => [
+                'title' => 'Some id field'
+            ]
+        ];
+
         return [
             // #0, listingForm
             [
                 $setup,
                 function ($result): void {
                     // asserting method
-                    $this->assertStringContainsString('!1!', $result);
-                    $this->assertStringContainsString('!2!', $result);
+                    $this->assertStringContainsStrings([
+                        '!1!',
+                        '!2!'
+                    ], $result);
                 }
             ],
             // #1, listingForm, no custom buttons
@@ -173,32 +205,26 @@ class CommonListBuilderUnitTest extends TestCase
             ],
             // #2, listingForm, no custom buttons
             [
-                function (): object {
+                function () use ($headerData): object {
                     // setup method
-                    return new CommonListBuilder([
-                        'id' => [
-                            'title' => 'Some id field'
-                        ]
-                    ], new FakeAdapter($this->getRecords()));
+                    return new CommonListBuilder($headerData, new FakeAdapter($this->getRecords()));
                 },
                 $assert
             ],
             // #3, listingForm, no custom buttons
             [
-                function (): object {
+                function () use ($headerData): object {
                     // setup method
-                    return new CommonListBuilder([
-                        'id' => [
-                            'title' => 'Some id field'
-                        ]
-                    ], new FakeAdapter($this->getRecords()));
+                    return new CommonListBuilder($headerData, new FakeAdapter($this->getRecords()));
                 },
                 function (string $result) use ($assert) {
                     $assert($result);
 
-                    $this->assertStringContainsString('Some id field', $result);
-                    $this->assertStringContainsString('>1<', $result);
-                    $this->assertStringContainsString('>2<', $result);
+                    $this->assertStringContainsStrings([
+                        'Some id field',
+                        '>1<',
+                        '>2<'
+                    ], $result);
                 }
             ],
             // #4, listingForm, default buttons
@@ -212,9 +238,52 @@ class CommonListBuilderUnitTest extends TestCase
                 function (string $result) use ($assert) {
                     $assert($result);
 
-                    $this->assertStringContainsString('>id<', $result);
-                    $this->assertStringContainsString('>1<', $result);
-                    $this->assertStringContainsString('>2<', $result);
+                    $this->assertStringContainsStrings([
+                        '>id<',
+                        '>1<',
+                        '>2<'
+                    ], $result);
+                }
+            ],
+            // #5, listingForm, custom title and description
+            [
+                function (): object {
+                    // setup method
+                    $listBuilder = new CommonListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                    $listBuilder->listTitle = 'List Title';
+                    $listBuilder->listDescription = 'List Description';
+                    return $listBuilder;
+                },
+                function (string $result) use ($assert) {
+                    $assert($result);
+
+                    $this->assertStringContainsStrings([
+                        '>id<',
+                        '>1<',
+                        '>2<',
+                        'List Title',
+                        'List Description'
+                    ], $result);
+                }
+            ],
+            // #6, listingForm, default title and description
+            [
+                function (): object {
+                    // setup method
+                    return new CommonListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                },
+                function (string $result) use ($assert) {
+                    $assert($result);
+
+                    $this->assertStringContainsStrings(
+                        [
+                            '>id<',
+                            '>1<',
+                            '>2<',
+                            'Список записей',
+                            'Выберите необходимое действие'
+                        ],
+                        $result);
                 }
             ]
         ];
@@ -227,9 +296,9 @@ class CommonListBuilderUnitTest extends TestCase
      *            setup method
      * @param callable $assertions
      *            assertions method
-     * @dataProvider customActionsDataProvider
+     * @dataProvider commonBehaviourDataProvider
      */
-    public function testCustomActions(callable $setup, callable $assertions): void
+    public function testCommonBehaviour(callable $setup, callable $assertions): void
     {
         // setup
         $obj = $setup();

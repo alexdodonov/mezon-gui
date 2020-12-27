@@ -125,4 +125,96 @@ class SimpleListBuilderUnitTest extends TestCase
         // assertions
         $this->runAssertions($asserts, $content);
     }
+
+    /**
+     * Asserting that string contains substrings
+     *
+     * @param array $needles
+     * @param string $haystack
+     */
+    private function assertStringContainsStrings(array $needles, string $haystack): void
+    {
+        foreach ($needles as $needle) {
+            $this->assertStringContainsString($needle, $haystack);
+        }
+    }
+
+    /**
+     * Testing data provider
+     *
+     * @return array testing data
+     */
+    public function commonBehaviourDataProvider(): array
+    {
+        $assert = function ($result): void {
+            // asserting method
+            $this->assertStringNotContainsString('!1!', $result);
+            $this->assertStringNotContainsString('!2!', $result);
+        };
+
+        return [
+            // #0, listingForm, custom title and description
+            [
+                function (): object {
+                    // setup method
+                    $listBuilder = new SimpleListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                    $listBuilder->listTitle = 'List Title';
+                    $listBuilder->listDescription = 'List Description';
+                    return $listBuilder;
+                },
+                function (string $result) use ($assert) {
+                    $assert($result);
+
+                    $this->assertStringContainsStrings([
+                        '>id<',
+                        '>1<',
+                        '>2<',
+                        'List Title',
+                        'List Description'
+                    ], $result);
+                }
+            ],
+            // #1, listingForm, default title and description
+            [
+                function (): object {
+                    // setup method
+                    return new SimpleListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                },
+                function (string $result) use ($assert) {
+                    $assert($result);
+
+                    $this->assertStringContainsStrings(
+                        [
+                            '>id<',
+                            '>1<',
+                            '>2<',
+                            'Список записей',
+                            'Выберите необходимое действие'
+                        ],
+                        $result);
+                }
+            ]
+        ];
+    }
+
+    /**
+     * Testing method
+     *
+     * @param callable $setup
+     *            setup method
+     * @param callable $assertions
+     *            assertions method
+     * @dataProvider commonBehaviourDataProvider
+     */
+    public function testCommonBehaviour(callable $setup, callable $assertions): void
+    {
+        // setup
+        $obj = $setup();
+
+        // test body
+        $result = $obj->listingForm();
+
+        // assertions
+        $assertions($result);
+    }
 }

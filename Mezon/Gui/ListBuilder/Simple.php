@@ -43,6 +43,20 @@ class Simple
     private $recordTransformer = [];
 
     /**
+     * List title
+     *
+     * @var string
+     */
+    public $listTitle = 'Список записей';
+
+    /**
+     * List description
+     *
+     * @var string
+     */
+    public $listDescription = 'Выберите необходимое действие';
+
+    /**
      * Constructor
      *
      * @param array $fields
@@ -159,10 +173,13 @@ class Simple
     {
         $content = BootstrapWidgets::get('simple-listing-header');
 
-        $content = str_replace(
-            '{description}',
-            Request::getParam('description', 'Выберите необходимое действие'),
-            $content);
+        $content = str_replace([
+            '{list-description}',
+            '{list-title}'
+        ], [
+            Request::getParam('list-description', $this->listDescription),
+            $this->listTitle
+        ], $content);
 
         return str_replace('{cells}', $this->listingHeaderCells(), $content);
     }
