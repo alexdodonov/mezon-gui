@@ -1,5 +1,6 @@
-			  </tbody>
-					  </table>
+			              </tbody>
+					    </table>
+					  </form>
 					</div>
                   </div>
                 </div>

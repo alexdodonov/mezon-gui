@@ -1,12 +1,11 @@
 <?php
 namespace Mezon\Gui\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Mezon\Gui\ListBuilder\Simple as SimpleListBuilder;
 use Mezon\Router\Router;
 use Mezon\Transport\Request;
 
-class SimpleListBuilderUnitTest extends TestCase
+class SimpleListBuilderUnitTest extends ListBuilderTestsBase
 {
 
     /**
@@ -17,20 +16,6 @@ class SimpleListBuilderUnitTest extends TestCase
         $router = new Router();
 
         Request::registerRouter($router);
-    }
-
-    /**
-     * Method returns list of fields
-     *
-     * @return array Fields algorithms object
-     */
-    protected function getFields(): array
-    {
-        return [
-            'id',
-            'domain_id',
-            'title'
-        ];
     }
 
     /**
@@ -58,23 +43,6 @@ class SimpleListBuilderUnitTest extends TestCase
 
         // assertions
         $this->assertIsArray($listBuilder->getFields(), 'Invalid fields list type');
-    }
-
-    /**
-     * Method returns testing records
-     *
-     * @return array testing records
-     */
-    private function getRecords(): array
-    {
-        return [
-            [
-                'id' => 1,
-            ],
-            [
-                'id' => 2,
-            ]
-        ];
     }
 
     /**

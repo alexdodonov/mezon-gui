@@ -1,25 +1,10 @@
 <?php
 namespace Mezon\Gui\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Mezon\Gui\ListBuilder\ListBuilder;
 
-class ListBuilderUnitTest extends TestCase
+class ListBuilderUnitTest extends ListBuilderTestsBase
 {
-
-    /**
-     * Method returns list of fields
-     *
-     * @return array Fields algorithms object
-     */
-    protected function getFields(): array
-    {
-        return [
-            'id',
-            'domain_id',
-            'title'
-        ];
-    }
 
     /**
      * Method runs string assertions
@@ -46,23 +31,6 @@ class ListBuilderUnitTest extends TestCase
 
         // assertions
         $this->assertIsArray($listBuilder->getFields(), 'Invalid fields list type');
-    }
-
-    /**
-     * Method returns testing records
-     *
-     * @return array testing records
-     */
-    private function getRecords(): array
-    {
-        return [
-            [
-                'id' => 1,
-            ],
-            [
-                'id' => 2,
-            ]
-        ];
     }
 
     /**

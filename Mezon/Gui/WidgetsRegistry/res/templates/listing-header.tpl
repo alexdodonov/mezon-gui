@@ -16,13 +16,14 @@
 				  </div>
 				  <div class="x_content">
 					<div class="table-responsive">
-					  {action-message}
-					  <a href="{create-page-endpoint}" class="btn btn-success" title="Создать">Создать</a>
-					  <table class="table table-striped jambo_table bulk_action">
-						<thead>
-						  <tr class="headings">
-							{cells}
-						  </tr>
-						</thead>
+					  <form method="post">
+					    {action-message}
+					    <a href="{create-page-endpoint}" class="btn btn-success" title="Создать">Создать</a>{header-actions}
+					    <table class="table table-striped jambo_table bulk_action">
+						  <thead>
+						    <tr class="headings">
+							  {cells}
+						    </tr>
+						  </thead>
 
-						<tbody>
+						  <tbody>

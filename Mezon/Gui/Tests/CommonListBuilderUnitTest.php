@@ -1,25 +1,10 @@
 <?php
 namespace Mezon\Gui\Tests;
 
-use PHPUnit\Framework\TestCase;
-use Mezon\Gui\ListBuilder\Common as CommonListBuilder;
+use Mezon\Gui\ListBuilder;
 
-class CommonListBuilderUnitTest extends TestCase
+class CommonListBuilderUnitTest extends ListBuilderTestsBase
 {
-
-    /**
-     * Method returns list of fields
-     *
-     * @return array Fields algorithms object
-     */
-    protected function getFields(): array
-    {
-        return [
-            'id',
-            'domain_id',
-            'title'
-        ];
-    }
 
     /**
      * Method runs string assertions
@@ -42,27 +27,10 @@ class CommonListBuilderUnitTest extends TestCase
     public function testConstructorValid(): void
     {
         // setup and test body
-        $listBuilder = new CommonListBuilder($this->getFields(), new FakeAdapter());
+        $listBuilder = new ListBuilder\Common($this->getFields(), new FakeAdapter());
 
         // assertions
         $this->assertIsArray($listBuilder->getFields(), 'Invalid fields list type');
-    }
-
-    /**
-     * Method returns testing records
-     *
-     * @return array testing records
-     */
-    private function getRecords(): array
-    {
-        return [
-            [
-                'id' => 1,
-            ],
-            [
-                'id' => 2,
-            ]
-        ];
     }
 
     /**
@@ -133,7 +101,7 @@ class CommonListBuilderUnitTest extends TestCase
         // setup
         $_GET['create-page-endpoint'] = $createButton ? '/create-endpoint/' : null;
         $_GET['create-button'] = $createButton;
-        $listBuilder = new CommonListBuilder($this->getFields(), new FakeAdapter($records));
+        $listBuilder = new ListBuilder\Common($this->getFields(), new FakeAdapter($records));
 
         // test body
         $content = $listBuilder->listingForm();
@@ -164,7 +132,7 @@ class CommonListBuilderUnitTest extends TestCase
     {
         $setup = function (): object {
             // setup method
-            $listBuilder = new CommonListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+            $listBuilder = new ListBuilder\Common($this->getFields(), new FakeAdapter($this->getRecords()));
 
             $listBuilder->setCustomActions('!{id}!');
 
@@ -199,7 +167,7 @@ class CommonListBuilderUnitTest extends TestCase
             [
                 function (): object {
                     // setup method
-                    return new CommonListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                    return new ListBuilder\Common($this->getFields(), new FakeAdapter($this->getRecords()));
                 },
                 $assert
             ],
@@ -207,7 +175,7 @@ class CommonListBuilderUnitTest extends TestCase
             [
                 function () use ($headerData): object {
                     // setup method
-                    return new CommonListBuilder($headerData, new FakeAdapter($this->getRecords()));
+                    return new ListBuilder\Common($headerData, new FakeAdapter($this->getRecords()));
                 },
                 $assert
             ],
@@ -215,7 +183,7 @@ class CommonListBuilderUnitTest extends TestCase
             [
                 function () use ($headerData): object {
                     // setup method
-                    return new CommonListBuilder($headerData, new FakeAdapter($this->getRecords()));
+                    return new ListBuilder\Common($headerData, new FakeAdapter($this->getRecords()));
                 },
                 function (string $result) use ($assert) {
                     $assert($result);
@@ -233,7 +201,7 @@ class CommonListBuilderUnitTest extends TestCase
                     // setup method
                     $_GET['update-button'] = 1;
                     $_GET['create-button'] = 1;
-                    return new CommonListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                    return new ListBuilder\Common($this->getFields(), new FakeAdapter($this->getRecords()));
                 },
                 function (string $result) use ($assert) {
                     $assert($result);
@@ -249,7 +217,7 @@ class CommonListBuilderUnitTest extends TestCase
             [
                 function (): object {
                     // setup method
-                    $listBuilder = new CommonListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                    $listBuilder = new ListBuilder\Common($this->getFields(), new FakeAdapter($this->getRecords()));
                     $listBuilder->listTitle = 'List Title';
                     $listBuilder->listDescription = 'List Description';
                     return $listBuilder;
@@ -270,7 +238,7 @@ class CommonListBuilderUnitTest extends TestCase
             [
                 function (): object {
                     // setup method
-                    return new CommonListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                    return new ListBuilder\Common($this->getFields(), new FakeAdapter($this->getRecords()));
                 },
                 function (string $result) use ($assert) {
                     $assert($result);

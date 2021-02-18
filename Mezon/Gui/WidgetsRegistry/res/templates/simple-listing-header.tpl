@@ -16,12 +16,14 @@
 				  </div>
 				  <div class="x_content">
 					<div class="table-responsive">
-					  {action-message}
-					  <table class="table table-striped jambo_table bulk_action">
-						<thead>
-						  <tr class="headings">
-							{cells}
-						  </tr>
-						</thead>
+					  <form method="post">
+					    {action-message}
+					    {header-actions}
+					    <table class="table table-striped jambo_table bulk_action">
+						  <thead>
+						    <tr class="headings">
+							  {cells}
+						    </tr>
+						  </thead>
 
-						<tbody>
+						  <tbody>

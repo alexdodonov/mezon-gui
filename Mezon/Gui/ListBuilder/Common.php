@@ -51,6 +51,13 @@ class Common
     private $customActions = null;
 
     /**
+     * Custom header actions
+     *
+     * @var string
+     */
+    private $customHeaderActions = '';
+
+    /**
      * List title
      *
      * @var string
@@ -96,6 +103,16 @@ class Common
     public function setCustomActions(string $actions): void
     {
         $this->customActions = $actions;
+    }
+
+    /**
+     * Method sets custom header actions
+     *
+     * @param string $actions
+     */
+    public function setCustomHeaderActions(string $actions): void
+    {
+        $this->customHeaderActions = $actions;
     }
 
     /**
@@ -292,7 +309,7 @@ class Common
             $content = BootstrapWidgets::get('simple-listing-header');
         }
 
-        return $content;
+        return str_replace('{header-actions}', $this->customHeaderActions, $content);
     }
 
     /**
