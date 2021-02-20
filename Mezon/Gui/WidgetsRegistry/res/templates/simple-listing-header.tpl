@@ -15,8 +15,8 @@
 					<div class="clearfix"></div>
 				  </div>
 				  <div class="x_content">
-					<div class="table-responsive">
-					  <form method="post">
+				    <form method="post">
+					  <div class="table-responsive">
 					    {action-message}
 					    {header-actions}
 					    <table class="table table-striped jambo_table bulk_action">
