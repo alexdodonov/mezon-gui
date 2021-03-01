@@ -80,6 +80,8 @@ class CommonListBuilderUnitTest extends ListBuilderTestsBase
                 $this->commonSubstring([
                     'class="no-items-title"',
                     '../create/',
+                    'Ни одной записи не найдено',
+                    'Some list title'
                 ])
             ]
         ];
@@ -102,6 +104,7 @@ class CommonListBuilderUnitTest extends ListBuilderTestsBase
         $_GET['create-page-endpoint'] = $createButton ? '/create-endpoint/' : null;
         $_GET['create-button'] = $createButton;
         $listBuilder = new ListBuilder\Common($this->getFields(), new FakeAdapter($records));
+        $listBuilder->listTitle = 'Some list title';
 
         // test body
         $content = $listBuilder->listingForm();

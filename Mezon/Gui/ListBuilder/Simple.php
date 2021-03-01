@@ -227,7 +227,15 @@ class Simple
 
             return $header . $items . $footer;
         } else {
-            return BootstrapWidgets::get('listing-no-items');
+            // TODO fetch this code to the base class for list builders, so we can reuse it 
+            // both in Simple and Common list builders
+            return str_replace([
+                '{list-description}',
+                '{list-title}'
+            ], [
+                'Ни одной записи не найдено',
+                $this->listTitle
+            ], BootstrapWidgets::get('listing-no-items'));
         }
     }
 

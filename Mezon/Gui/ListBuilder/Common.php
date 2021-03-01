@@ -148,7 +148,13 @@ class Common
      */
     private function listingNoItems(): string
     {
-        $content = BootstrapWidgets::get('listing-no-items');
+        $content = str_replace([
+            '{list-description}',
+            '{list-title}'
+        ], [
+            'Ни одной записи не найдено',
+            $this->listTitle
+        ], BootstrapWidgets::get('listing-no-items'));
 
         return str_replace('{create-page-endpoint}', $this->getCreatePageEndpoint(), $content);
     }

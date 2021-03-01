@@ -1,7 +1,7 @@
 <?php
 namespace Mezon\Gui\Tests;
 
-use Mezon\Gui\ListBuilder\Simple as SimpleListBuilder;
+use Mezon\Gui\ListBuilder;
 use Mezon\Router\Router;
 use Mezon\Transport\Request;
 
@@ -39,7 +39,7 @@ class SimpleListBuilderUnitTest extends ListBuilderTestsBase
     public function testConstructorValid(): void
     {
         // setup and test body
-        $listBuilder = new SimpleListBuilder($this->getFields(), new FakeAdapter());
+        $listBuilder = new ListBuilder\Simple($this->getFields(), new FakeAdapter());
 
         // assertions
         $this->assertIsArray($listBuilder->getFields(), 'Invalid fields list type');
@@ -58,7 +58,9 @@ class SimpleListBuilderUnitTest extends ListBuilderTestsBase
                 [],
                 [
                     'class="no-items-title"',
-                    '{action-message}'
+                    '{action-message}',
+                    'Ни одной записи не найдено',
+                    'Some list title'
                 ]
             ],
             // #1, no records
@@ -85,7 +87,8 @@ class SimpleListBuilderUnitTest extends ListBuilderTestsBase
     public function testSimpleListingForm(array $records, array $asserts): void
     {
         // setup
-        $listBuilder = new SimpleListBuilder($this->getFields(), new FakeAdapter($records));
+        $listBuilder = new ListBuilder\Simple($this->getFields(), new FakeAdapter($records));
+        $listBuilder->listTitle = 'Some list title';
 
         // test body
         $content = $listBuilder->listingForm();
@@ -125,7 +128,7 @@ class SimpleListBuilderUnitTest extends ListBuilderTestsBase
             [
                 function (): object {
                     // setup method
-                    $listBuilder = new SimpleListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                    $listBuilder = new ListBuilder\Simple($this->getFields(), new FakeAdapter($this->getRecords()));
                     $listBuilder->listTitle = 'List Title';
                     $listBuilder->listDescription = 'List Description';
                     return $listBuilder;
@@ -146,7 +149,7 @@ class SimpleListBuilderUnitTest extends ListBuilderTestsBase
             [
                 function (): object {
                     // setup method
-                    return new SimpleListBuilder($this->getFields(), new FakeAdapter($this->getRecords()));
+                    return new ListBuilder\Simple($this->getFields(), new FakeAdapter($this->getRecords()));
                 },
                 function (string $result) use ($assert) {
                     $assert($result);
