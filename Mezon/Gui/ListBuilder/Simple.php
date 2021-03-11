@@ -18,79 +18,8 @@ use Mezon\Transport\Request;
 /**
  * Class constructs grids
  */
-class Simple
+class Simple extends Base
 {
-
-    /**
-     * Fields
-     *
-     * @var array
-     */
-    private $fields = [];
-
-    /**
-     * Service logic adapter
-     *
-     * @var \Mezon\Gui\ListBuilder\ListBuilderAdapter
-     */
-    private $listBuilderAdapter = false;
-
-    /**
-     * List item transformation callback
-     *
-     * @var array
-     */
-    private $recordTransformer = [];
-
-    /**
-     * List title
-     *
-     * @var string
-     */
-    public $listTitle = 'Список записей';
-
-    /**
-     * List description
-     *
-     * @var string
-     */
-    public $listDescription = 'Выберите необходимое действие';
-
-    /**
-     * Constructor
-     *
-     * @param array $fields
-     *            List of fields
-     * @param \Mezon\Gui\ListBuilder\ListBuilderAdapter $listBuilderAdapter
-     *            Adapter for the data source
-     */
-    public function __construct(array $fields, ListBuilderAdapter $listBuilderAdapter)
-    {
-        $transformedFields = [];
-
-        foreach ($fields as $i => $field) {
-            $key = is_array($field) ? $i : $field;
-            $transformedFields[$key] = is_array($field) ? $field : [
-                'title' => $field
-            ];
-        }
-
-        $this->fields = $transformedFields;
-
-        $this->listBuilderAdapter = $listBuilderAdapter;
-    }
-
-    /**
-     * Setting record transformer
-     *
-     * @param mixed $recordTransformer
-     *            callable record transformer
-     * @codeCoverageIgnore
-     */
-    public function setRecordTransformer($recordTransformer): void
-    {
-        $this->recordTransformer = $recordTransformer;
-    }
 
     /**
      * Method compiles listing items cells
@@ -227,15 +156,7 @@ class Simple
 
             return $header . $items . $footer;
         } else {
-            // TODO fetch this code to the base class for list builders, so we can reuse it 
-            // both in Simple and Common list builders
-            return str_replace([
-                '{list-description}',
-                '{list-title}'
-            ], [
-                'Ни одной записи не найдено',
-                $this->listTitle
-            ], BootstrapWidgets::get('listing-no-items'));
+            return $this->getNoItemsContent();
         }
     }
 

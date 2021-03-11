@@ -19,29 +19,8 @@ use Mezon\Transport\Request;
 /**
  * Class constructs grids
  */
-class Common
+class Common extends Base
 {
-
-    /**
-     * Fields
-     *
-     * @var array
-     */
-    private $fields = [];
-
-    /**
-     * Service logic adapter
-     *
-     * @var \Mezon\Gui\ListBuilder\ListBuilderAdapter
-     */
-    private $listBuilderAdapter = false;
-
-    /**
-     * List item transformation callback
-     *
-     * @var array
-     */
-    private $recordTransformer = [];
 
     /**
      * Custom actions for each record
@@ -56,44 +35,6 @@ class Common
      * @var string
      */
     private $customHeaderActions = '';
-
-    /**
-     * List title
-     *
-     * @var string
-     */
-    public $listTitle = 'Список записей';
-
-    /**
-     * List description
-     *
-     * @var string
-     */
-    public $listDescription = 'Выберите необходимое действие';
-
-    /**
-     * Constructor
-     *
-     * @param array $fields
-     *            List of fields
-     * @param \Mezon\Gui\ListBuilder\ListBuilderAdapter $listBuilderAdapter
-     *            Adapter for the data source
-     */
-    public function __construct(array $fields, ListBuilderAdapter $listBuilderAdapter)
-    {
-        $transformedFields = [];
-
-        foreach ($fields as $i => $field) {
-            $key = is_array($field) ? $i : $field;
-            $transformedFields[$key] = is_array($field) ? $field : [
-                'title' => $field
-            ];
-        }
-
-        $this->fields = $transformedFields;
-
-        $this->listBuilderAdapter = $listBuilderAdapter;
-    }
 
     /**
      * Method sets custom actions
@@ -113,18 +54,6 @@ class Common
     public function setCustomHeaderActions(string $actions): void
     {
         $this->customHeaderActions = $actions;
-    }
-
-    /**
-     * Setting record transformer
-     *
-     * @param mixed $recordTransformer
-     *            callable record transformer
-     * @codeCoverageIgnore
-     */
-    public function setRecordTransformer($recordTransformer): void
-    {
-        $this->recordTransformer = $recordTransformer;
     }
 
     /**
@@ -148,15 +77,7 @@ class Common
      */
     private function listingNoItems(): string
     {
-        $content = str_replace([
-            '{list-description}',
-            '{list-title}'
-        ], [
-            'Ни одной записи не найдено',
-            $this->listTitle
-        ], BootstrapWidgets::get('listing-no-items'));
-
-        return str_replace('{create-page-endpoint}', $this->getCreatePageEndpoint(), $content);
+        return str_replace('{create-page-endpoint}', $this->getCreatePageEndpoint(), $this->getNoItemsContent());
     }
 
     /**
@@ -168,9 +89,7 @@ class Common
      */
     private function listOfButtons(int $id): string
     {
-        $content = BootstrapWidgets::get('list-of-buttons');
-
-        return str_replace('{id}', $id, $content);
+        return str_replace('{id}', $id, BootstrapWidgets::get('list-of-buttons'));
     }
 
     /**
