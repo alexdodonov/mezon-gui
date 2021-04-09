@@ -6,29 +6,26 @@ use Mezon\Gui\WidgetsRegistry\BootstrapWidgets;
 class Base
 {
 
-    // TODO make private
     /**
      * Fields
      *
      * @var array
      */
-    protected $fields = [];
+    private $fields = [];
 
-    // TODO make private
     /**
      * Service logic adapter
      *
-     * @var \Mezon\Gui\ListBuilder\ListBuilderAdapter
+     * @var ListBuilderAdapter
      */
-    protected $listBuilderAdapter = false;
+    private $listBuilderAdapter = false;
 
-    // TODO make private
     /**
      * List item transformation callback
      *
      * @var array
      */
-    protected $recordTransformer = [];
+    private $recordTransformer = [];
 
     /**
      * List title
@@ -94,5 +91,44 @@ class Base
     public function setRecordTransformer($recordTransformer): void
     {
         $this->recordTransformer = $recordTransformer;
+    }
+
+    /**
+     * Method returns fields
+     *
+     * @return array fields
+     */
+    public function getFields(): array
+    {
+        return $this->fields;
+    }
+
+    /**
+     * Method returns list builder adapter
+     *
+     * @return ListBuilderAdapter
+     */
+    protected function getListBuilderAdapter(): ListBuilderAdapter
+    {
+        return $this->listBuilderAdapter;
+    }
+
+    /**
+     * Method transforms database record
+     *
+     * @param array $record
+     *            Transforming record
+     * @return object Transformed record
+     */
+    protected function transformRecord(object $record): object
+    {
+        // here we assume that we get from service
+        // already transformed
+        // and here we provide only additional transformations
+        if (is_callable($this->recordTransformer)) {
+            $record = call_user_func($this->recordTransformer, $record);
+        }
+
+        return $record;
     }
 } 

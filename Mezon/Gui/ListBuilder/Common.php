@@ -117,7 +117,7 @@ class Common extends Base
     {
         $content = '';
 
-        foreach (array_keys($this->fields) as $name) {
+        foreach (array_keys($this->getFields()) as $name) {
             if ($name == 'domain_id') {
                 continue;
             }
@@ -142,25 +142,6 @@ class Common extends Base
     }
 
     /**
-     * Method transforms database record
-     *
-     * @param array $record
-     *            Transforming record
-     * @return object Transformed record
-     */
-    private function transformRecord(object $record): object
-    {
-        // here we assume that we get from service
-        // already transformed
-        // and here we provide only additional transformations
-        if (is_callable($this->recordTransformer)) {
-            $record = call_user_func($this->recordTransformer, $record);
-        }
-
-        return $record;
-    }
-
-    /**
      * Method compiles listing items
      *
      * @param array $records
@@ -177,7 +158,7 @@ class Common extends Base
 
             $record = $this->transformRecord($record);
 
-            $record = $this->listBuilderAdapter->preprocessListItem($record);
+            $record = $this->getListBuilderAdapter()->preprocessListItem($record);
 
             $content = TemplateEngine::printRecord($content, $record);
         }
@@ -194,7 +175,7 @@ class Common extends Base
     {
         $content = '';
 
-        foreach ($this->fields as $name => $data) {
+        foreach ($this->getFields() as $name => $data) {
             if ($name == 'domain_id') {
                 continue;
             }
@@ -264,7 +245,7 @@ class Common extends Base
      */
     public function listingForm(): string
     {
-        $records = $this->listBuilderAdapter->getRecords([
+        $records = $this->getListBuilderAdapter()->getRecords([
             'field' => 'id',
             'order' => 'ASC'
         ], isset($_GET['from']) ? $_GET['from'] : 0, isset($_GET['limit']) ? $_GET['limit'] : 100);
@@ -280,15 +261,5 @@ class Common extends Base
         } else {
             return $this->listingNoItems();
         }
-    }
-
-    /**
-     * Method returns fields of the list
-     *
-     * @return array fields list
-     */
-    public function getFields(): array
-    {
-        return $this->fields;
     }
 }
