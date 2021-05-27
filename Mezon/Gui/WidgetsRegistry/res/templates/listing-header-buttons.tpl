@@ -1,0 +1,1 @@
+<a href="{create-page-endpoint}" class="btn btn-success create-button">Создать</a>

@@ -64,8 +64,7 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
                 0,
                 [],
                 [
-                    'class="no-items-title"',
-                    '../create/'
+                    'class="no-items-title"'
                 ]
             ]
         ];

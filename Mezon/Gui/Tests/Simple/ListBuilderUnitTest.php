@@ -1,11 +1,13 @@
 <?php
-namespace Mezon\Gui\Tests;
+namespace Mezon\Gui\Tests\Simple;
 
 use Mezon\Gui\ListBuilder;
 use Mezon\Router\Router;
 use Mezon\Transport\Request;
+use Mezon\Gui\Tests\ListBuilderTestsBase;
+use Mezon\Gui\Tests\FakeAdapter;
 
-class SimpleListBuilderUnitTest extends ListBuilderTestsBase
+class ListBuilderUnitTest extends ListBuilderTestsBase
 {
 
     /**

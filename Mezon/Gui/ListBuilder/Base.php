@@ -42,6 +42,29 @@ class Base
     public $listDescription = 'Выберите необходимое действие';
 
     /**
+     * Name of the template for the empty records list
+     *
+     * @var string
+     */
+    protected $noItemsTemplateName = 'listing-no-items';
+
+    /**
+     * Method returns content for the case when no items were found
+     *
+     * @return string content for the case when no items were found
+     */
+    protected function getNoItemsContent(): string
+    {
+        return str_replace([
+            '{list-description}',
+            '{list-title}'
+        ], [
+            'Ни одной записи не найдено',
+            $this->listTitle
+        ], BootstrapWidgets::get($this->noItemsTemplateName));
+    }
+
+    /**
      * Constructor
      *
      * @param array $fields
@@ -63,22 +86,6 @@ class Base
         $this->fields = $transformedFields;
 
         $this->listBuilderAdapter = $listBuilderAdapter;
-    }
-
-    /**
-     * Method returns content for the case when no items were found
-     *
-     * @return string content for the case when no items were found
-     */
-    public function getNoItemsContent(): string
-    {
-        return str_replace([
-            '{list-description}',
-            '{list-title}'
-        ], [
-            'Ни одной записи не найдено',
-            $this->listTitle
-        ], BootstrapWidgets::get('listing-no-items'));
     }
 
     /**

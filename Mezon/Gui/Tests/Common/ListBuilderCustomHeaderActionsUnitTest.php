@@ -1,9 +1,11 @@
 <?php
-namespace Mezon\Gui\Tests;
+namespace Mezon\Gui\Tests\Common;
 
 use Mezon\Gui\ListBuilder;
+use Mezon\Gui\Tests\FakeAdapter;
+use Mezon\Gui\Tests\ListBuilderTestsBase;
 
-class CommonListBuilderCustomHeaderActionsUnitTest extends ListBuilderTestsBase
+class ListBuilderCustomHeaderActionsUnitTest extends ListBuilderTestsBase
 {
 
     /**
@@ -11,7 +13,7 @@ class CommonListBuilderCustomHeaderActionsUnitTest extends ListBuilderTestsBase
      *
      * @return array testing data
      */
-    public function DataProvider(): array
+    public function actionsDataProvider(): array
     {
         return [
             // #0, the first case - simple header
@@ -31,7 +33,7 @@ class CommonListBuilderCustomHeaderActionsUnitTest extends ListBuilderTestsBase
                     $this->assertStringContainsString('custom header actions', $result);
                 }
             ],
-            // #1, the first case - full header
+            // #1, the second case - full header
             [
                 function (): object {
                     // setup
@@ -48,7 +50,7 @@ class CommonListBuilderCustomHeaderActionsUnitTest extends ListBuilderTestsBase
                     $this->assertStringContainsString('custom header actions', $result);
                 }
             ],
-            // #2, the first case - simple header
+            // #2, the third case - simple header
             [
                 function (): object {
                     // setup
@@ -75,7 +77,7 @@ class CommonListBuilderCustomHeaderActionsUnitTest extends ListBuilderTestsBase
      *            setup method
      * @param callable $assertions
      *            assertions method
-     * @dataProvider DataProvider
+     * @dataProvider actionsDataProvider
      */
     public function testCustomHeaderActions(callable $setup, callable $assertions): void
     {

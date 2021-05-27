@@ -37,6 +37,13 @@ class Common extends Base
     private $customHeaderActions = '';
 
     /**
+     * Name of the template for the empty records list
+     *
+     * @var string
+     */
+    protected $noItemsTemplateName = 'listing-no-items-with-buttons';
+
+    /**
      * Method sets custom actions
      *
      * @param string $actions
@@ -77,7 +84,14 @@ class Common extends Base
      */
     private function listingNoItems(): string
     {
-        return str_replace('{create-page-endpoint}', $this->getCreatePageEndpoint(), $this->getNoItemsContent());
+        $content = $this->getNoItemsContent();
+
+        if (isset($_GET['create-button'])) {
+            $content = str_replace('{buttons}', BootstrapWidgets::get('listing-header-buttons'), $content);
+            $content = str_replace('{create-page-endpoint}', $this->getCreatePageEndpoint(), $content);
+        }
+
+        return $content;
     }
 
     /**

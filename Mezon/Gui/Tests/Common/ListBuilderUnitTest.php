@@ -1,9 +1,11 @@
 <?php
-namespace Mezon\Gui\Tests;
+namespace Mezon\Gui\Tests\Common;
 
 use Mezon\Gui\ListBuilder;
+use Mezon\Gui\Tests\ListBuilderTestsBase;
+use Mezon\Gui\Tests\FakeAdapter;
 
-class CommonListBuilderUnitTest extends ListBuilderTestsBase
+class ListBuilderUnitTest extends ListBuilderTestsBase
 {
 
     /**
