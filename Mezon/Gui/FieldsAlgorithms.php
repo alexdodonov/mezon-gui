@@ -52,7 +52,7 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
 
     /**
      * Supported types
-     * 
+     *
      * @var array
      */
     public static $typeMap = [
@@ -232,7 +232,7 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * @param string $fieldName
      *            Field name
      */
-    public function removeField($fieldName)
+    public function removeField($fieldName): void
     {
         parent::removeField($fieldName);
 
