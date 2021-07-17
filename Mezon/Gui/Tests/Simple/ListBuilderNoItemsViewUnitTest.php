@@ -14,7 +14,7 @@ class ListBuilderNoItemsViewUnitTest extends ListBuilderTestsBase
     public function testNoItemsView(): void
     {
         // setup
-        $listBuilder = new ListBuilder\Common($this->getFields(), new FakeAdapter([]));
+        $listBuilder = new ListBuilder\Simple($this->getFields(), new FakeAdapter([]));
         $listBuilder->setNoItemsView('no items!');
         $listBuilder->listTitle = 'title';
 
