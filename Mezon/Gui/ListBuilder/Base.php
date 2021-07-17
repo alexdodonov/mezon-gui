@@ -49,20 +49,11 @@ class Base
     protected $noItemsTemplateName = 'listing-no-items';
 
     /**
-     * Method returns content for the case when no items were found
+     * No items block name
      *
-     * @return string content for the case when no items were found
+     * @var string
      */
-    protected function getNoItemsContent(): string
-    {
-        return str_replace([
-            '{list-description}',
-            '{list-title}'
-        ], [
-            'Ни одной записи не найдено',
-            $this->listTitle
-        ], BootstrapWidgets::get($this->noItemsTemplateName));
-    }
+    private $noItemsView = '';
 
     /**
      * Constructor
@@ -86,6 +77,34 @@ class Base
         $this->fields = $transformedFields;
 
         $this->listBuilderAdapter = $listBuilderAdapter;
+    }
+
+    /**
+     * Method sets field $noItemsView
+     *
+     * @param string $noItemsView
+     */
+    public function setNoItemsView(string $noItemsView): void
+    {
+        $this->noItemsView = $noItemsView;
+    }
+
+    /**
+     * Method returns content for the case when no items were found
+     *
+     * @return string content for the case when no items were found
+     */
+    protected function getNoItemsContent(): string
+    {
+        return str_replace([
+            '{list-description}',
+            '{list-title}',
+            '{extra-message}'
+        ], [
+            'Ни одной записи не найдено',
+            $this->listTitle,
+            $this->noItemsView
+        ], BootstrapWidgets::get($this->noItemsTemplateName));
     }
 
     /**

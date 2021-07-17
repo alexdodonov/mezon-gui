@@ -17,6 +17,7 @@
                   <div class="x_content">
 					<div class="table-responsive">
 					  {action-message}
+					  {extra-message}
 					</div>
                   </div>
                 </div>

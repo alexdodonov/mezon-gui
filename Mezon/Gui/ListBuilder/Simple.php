@@ -140,20 +140,4 @@ class Simple extends Base
             return $this->getNoItemsContent();
         }
     }
-
-    /**
-     * Method returns content for the case when no items were found
-     *
-     * @return string content for the case when no items were found
-     */
-    protected function getNoItemsContent(): string
-    {
-        return str_replace([
-            '{list-description}',
-            '{list-title}'
-        ], [
-            'Ни одной записи не найдено',
-            $this->listTitle
-        ], BootstrapWidgets::get('listing-no-items'));
-    }
 }

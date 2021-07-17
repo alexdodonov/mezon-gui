@@ -18,6 +18,7 @@
 					<div class="table-responsive">
 					  {action-message}
 					  {buttons}
+					  {extra-message}
 					</div>
                   </div>
                 </div>
