@@ -24,18 +24,6 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
     }
 
     /**
-     * Testing constructor
-     */
-    public function testConstructorValid(): void
-    {
-        // setup and test body
-        $listBuilder = new ListBuilder\Common($this->getFields(), new FakeAdapter());
-
-        // assertions
-        $this->assertIsArray($listBuilder->getFields(), 'Invalid fields list type');
-    }
-
-    /**
      * Combining substrings to assert
      *
      * @param array $specificSubstrings

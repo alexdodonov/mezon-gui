@@ -5,7 +5,7 @@ use Mezon\Gui\ListBuilder;
 use Mezon\Gui\Tests\FakeAdapter;
 use Mezon\Gui\Tests\ListBuilderTestsBase;
 
-class ListBuilderCustomHeaderActionsUnitTest extends ListBuilderTestsBase
+class CustomHeaderActionsUnitTest extends ListBuilderTestsBase
 {
 
     /**

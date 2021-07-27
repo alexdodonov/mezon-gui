@@ -44,6 +44,13 @@ class Common extends Base
     protected $noItemsTemplateName = 'listing-no-items-with-buttons';
 
     /**
+     * Endpoint for create button
+     *
+     * @var string
+     */
+    public $createButtonEndpoint = '';
+
+    /**
      * Method sets custom actions
      *
      * @param string $actions
@@ -70,7 +77,9 @@ class Common extends Base
      */
     private function getCreatePageEndpoint(): string
     {
-        if (isset($_GET['create-page-endpoint'])) {
+        if ($this->createButtonEndpoint !== '') {
+            return $this->createButtonEndpoint;
+        } elseif (isset($_GET['create-page-endpoint'])) {
             return $_GET['create-page-endpoint'];
         }
 
@@ -86,7 +95,7 @@ class Common extends Base
     {
         $content = $this->getNoItemsContent();
 
-        if (isset($_GET['create-button'])) {
+        if (isset($_GET['create-button']) || $this->createButtonEndpoint !== '') {
             $content = str_replace('{buttons}', BootstrapWidgets::get('listing-header-buttons'), $content);
             $content = str_replace('{create-page-endpoint}', $this->getCreatePageEndpoint(), $content);
         }
@@ -221,7 +230,7 @@ class Common extends Base
      */
     private function listingHeaderContent(): string
     {
-        if (@$_GET['create-button'] == 1) {
+        if (@$_GET['create-button'] === 1 || $this->createButtonEndpoint !== '') {
             $content = BootstrapWidgets::get('listing-header');
 
             $content = str_replace('{create-page-endpoint}', $this->getCreatePageEndpoint(), $content);
