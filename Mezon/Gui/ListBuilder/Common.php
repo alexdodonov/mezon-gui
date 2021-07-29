@@ -230,7 +230,7 @@ class Common extends Base
      */
     private function listingHeaderContent(): string
     {
-        if (@$_GET['create-button'] === 1 || $this->createButtonEndpoint !== '') {
+        if (@$_GET['create-button'] == 1 || $this->createButtonEndpoint !== '') {
             $content = BootstrapWidgets::get('listing-header');
 
             $content = str_replace('{create-page-endpoint}', $this->getCreatePageEndpoint(), $content);
