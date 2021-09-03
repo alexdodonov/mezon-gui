@@ -58,7 +58,7 @@ class Select extends \Mezon\Gui\Field
         $content = '<select class="' . $this->class . '"';
         $content .= $this->required ? ' required="required"' : '';
         $content .= ' type="text" name="' . $this->getNamePrefix() . $this->name .
-            ($this->batch ? '[{_creation_form_items_counter}]' : '') . '"';
+            ($this->batch ? '[{_creation_form_items_counter}]' : '') . '" ';
         $content .= $this->disabled ? ' disabled ' : '';
         $content .= $this->toggler === '' ? '' : 'toggler="' . $this->toggler . '" ';
         $content .= $this->toggler === '' ? '' : 'toggle-value="' . $this->toggleValue . '" ';
