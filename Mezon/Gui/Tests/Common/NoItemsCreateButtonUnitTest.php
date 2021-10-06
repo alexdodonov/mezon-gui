@@ -33,6 +33,9 @@ class NoItemsCreateButtonUnitTest extends ListBuilderTestsBase
                 function (): object {
                     // setup
                     $_GET['create-button'] = 1;
+                    if(isset($_GET['create-page-endpoint'])){
+                        unset($_GET['create-page-endpoint']);
+                    }
                     return new ListBuilder\Common($this->getFields(), new FakeAdapter([]));
                 },
                 function ($result): void {
