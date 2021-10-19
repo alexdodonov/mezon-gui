@@ -2,9 +2,11 @@
 namespace Mezon\Gui\FormBuilder\Tests;
 
 use Mezon\Gui\FormBuilder\FormBuilder;
+use Mezon\Gui\FieldsAlgorithms;
+use PHPUnit\Framework\TestCase;
 define('SESSION_ID', 'session-id');
 
-class FormBuilderUnitTest extends \PHPUnit\Framework\TestCase
+class FormBuilderUnitTest extends TestCase
 {
 
     /**
@@ -22,11 +24,11 @@ class FormBuilderUnitTest extends \PHPUnit\Framework\TestCase
     /**
      * Method constructs FieldsAlgorithms object
      *
-     * @return \Mezon\Gui\FieldsAlgorithms Fields algorithms object
+     * @return FieldsAlgorithms Fields algorithms object
      */
     protected function getFieldsAlgorithms()
     {
-        return new \Mezon\Gui\FieldsAlgorithms($this->getJson('form-builder-setup'), 'entity');
+        return new FieldsAlgorithms($this->getJson('form-builder-setup'), 'entity');
     }
 
     /**
@@ -44,42 +46,12 @@ class FormBuilderUnitTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Method returns mock for FormBuilder
-     *
-     * @return object Mock of the object
-     */
-    protected function getFormBuilder(bool $hasLayout = true): object
-    {
-        $formBuilder = $this->getMockBuilder(FormBuilder::class)
-            ->setMethods([
-            'get_external_records'
-        ])
-            ->setConstructorArgs(
-            [
-                $this->getFieldsAlgorithms(),
-                SESSION_ID,
-                'test-record',
-                $hasLayout ? $this->getJson('layout') : []
-            ])
-            ->getMock();
-
-        $formBuilder->method('get_external_records')->willReturn([
-            [
-                'id' => 1,
-                'title' => "Some title"
-            ]
-        ]);
-
-        return $formBuilder;
-    }
-
-    /**
      * Testing creation form
      */
     public function testCreationForm(): void
     {
         // setup
-        $formBuilder = $this->getFormBuilder();
+        $formBuilder = new FormBuilder($this->getFieldsAlgorithms(), SESSION_ID, 'test-record', $this->getJson('layout'));
 
         $this->formHeader(true);
 
@@ -102,7 +74,7 @@ class FormBuilderUnitTest extends \PHPUnit\Framework\TestCase
     public function testUpdatingForm(): void
     {
         // setup
-        $formBuilder = $this->getFormBuilder();
+        $formBuilder = new FormBuilder($this->getFieldsAlgorithms(), SESSION_ID, 'test-record', $this->getJson('layout'));
 
         $this->formHeader(true);
 
@@ -128,7 +100,7 @@ class FormBuilderUnitTest extends \PHPUnit\Framework\TestCase
     {
         // setup
         $_GET['form-width'] = 7;
-        $formBuilder = $this->getFormBuilder(false);
+        $formBuilder = new FormBuilder($this->getFieldsAlgorithms(), SESSION_ID, 'test-record', []);
 
         $this->formHeader(false);
 

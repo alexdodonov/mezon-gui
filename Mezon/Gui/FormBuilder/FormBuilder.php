@@ -1,6 +1,8 @@
 <?php
 namespace Mezon\Gui\FormBuilder;
 
+use Mezon\Gui\FieldsAlgorithms;
+
 /**
  * Class FormBuilder
  *
@@ -57,7 +59,7 @@ class FormBuilder
      *            Batch operations available
      */
     public function __construct(
-        \Mezon\Gui\FieldsAlgorithms $fieldsAlgorithms,
+        FieldsAlgorithms $fieldsAlgorithms,
         string $sessionId = '',
         string $entityName = 'default',
         $layout = false,
