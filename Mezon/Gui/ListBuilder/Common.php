@@ -27,7 +27,7 @@ class Common extends Base
      *
      * @var string
      */
-    private $customActions = null;
+    private $customActions = '';
 
     /**
      * Custom header actions
@@ -122,7 +122,7 @@ class Common extends Base
      */
     private function needActions(): bool
     {
-        if (@$_GET['update-button'] == 1 || @$_GET['delete-button'] == 1 || $this->customActions !== null) {
+        if (@$_GET['update-button'] == 1 || @$_GET['delete-button'] == 1 || $this->customActions !== '') {
             return true;
         }
 
@@ -157,7 +157,7 @@ class Common extends Base
 
             $content = str_replace(
                 '{actions}',
-                $this->customActions === null ? $this->listOfButtons(Fetcher::getField($record, 'id')) : $this->customActions,
+                $this->customActions === '' ? $this->listOfButtons(Fetcher::getField($record, 'id')) : $this->customActions,
                 $content);
         }
 

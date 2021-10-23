@@ -4,9 +4,23 @@ namespace Mezon\Gui\Tests\Common;
 use Mezon\Gui\ListBuilder;
 use Mezon\Gui\Tests\ListBuilderTestsBase;
 use Mezon\Gui\Tests\FakeAdapter;
+use PHPUnit\Framework\TestCase;
 
 class ListBuilderUnitTest extends ListBuilderTestsBase
 {
+
+    /**
+     *
+     * {@inheritdoc}
+     * @see TestCase::setUp()
+     */
+    protected function setUp(): void
+    {
+        if (isset($_GET)) {
+            unset($_GET['update-button']);
+            unset($_GET['delete-button']);
+        }
+    }
 
     /**
      * Method runs string assertions
@@ -67,12 +81,13 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
             [
                 0,
                 [],
-                $this->commonSubstring([
-                    'class="no-items-title"',
-                    '../create/',
-                    'Ни одной записи не найдено',
-                    'Some list title'
-                ])
+                $this->commonSubstring(
+                    [
+                        'class="no-items-title"',
+                        '../create/',
+                        'Ни одной записи не найдено',
+                        'Some list title'
+                    ])
             ]
         ];
     }
