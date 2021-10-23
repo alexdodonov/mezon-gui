@@ -46,15 +46,36 @@ class FormBuilderUnitTest extends TestCase
     }
 
     /**
-     * Testing creation form
+     * Testing data for creation form tests
+     *
+     * @return array testing data
      */
-    public function testCreationForm(): void
+    public function creationFormWidthDataProvider(): array
+    {
+        return [
+            [
+                $this->getJson('layout')
+            ],
+            [
+                []
+            ]
+        ];
+    }
+
+    /**
+     * Testing creation form
+     *
+     * @param array $layout
+     *            layout config
+     * @dataProvider creationFormWidthDataProvider
+     */
+    public function testCreationFormWith(array $layout): void
     {
         // setup
         if (isset($_GET)) {
             unset($_GET['form-width']);
         }
-        $formBuilder = new FormBuilder($this->getFieldsAlgorithms(), SESSION_ID, 'test-record', $this->getJson('layout'));
+        $formBuilder = new FormBuilder($this->getFieldsAlgorithms(), SESSION_ID, 'test-record', $layout);
 
         $this->formHeader(true);
 
