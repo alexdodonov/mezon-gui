@@ -51,6 +51,9 @@ class FormBuilderUnitTest extends TestCase
     public function testCreationForm(): void
     {
         // setup
+        if (isset($_GET)) {
+            unset($_GET['form-width']);
+        }
         $formBuilder = new FormBuilder($this->getFieldsAlgorithms(), SESSION_ID, 'test-record', $this->getJson('layout'));
 
         $this->formHeader(true);
