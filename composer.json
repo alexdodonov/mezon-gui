@@ -19,7 +19,7 @@
 		"php": ">=7.2.0",
 		"mezon/functional": "1.0.*",
 		"mezon/template-engine": "1.0.*",
-		"mezon/security": "1.0.*",
+		"mezon/security": "1.1.*",
 		"mezon/list-builder-adapter": "1.1.*",
 		"mezon/fields-set": "1.0.*",
 		"mezon/field": "1.0.*",

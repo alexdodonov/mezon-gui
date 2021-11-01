@@ -12,6 +12,7 @@ use Mezon\Gui\Field\Select;
 use Mezon\Gui\Field\InputText;
 use Mezon\Gui\Field\Textarea;
 use Mezon\Gui\FormBuilder\RowsField;
+use Mezon\Security\Security;
 
 /**
  * Class FieldsAlgorithms
@@ -138,11 +139,11 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
                 break;
 
             case ('string'):
-                $result = \Mezon\Security\Security::getStringValue($value);
+                $result = Security::getStringValue($value);
                 break;
 
             case ('file'):
-                $result = \Mezon\Security\Security::getFileValue($value, $storeFiles);
+                $result = Security::getFileValue($value, $storeFiles);
                 break;
 
             case ('date'):
