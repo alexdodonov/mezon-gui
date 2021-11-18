@@ -1,7 +1,10 @@
 <?php
 namespace Mezon\Gui\Tests;
 
-class CustomFieldUnitTest extends \PHPUnit\Framework\TestCase
+use Mezon\Gui\Field\CustomField;
+use PHPUnit\Framework\TestCase;
+
+class CustomFieldUnitTest extends TestCase
 {
 
     /**
@@ -11,7 +14,7 @@ class CustomFieldUnitTest extends \PHPUnit\Framework\TestCase
      */
     protected function getFieldMock(): object
     {
-        $mock = $this->getMockBuilder(\Mezon\Gui\Field\CustomField::class)
+        $mock = $this->getMockBuilder(CustomField::class)
             ->setConstructorArgs(
             [
                 [
@@ -29,12 +32,12 @@ class CustomFieldUnitTest extends \PHPUnit\Framework\TestCase
                 ],
                 ''
             ])
-            ->setMethods([
-            'get_field_template'
+            ->onlyMethods([
+            'getFieldTemplate'
         ])
             ->getMock();
 
-        $mock->method('get_field_template')->willReturn(
+        $mock->method('getFieldTemplate')->willReturn(
             'class:{class} name:{name} required:{required} disabled:{disabled} custom:{custom} name-prefix:{name-prefix} batch:{batch} toggler:{toggler} toggler:{toggle-value}');
 
         return $mock;
