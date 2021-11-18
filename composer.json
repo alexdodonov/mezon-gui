@@ -23,7 +23,8 @@
 		"mezon/list-builder-adapter": "1.1.*",
 		"mezon/fields-set": "1.0.*",
 		"mezon/field": "1.0.*",
-		"mezon/http-request-params": "1.0.*"
+		"mezon/http-request-params": "1.0.*",
+		"mezon/infrastructure-layer": "1.1.*"
 	},
 	"support": {
 		"email": "alexey@dodonov.pro",
@@ -40,6 +41,7 @@
 	},
 	"scripts": {
 		"test": "php ./vendor/phpunit/phpunit/phpunit",
-		"psalm": "php ./vendor/vimeo/psalm/psalm --show-info=true --no-cache"
+		"psalm": "php ./vendor/vimeo/psalm/psalm --show-info=true --no-cache",
+		"psalm-self": "php ./vendor/vimeo/psalm/psalm --config=psalm-self.xml --show-info=true --no-cache"
 	}
 }

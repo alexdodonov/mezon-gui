@@ -142,7 +142,7 @@ class Base
     /**
      * Method transforms database record
      *
-     * @param array $record
+     * @param object $record
      *            Transforming record
      * @return object Transformed record
      */

@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Mezon\Gui\FieldsAlgorithms;
 use Mezon\Conf\Conf;
 use Mezon\Fs\Layer;
+use Mezon\Fs\InMemory;
 define('ID_FIELD_NAME', 'id');
 define('TITLE_FIELD_NAME', 'title');
 define('USER_ID_FIELD_NAME', 'user_id');
@@ -26,7 +27,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     protected function setUp(): void
     {
         Conf::setConfigValue('fs/layer', 'mock');
-        Layer::clearFilePutContentsData();
+        InMemory::clearFs();
     }
 
     /**
@@ -156,7 +157,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
             'name' => 'test.txt',
             'file' => '1234'
         ], true);
-        $this->assertEquals($path, Layer::$filePaths[0]);
+        $this->assertEquals(base64_decode('1234'), InMemory::fileGetContents($path));
 
         // assertions external
         $typedValue = $fieldsAlgorithms->getTypedValue(EXTERNAL_TYPE_NAME, [
@@ -317,7 +318,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
 
         // assertions
         $this->assertEquals(11, $record['id'], 'id was not fetched');
-        $this->assertEquals($record['avatar'], Layer::$filePaths[0]);
+        $this->assertEquals(base64_decode('content'), InMemory::fileGetContents($record['avatar']));
         $this->assertEquals(33, $record['balance'], 'balance was not fetched');
     }
 

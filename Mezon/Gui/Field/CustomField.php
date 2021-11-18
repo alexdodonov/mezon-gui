@@ -1,6 +1,8 @@
 <?php
 namespace Mezon\Gui\Field;
 
+use Mezon\TemplateEngine\TemplateEngine;
+
 /**
  * Class CustomField
  *
@@ -64,8 +66,8 @@ class CustomField extends \Mezon\Gui\Field
      */
     public function html(): string
     {
-        return \Mezon\TemplateEngine\TemplateEngine::printRecord(
-            $this->get_field_template(),
+        return TemplateEngine::printRecord(
+            $this->getFieldTemplate(),
             [
                 'name' => $this->name,
                 'name-prefix' => $this->namePrefix,

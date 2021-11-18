@@ -36,8 +36,10 @@ class FormBuilder
 
     /**
      * Layout
+     * 
+     * @var array
      */
-    private $layout = false;
+    private $layout = [];
 
     /**
      * Multiple forms
@@ -47,22 +49,22 @@ class FormBuilder
     /**
      * Constructor
      *
-     * @param \Mezon\Gui\FieldsAlgorithms $fieldsAlgorithms
-     *            Fields algorithms
+     * @param FieldsAlgorithms $fieldsAlgorithms
+     *            fields algorithms
      * @param string $sessionId
-     *            Session id
+     *            session id
      * @param string $entityName
-     *            Entity name
+     *            entity name
      * @param array $layout
-     *            Fields layout
+     *            fields layout
      * @param bool $batch
-     *            Batch operations available
+     *            batch operations available
      */
     public function __construct(
         FieldsAlgorithms $fieldsAlgorithms,
         string $sessionId = '',
         string $entityName = 'default',
-        $layout = false,
+        array $layout = [],
         bool $batch = false)
     {
         $this->fieldsAlgorithms = $fieldsAlgorithms;
@@ -79,7 +81,7 @@ class FormBuilder
     /**
      * Method compiles form without layout
      *
-     * @return string Compiled control
+     * @return string compiled control
      */
     protected function compileForFieldsWithNoLayout(): string
     {
@@ -104,7 +106,7 @@ class FormBuilder
      * Method compiles atoic field
      *
      * @param array $field
-     *            Field description
+     *            field description
      * @param string $name
      *            HTML field name
      * @return string Compiled field
@@ -137,8 +139,8 @@ class FormBuilder
      * Method compiles form with layout
      *
      * @param array $record
-     *            Record
-     * @return string Compiled fields
+     *            record
+     * @return string compiled fields
      */
     protected function compileForFieldsWithLayout(array $record = []): string
     {
@@ -156,13 +158,13 @@ class FormBuilder
     /**
      * Method returns amount of columns in the form
      *
-     * @return string|int Width of the column
+     * @return string|int width of the column
      */
     protected function getFormWidth()
     {
         if (isset($_GET['form-width'])) {
             return intval($_GET['form-width']);
-        } elseif ($this->layout === false || count($this->layout) === 0) {
+        } elseif (empty($this->layout)) {
             return 6;
         } else {
             return $this->layout['width'];
@@ -173,12 +175,12 @@ class FormBuilder
      * Method compiles form fields
      *
      * @param array $record
-     *            Record
-     * @return string Compiled fields
+     *            record
+     * @return string compiled fields
      */
     public function compileFormFields($record = [])
     {
-        if (count($this->layout) === 0) {
+        if (empty($this->layout)) {
             return $this->compileForFieldsWithNoLayout($record);
         } else {
             return $this->compileForFieldsWithLayout($record);
@@ -188,7 +190,7 @@ class FormBuilder
     /**
      * Method compiles creation form
      *
-     * @return string Compiled creation form
+     * @return string compiled creation form
      */
     public function creationForm(): string
     {
@@ -213,10 +215,10 @@ class FormBuilder
      * Method compiles updating form
      *
      * @param string $sessionId
-     *            Session id
+     *            session id
      * @param array $record
-     *            Record to be updated
-     * @return string Compiled updating form
+     *            record to be updated
+     * @return string compiled updating form
      */
     public function updatingForm(string $sessionId, array $record): string
     {
