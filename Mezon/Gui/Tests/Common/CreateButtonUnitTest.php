@@ -5,6 +5,10 @@ use Mezon\Gui\ListBuilder;
 use Mezon\Gui\Tests\ListBuilderTestsBase;
 use Mezon\Gui\Tests\FakeAdapter;
 
+/**
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class CreateButtonUnitTest extends ListBuilderTestsBase
 {
 

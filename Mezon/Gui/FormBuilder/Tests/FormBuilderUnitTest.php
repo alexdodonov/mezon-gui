@@ -6,6 +6,10 @@ use Mezon\Gui\FieldsAlgorithms;
 use PHPUnit\Framework\TestCase;
 define('SESSION_ID', 'session-id');
 
+/**
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class FormBuilderUnitTest extends TestCase
 {
     

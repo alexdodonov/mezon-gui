@@ -3,6 +3,10 @@ namespace Mezon\Gui\Tests;
 
 use PHPUnit\Framework\TestCase;
 
+/**
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class ListBuilderTestsBase extends TestCase
 {
 

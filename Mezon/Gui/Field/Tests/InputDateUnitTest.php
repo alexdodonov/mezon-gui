@@ -1,7 +1,13 @@
 <?php
 namespace Mezon\Gui\Field\Tests;
 
-class InputDateUnitTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+/**
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
+class InputDateUnitTest extends TestCase
 {
 
     /**

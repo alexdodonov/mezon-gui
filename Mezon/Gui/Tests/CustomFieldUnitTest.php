@@ -4,6 +4,10 @@ namespace Mezon\Gui\Tests;
 use Mezon\Gui\Field\CustomField;
 use PHPUnit\Framework\TestCase;
 
+/**
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class CustomFieldUnitTest extends TestCase
 {
 

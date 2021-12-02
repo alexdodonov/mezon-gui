@@ -7,6 +7,10 @@ use Mezon\Transport\Request;
 use Mezon\Gui\Tests\ListBuilderTestsBase;
 use Mezon\Gui\Tests\FakeAdapter;
 
+/**
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class ListBuilderUnitTest extends ListBuilderTestsBase
 {
 
@@ -119,7 +123,7 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
      */
     public function commonBehaviourDataProvider(): array
     {
-        $assert = function ($result): void {
+        $assert = function (string $result): void {
             // asserting method
             $this->assertStringNotContainsString('!1!', $result);
             $this->assertStringNotContainsString('!2!', $result);

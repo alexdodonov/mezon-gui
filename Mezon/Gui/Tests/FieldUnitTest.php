@@ -1,7 +1,13 @@
 <?php
 namespace Mezon\Gui\Tests;
 
-class FieldUnitTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+/**
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
+class FieldUnitTest extends TestCase
 {
 
     /**

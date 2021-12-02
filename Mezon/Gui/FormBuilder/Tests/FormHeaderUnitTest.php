@@ -1,7 +1,14 @@
 <?php
 namespace Mezon\Gui\FormBuilder\Tests;
 
-class FormHeaderUnitTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+use Mezon\Gui\FormBuilder\FormHeader;
+
+/**
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
+class FormHeaderUnitTest extends TestCase
 {
 
     /**
@@ -10,7 +17,7 @@ class FormHeaderUnitTest extends \PHPUnit\Framework\TestCase
     public function testConstructor(): void
     {
         // setup
-        $field = new \Mezon\Gui\FormBuilder\FormHeader([
+        $field = new FormHeader([
             'text' => 'name'
         ]);
 
@@ -27,7 +34,7 @@ class FormHeaderUnitTest extends \PHPUnit\Framework\TestCase
     public function testFillAllRow(): void
     {
         // setup
-        $field = new \Mezon\Gui\FormBuilder\FormHeader([
+        $field = new FormHeader([
             'text' => 'name'
         ]);
 

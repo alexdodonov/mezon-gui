@@ -4,7 +4,6 @@ namespace Mezon\Gui\Tests;
 use PHPUnit\Framework\TestCase;
 use Mezon\Gui\FieldsAlgorithms;
 use Mezon\Conf\Conf;
-use Mezon\Fs\Layer;
 use Mezon\Fs\InMemory;
 define('ID_FIELD_NAME', 'id');
 define('TITLE_FIELD_NAME', 'title');
@@ -16,6 +15,10 @@ define('INTEGER_TYPE_NAME', 'integer');
 define('DATE_TYPE_NAME', 'date');
 define('EXTERNAL_TYPE_NAME', 'external');
 
+/**
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class FieldsAlgorithmsUnitTest extends TestCase
 {
 

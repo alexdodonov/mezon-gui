@@ -1,16 +1,23 @@
 <?php
 namespace Mezon\Gui\WidgetsRegistry\Tests;
 
-class BootstrapWidgetsUnitTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+use Mezon\Gui\WidgetsRegistry\BootstrapWidgets;
+
+/**
+ *
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
+class BootstrapWidgetsUnitTest extends TestCase
 {
 
     /**
      * Getting template
      */
-    public function testGetTemplate()
+    public function testGetTemplate(): void
     {
         // setup
-        $bootstrapWidgets = new \Mezon\Gui\WidgetsRegistry\BootstrapWidgets();
+        $bootstrapWidgets = new BootstrapWidgets();
 
         // test body
         $widget = $bootstrapWidgets->getWidget('table-cell-start');
