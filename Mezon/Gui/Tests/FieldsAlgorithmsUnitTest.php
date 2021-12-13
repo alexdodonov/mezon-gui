@@ -73,7 +73,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Testing invalid construction
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         // setup and test body
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -86,7 +86,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Testing hasCustomFields
      */
-    public function testHasNotCustomFields()
+    public function testHasNotCustomFields(): void
     {
         // setup and test body
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields2(), 'entity');
@@ -99,7 +99,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Testing hasCustomFields
      */
-    public function testHasCustomFields()
+    public function testHasCustomFields(): void
     {
         // setup and test body
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -111,7 +111,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Testing getTypedValue
      */
-    public function testGetTypedValue()
+    public function testGetTypedValue(): void
     {
         // setup and test body
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -179,7 +179,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Test validateFieldExistance method
      */
-    public function testValidateFieldExistance()
+    public function testValidateFieldExistance(): void
     {
         // setup and test body
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -195,7 +195,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Test getSecureValue method
      */
-    public function testGetSecureValue()
+    public function testGetSecureValue(): void
     {
         // setup and test body
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -211,7 +211,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Test getSecureValues method
      */
-    public function testGetSecureValues()
+    public function testGetSecureValues(): void
     {
         // setup and test body
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -233,7 +233,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Test getValuesForPrefix method
      */
-    public function testGetValuesForPrefix()
+    public function testGetValuesForPrefix(): void
     {
         // setup and test body
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -254,7 +254,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Testing 'removeField' method
      */
-    public function testRemoveField()
+    public function testRemoveField(): void
     {
         // setup
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -269,7 +269,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Testing 'fetchCustomField' method for unexisting field
      */
-    public function testFetchCustomFieldUnexistingField()
+    public function testFetchCustomFieldUnexistingField(): void
     {
         // setup
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -285,7 +285,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Testing 'fetchCustomField' method
      */
-    public function testFetchCustomField()
+    public function testFetchCustomField(): void
     {
         // setup
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -302,7 +302,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Testing 'fetchField' method
      */
-    public function testFetchField()
+    public function testFetchField(): void
     {
         // setup
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -328,7 +328,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Testing 'getObject' method
      */
-    public function testGetObject()
+    public function testGetObject(): void
     {
         // setup
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');
@@ -343,7 +343,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
     /**
      * Testing 'getFieldsNames' method
      */
-    public function testGetFieldsNames()
+    public function testGetFieldsNames(): void
     {
         // setup
         $fieldsAlgorithms = new FieldsAlgorithms($this->getFields1(), 'entity');

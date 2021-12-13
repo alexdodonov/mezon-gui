@@ -13,7 +13,7 @@ class FieldUnitTest extends TestCase
     /**
      * Testing constructor
      */
-    public function testNoNameException()
+    public function testNoNameException(): void
     {
         $this->expectException(\Exception::class);
         new \Mezon\Gui\Field([], '');
@@ -22,7 +22,7 @@ class FieldUnitTest extends TestCase
     /**
      * Testing setters
      */
-    public function testNameSetter()
+    public function testNameSetter(): void
     {
         // test body
         $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/conf/name-setter.json'), true), '');
@@ -34,7 +34,7 @@ class FieldUnitTest extends TestCase
     /**
      * Testing setters
      */
-    public function testRequiredSetter()
+    public function testRequiredSetter(): void
     {
         // test body
         $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/conf/required-setter.json'), true), '');
@@ -58,7 +58,7 @@ class FieldUnitTest extends TestCase
     /**
      * Testing setters
      */
-    public function testHasLabelSetter()
+    public function testHasLabelSetter(): void
     {
         // test body
         $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/conf/has-label-setter.json'), true), '');

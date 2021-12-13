@@ -50,7 +50,7 @@ class CustomFieldUnitTest extends TestCase
     /**
      * Testing constructor
      */
-    public function testConstructor()
+    public function testConstructor():void
     {
         // setup
         $field = $this->getFieldMock();
