@@ -27,7 +27,7 @@ class NoItemsCreateButtonUnitTest extends ListBuilderTestsBase
                     unset($_GET['create-button']);
                     return new ListBuilder\Common($this->getFields(), new FakeAdapter([]));
                 },
-                function ($result): void {
+                function (string $result): void {
                     // asserting method
                     $this->assertStringNotContainsString('create-button"', $result);
                 }
@@ -42,7 +42,7 @@ class NoItemsCreateButtonUnitTest extends ListBuilderTestsBase
                     }
                     return new ListBuilder\Common($this->getFields(), new FakeAdapter([]));
                 },
-                function ($result): void {
+                function (string $result): void {
                     // asserting method
                     $this->assertStringContainsString('../create/', $result);
                 }

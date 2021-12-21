@@ -29,7 +29,7 @@ class CustomHeaderActionsUnitTest extends ListBuilderTestsBase
                     $listBuilder->setCustomHeaderActions('custom header actions');
                     return $listBuilder;
                 },
-                function ($result): void {
+                function (string $result): void {
                     // asserting method
                     $this->assertStringContainsString('<form', $result);
                     $this->assertStringContainsString('</form>', $result);
@@ -46,7 +46,7 @@ class CustomHeaderActionsUnitTest extends ListBuilderTestsBase
                     $listBuilder->setCustomHeaderActions('custom header actions');
                     return $listBuilder;
                 },
-                function ($result): void {
+                function (string $result): void {
                     // asserting method
                     $this->assertStringContainsString('<form', $result);
                     $this->assertStringContainsString('</form>', $result);
@@ -63,7 +63,7 @@ class CustomHeaderActionsUnitTest extends ListBuilderTestsBase
                     $listBuilder->setCustomHeaderActions('custom header actions');
                     return $listBuilder;
                 },
-                function ($result): void {
+                function (string $result): void {
                     // asserting method
                     $this->assertStringNotContainsString('<form', $result);
                     $this->assertStringNotContainsString('</form>', $result);

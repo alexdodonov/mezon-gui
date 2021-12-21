@@ -17,6 +17,7 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
      *
      * {@inheritdoc}
      * @see TestCase::setUp()
+     * @psalm-suppress RedundantCondition
      */
     protected function setUp(): void
     {
@@ -151,7 +152,7 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
             return $listBuilder;
         };
 
-        $assert = function ($result): void {
+        $assert = function (string $result): void {
             // asserting method
             $this->assertStringNotContainsString('!1!', $result);
             $this->assertStringNotContainsString('!2!', $result);
@@ -167,7 +168,7 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
             // #0, listingForm
             [
                 $setup,
-                function ($result): void {
+                function (string $result): void {
                     // asserting method
                     $this->assertStringContainsStrings([
                         '!1!',

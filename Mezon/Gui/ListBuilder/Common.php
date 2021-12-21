@@ -107,18 +107,18 @@ class Common extends Base
      * Method displays list of possible buttons
      *
      * @param int $id
-     *            Id of the record
-     * @return string Compiled list buttons
+     *            id of the record
+     * @return string compiled list buttons
      */
     private function listOfButtons(int $id): string
     {
-        return str_replace('{id}', $id, BootstrapWidgets::get('list-of-buttons'));
+        return str_replace('{id}', (string) $id, BootstrapWidgets::get('list-of-buttons'));
     }
 
     /**
      * Need to display actions in list
      *
-     * @return bool Do we need add actions
+     * @return bool do we need add actions
      */
     private function needActions(): bool
     {
@@ -134,7 +134,7 @@ class Common extends Base
      *
      * @param array|object $record
      *            record data
-     * @return string Compiled row
+     * @return string compiled row
      */
     private function listingItemsCells($record): string
     {
@@ -168,8 +168,8 @@ class Common extends Base
      * Method compiles listing items
      *
      * @param array $records
-     *            Listof records
-     * @return string Compiled list items
+     *            listof records
+     * @return string compiled list items
      */
     private function listingItems(array $records): string
     {
@@ -192,7 +192,7 @@ class Common extends Base
     /**
      * Method compiles header cells
      *
-     * @return string Compiled header
+     * @return string compiled header
      */
     private function listingHeaderCells(): string
     {
@@ -225,8 +225,7 @@ class Common extends Base
     /**
      * Method returns listing header content
      *
-     * @param
-     *            string Compiled header
+     * @return string compiled header
      */
     private function listingHeaderContent(): string
     {
@@ -244,7 +243,7 @@ class Common extends Base
     /**
      * Method compiles listing header
      *
-     * @return string Compiled header
+     * @return string compiled header
      */
     private function listingHeader(): string
     {
@@ -264,7 +263,7 @@ class Common extends Base
     /**
      * Method compiles listing form
      *
-     * @return string Compiled listing form
+     * @return string compiled listing form
      */
     public function listingForm(): string
     {
