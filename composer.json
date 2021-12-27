@@ -24,7 +24,7 @@
 		"mezon/fields-set": "1.0.*",
 		"mezon/field": "1.0.*",
 		"mezon/http-request-params": "1.0.*",
-		"mezon/infrastructure-layer": "1.1.*"
+		"mezon/infrastructure-layer": "1.2.*"
 	},
 	"support": {
 		"email": "alexey@dodonov.pro",
