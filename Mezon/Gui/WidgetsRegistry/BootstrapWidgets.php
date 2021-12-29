@@ -14,15 +14,15 @@ namespace Mezon\Gui\WidgetsRegistry;
 /**
  * Bootstrap widgets
  */
-class BootstrapWidgets implements \Mezon\Gui\WidgetsRegistry\WidgetsRegistryBase
+class BootstrapWidgets implements WidgetsRegistryBase
 {
 
     /**
      * Method returns widget
      *
      * @param string $name
-     *            Name of the widget
-     * @return string Widget's HTML code
+     *            name of the widget
+     * @return string widget's HTML code
      */
     public function getWidget(string $name): string
     {
@@ -33,8 +33,8 @@ class BootstrapWidgets implements \Mezon\Gui\WidgetsRegistry\WidgetsRegistryBase
      * Method returns widget
      *
      * @param string $name
-     *            Name of the widget
-     * @return string Widget's HTML code
+     *            name of the widget
+     * @return string widget's HTML code
      */
     public static function get(string $name): string
     {

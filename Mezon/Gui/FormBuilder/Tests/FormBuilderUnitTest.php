@@ -40,7 +40,7 @@ class FormBuilderUnitTest extends TestCase
      *
      * @param bool $flag
      */
-    private function formHeader(bool $flag)
+    private function formHeader(bool $flag):void
     {
         if (! $flag) {
             $_GET['no-header'] = 1;
@@ -72,6 +72,7 @@ class FormBuilderUnitTest extends TestCase
      * @param array $layout
      *            layout config
      * @dataProvider creationFormWidthDataProvider
+     * @psalm-suppress RedundantCondition
      */
     public function testCreationFormWith(array $layout): void
     {

@@ -1,6 +1,9 @@
 <?php
 namespace Mezon\Gui\FormBuilder;
 
+use Mezon\Gui\Field;
+use Mezon\Gui\FieldsAlgorithms;
+
 /**
  * Class RowsField
  *
@@ -14,7 +17,7 @@ namespace Mezon\Gui\FormBuilder;
 /**
  * Rows field control
  */
-class RowsField extends \Mezon\Gui\Field
+class RowsField extends Field
 {
 
     /**
@@ -36,10 +39,10 @@ class RowsField extends \Mezon\Gui\Field
     {
         $rowedField = '';
 
-        $FieldsAlgorithms = new \Mezon\Gui\FieldsAlgorithms($rows, $entityName);
+        $fieldsAlgorithms = new FieldsAlgorithms($rows, $entityName);
 
         foreach (array_keys($rows) as $fieldName) {
-            $control = $FieldsAlgorithms->getObject($fieldName);
+            $control = $fieldsAlgorithms->getObject($fieldName);
             $rowedField .= $control->html();
         }
 

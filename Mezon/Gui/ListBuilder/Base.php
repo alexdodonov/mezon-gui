@@ -18,7 +18,7 @@ class Base
      *
      * @var ListBuilderAdapter
      */
-    private $listBuilderAdapter = false;
+    private $listBuilderAdapter;
 
     /**
      * List item transformation callback
@@ -60,7 +60,7 @@ class Base
      *
      * @param array $fields
      *            List of fields
-     * @param \Mezon\Gui\ListBuilder\ListBuilderAdapter $listBuilderAdapter
+     * @param ListBuilderAdapter $listBuilderAdapter
      *            Adapter for the data source
      */
     public function __construct(array $fields, ListBuilderAdapter $listBuilderAdapter)
