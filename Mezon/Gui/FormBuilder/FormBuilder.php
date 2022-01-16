@@ -222,6 +222,7 @@ class FormBuilder
      */
     public function updatingForm(string $sessionId, array $record): string
     {
+        // TODO $record must object, not array
         if (isset($_GET['no-header'])) {
             $content = file_get_contents(__DIR__ . '/res/templates/updating_form_no_header.tpl');
         } else {
