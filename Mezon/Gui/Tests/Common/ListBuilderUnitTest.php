@@ -5,6 +5,7 @@ use Mezon\Gui\ListBuilder;
 use Mezon\Gui\Tests\ListBuilderTestsBase;
 use Mezon\Gui\Tests\FakeAdapter;
 use PHPUnit\Framework\TestCase;
+use Mezon\Functional\Functional;
 
 /**
  *
@@ -80,7 +81,8 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
                     '>id<',
                     '>1<',
                     '>2<',
-                    '/create-endpoint/'
+                    '/create-endpoint/',
+                    'transformed!'
                 ])
             ],
             [
@@ -115,6 +117,11 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
         $_GET['create-button'] = $createButton;
         $listBuilder = new ListBuilder\Common($this->getFields(), new FakeAdapter($records));
         $listBuilder->listTitle = 'Some list title';
+        $listBuilder->setRecordTransformer(
+            function (object $record): object {
+                Functional::setField($record, 'transformed', 'transformed!');
+                return $record;
+            });
 
         // test body
         $content = $listBuilder->listingForm();

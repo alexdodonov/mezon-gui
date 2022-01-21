@@ -2,6 +2,7 @@
 namespace Mezon\Gui\FormBuilder;
 
 use Mezon\Gui\FieldsAlgorithms;
+use Mezon\Gui\Field;
 
 /**
  * Class FormBuilder
@@ -21,22 +22,28 @@ class FormBuilder
 
     /**
      * Fields algorithms
+     *
+     * @var FieldsAlgorithms
      */
-    private $fieldsAlgorithms = false;
+    private $fieldsAlgorithms;
 
     /**
      * Session id
+     *
+     * @var string
      */
-    private $sessionId = false;
+    private $sessionId = '';
 
     /**
      * Entity name
+     *
+     * @var string
      */
-    private $entityName = false;
+    private $entityName = '';
 
     /**
      * Layout
-     * 
+     *
      * @var array
      */
     private $layout = [];
@@ -81,9 +88,10 @@ class FormBuilder
     /**
      * Method compiles form without layout
      *
+     * @param array $record data
      * @return string compiled control
      */
-    protected function compileForFieldsWithNoLayout(): string
+    protected function compileForFieldsWithNoLayout(array $record): string
     {
         $content = '';
 
@@ -95,7 +103,7 @@ class FormBuilder
             }
 
             $content .= '<div class="form-group ' . $this->entityName . '">' . '<label class="control-label" >' .
-                $field->getTitle() . ($field->isRequired($name) ? ' <span class="required">*</span>' : '') . '</label>' .
+                $field->getTitle() . ($field->isRequired() ? ' <span class="required">*</span>' : '') . '</label>' .
                 $field->html() . '</div>';
         }
 
@@ -109,16 +117,18 @@ class FormBuilder
      *            field description
      * @param string $name
      *            HTML field name
+     * @param array $record
+     *            record
      * @return string Compiled field
      */
-    protected function compileField($field, $name)
+    protected function compileField(array $field, string $name, array $record): string
     {
         $control = $this->fieldsAlgorithms->getCompiledField($name);
 
         $fieldObject = $this->fieldsAlgorithms->getObject($name);
 
         if ($fieldObject->fillAllRow()) {
-            return $control->html();
+            return $control;
         }
 
         if ($fieldObject->isVisible() === false) {
@@ -129,7 +139,7 @@ class FormBuilder
 
         if ($fieldObject->hasLabel()) {
             $content .= '<label class="control-label" style="text-align: left;">' . $fieldObject->getTitle() .
-                ($fieldObject->isRequired($name) ? ' <span class="required">*</span>' : '') . '</label>';
+                ($fieldObject->isRequired() ? ' <span class="required">*</span>' : '') . '</label>';
         }
 
         return $content . $control . '</div>';
@@ -158,14 +168,14 @@ class FormBuilder
     /**
      * Method returns amount of columns in the form
      *
-     * @return string|int width of the column
+     * @return string width of the column
      */
-    protected function getFormWidth()
+    protected function getFormWidth(): string
     {
         if (isset($_GET['form-width'])) {
-            return intval($_GET['form-width']);
+            return $_GET['form-width'];
         } elseif (empty($this->layout)) {
-            return 6;
+            return '6';
         } else {
             return $this->layout['width'];
         }
@@ -175,10 +185,10 @@ class FormBuilder
      * Method compiles form fields
      *
      * @param array $record
-     *            record
+     *            record to be filled
      * @return string compiled fields
      */
-    public function compileFormFields($record = [])
+    public function compileFormFields(array $record): string
     {
         if (empty($this->layout)) {
             return $this->compileForFieldsWithNoLayout($record);
@@ -204,7 +214,7 @@ class FormBuilder
 
         $backLink = isset($_GET['back-link']) ? $_GET['back-link'] : '../list/';
 
-        $content = str_replace('{fields}', $this->compileFormFields(), $content);
+        $content = str_replace('{fields}', $this->compileFormFields([]), $content);
 
         $content = str_replace('{width}', $this->getFormWidth(), $content);
 
@@ -223,6 +233,7 @@ class FormBuilder
     public function updatingForm(string $sessionId, array $record): string
     {
         // TODO $record must object, not array
+        // TODO do we need $sessionId because it is setup in the __construct
         if (isset($_GET['no-header'])) {
             $content = file_get_contents(__DIR__ . '/res/templates/updating_form_no_header.tpl');
         } else {

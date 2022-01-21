@@ -63,7 +63,7 @@ class FakeAdapter implements ListBuilderAdapter
     /**
      *
      * {@inheritdoc}
-     * @see \Mezon\Gui\ListBuilder\ListBuilderAdapter::preprocessListItem($record)
+     * @see ListBuilderAdapter::preprocessListItem($record)
      */
     public function preprocessListItem(object $record): object
     {

@@ -6,6 +6,7 @@ use Mezon\Router\Router;
 use Mezon\Transport\Request;
 use Mezon\Gui\Tests\ListBuilderTestsBase;
 use Mezon\Gui\Tests\FakeAdapter;
+use Mezon\Functional\Functional;
 
 /**
  *
@@ -40,18 +41,6 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
     }
 
     /**
-     * Testing constructor
-     */
-    public function testConstructorValid(): void
-    {
-        // setup and test body
-        $listBuilder = new ListBuilder\Simple($this->getFields(), new FakeAdapter());
-
-        // assertions
-        $this->assertIsArray($listBuilder->getFields(), 'Invalid fields list type');
-    }
-
-    /**
      * Data provider for the testSimpleListingForm
      *
      * @return array test data
@@ -75,7 +64,8 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
                 [
                     '>1<',
                     '>2<',
-                    '{action-message}'
+                    '{action-message}',
+                    'transformed!'
                 ]
             ]
         ];
@@ -95,6 +85,11 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
         // setup
         $listBuilder = new ListBuilder\Simple($this->getFields(), new FakeAdapter($records));
         $listBuilder->listTitle = 'Some list title';
+        $listBuilder->setRecordTransformer(
+            function (object $record): object {
+                Functional::setField($record, 'transformed', 'transformed!');
+                return $record;
+            });
 
         // test body
         $content = $listBuilder->listingForm();

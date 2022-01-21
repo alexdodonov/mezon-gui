@@ -9,7 +9,7 @@ use Mezon\Gui\Tests\ListBuilderTestsBase;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class ListBuilderNoItemsViewUnitTest extends ListBuilderTestsBase
+class NoItemsViewUnitTest extends ListBuilderTestsBase
 {
 
     /**

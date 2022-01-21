@@ -20,7 +20,8 @@ class ListBuilderTestsBase extends TestCase
         return [
             'id',
             'domain_id',
-            'title'
+            'title',
+            'transformed'
         ];
     }
 

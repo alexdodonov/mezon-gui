@@ -1,8 +1,6 @@
 <?php
 namespace Mezon\Gui;
 
-use Mezon\Gui\Field\CheckboxesField;
-use Mezon\Gui\Field\RecordField;
 use Mezon\Gui\Field\InputFile;
 use Mezon\Gui\Field\InputDate;
 use Mezon\Gui\Field\CustomField;
@@ -68,9 +66,9 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Constructor
      *
      * @param array $fields
-     *            List of all fields
+     *            list of all fields
      * @param string $entityName
-     *            Entity name
+     *            entity name
      */
     public function __construct(array $fields = [], string $entityName = '')
     {
@@ -90,8 +88,8 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Returning date value
      *
      * @param string $value
-     *            Value to be made secure
-     * @return string Secure value
+     *            value to be made secure
+     * @return string secure value
      */
     protected function getDateValue(string $value): string
     {
@@ -106,8 +104,8 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Returning date value
      *
      * @param array $value
-     *            Value to be made secure
-     * @return array Secure value
+     *            value to be made secure
+     * @return array secure value
      */
     protected function getExternalValue(array $value): array
     {
@@ -126,8 +124,8 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * @param string|array $value
      *            of the field
      * @param bool $storeFiles
-     *            Need the uploaded file to be stored
-     * @return mixed Secured value
+     *            need the uploaded file to be stored
+     * @return mixed secured value
      */
     public function getTypedValue(string $type, $value, bool $storeFiles = true)
     {
@@ -165,12 +163,12 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Getting secure value
      *
      * @param string $field
-     *            Field name
+     *            field name
      * @param mixed $value
-     *            Field value
+     *            field value
      * @param bool $storeFiles
-     *            Should we store files
-     * @return mixed Secure value of the field
+     *            should we store files
+     * @return mixed secure value of the field
      */
     public function getSecureValue(string $field, $value, bool $storeFiles = true)
     {
@@ -183,12 +181,12 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Getting secure values
      *
      * @param string $field
-     *            Field name
+     *            field name
      * @param mixed $values
-     *            Field values
+     *            field values
      * @param bool $storeFiles
-     *            Should we store files
-     * @return mixed Secure values of the field or one value
+     *            should we store files
+     * @return mixed secure values of the field or one value
      */
     public function getSecureValues(string $field, $values, bool $storeFiles = true)
     {
@@ -209,10 +207,10 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Method returns field wich names are started from $prefix
      *
      * @param string $prefix
-     *            of the fieldsto be fetched
+     *            of the fields to be fetched
      * @param bool $storeFiles
-     *            Should we store files
-     * @return array Fetched fields
+     *            should we store files
+     * @return array fetched fields
      */
     public function getValuesForPrefix(string $prefix, bool $storeFiles = true): array
     {
@@ -231,7 +229,7 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Method removes field
      *
      * @param string $fieldName
-     *            Field name
+     *            field name
      */
     public function removeField($fieldName): void
     {
@@ -246,10 +244,10 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Method fetches returns custom fields for saving
      *
      * @param array $record
-     *            Record to be extended
+     *            record to be extended
      * @param string $name
-     *            Name od the field
-     * @return array Extended record
+     *            name od the field
+     * @return array extended record
      */
     public function fetchCustomField(array &$record, string $name): array
     {
@@ -274,9 +272,9 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Method fetches submitted field
      *
      * @param array $record
-     *            Record to be extended
+     *            record to be extended
      * @param string $name
-     *            Name od the field
+     *            name od the field
      */
     public function fetchField(array &$record, string $name)
     {
@@ -317,8 +315,8 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Method inits control
      *
      * @param array $field
-     *            Field
-     * @return mixed Control
+     *            field
+     * @return mixed control
      */
     protected function initObject(array $field)
     {
@@ -337,10 +335,10 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Method returns field object
      *
      * @param string $name
-     *            Field name
-     * @return \Mezon\Gui\Field Field object
+     *            field name
+     * @return Field field object
      */
-    public function getObject(string $name): \Mezon\Gui\Field
+    public function getObject(string $name): Field
     {
         return $this->fieldObjects[$name];
     }
@@ -349,9 +347,10 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * Method compiles field DOM
      *
      * @param string $name
-     *            Field name
+     *            field name
+     * @return string compiled HTML
      */
-    public function getCompiledField(string $name)
+    public function getCompiledField(string $name): string
     {
         $control = $this->getObject($name);
 
@@ -361,7 +360,7 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
     /**
      * Method returns entity name
      *
-     * @return string
+     * @return string entity name
      */
     public function getEntityName(): string
     {
