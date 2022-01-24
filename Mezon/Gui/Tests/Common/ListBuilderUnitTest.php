@@ -6,6 +6,7 @@ use Mezon\Gui\Tests\ListBuilderTestsBase;
 use Mezon\Gui\Tests\FakeAdapter;
 use PHPUnit\Framework\TestCase;
 use Mezon\Functional\Functional;
+use Mezon\Conf\Conf;
 
 /**
  *
@@ -26,6 +27,8 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
             unset($_GET['update-button']);
             unset($_GET['delete-button']);
         }
+
+        Conf::setConfigStringValue('headers/layer', 'mock');
     }
 
     /**

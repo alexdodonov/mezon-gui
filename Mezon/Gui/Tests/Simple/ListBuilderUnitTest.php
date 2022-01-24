@@ -7,6 +7,7 @@ use Mezon\Transport\Request;
 use Mezon\Gui\Tests\ListBuilderTestsBase;
 use Mezon\Gui\Tests\FakeAdapter;
 use Mezon\Functional\Functional;
+use Mezon\Conf\Conf;
 
 /**
  *
@@ -23,6 +24,8 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
         $router = new Router();
 
         Request::registerRouter($router);
+
+        Conf::setConfigStringValue('headers/layer', 'mock');
     }
 
     /**

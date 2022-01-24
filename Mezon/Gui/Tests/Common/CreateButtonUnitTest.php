@@ -4,6 +4,8 @@ namespace Mezon\Gui\Tests\Common;
 use Mezon\Gui\ListBuilder;
 use Mezon\Gui\Tests\ListBuilderTestsBase;
 use Mezon\Gui\Tests\FakeAdapter;
+use PHPUnit\Framework\TestCase;
+use Mezon\Conf\Conf;
 
 /**
  *
@@ -11,6 +13,17 @@ use Mezon\Gui\Tests\FakeAdapter;
  */
 class CreateButtonUnitTest extends ListBuilderTestsBase
 {
+
+    /**
+     *
+     * {@inheritdoc}
+     * @see TestCase::setUp()
+     * @psalm-suppress RedundantCondition
+     */
+    protected function setUp(): void
+    {
+        Conf::setConfigStringValue('headers/layer', 'mock');
+    }
 
     /**
      * Testing generating create button from setting
