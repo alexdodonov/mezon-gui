@@ -2,6 +2,7 @@
 namespace Mezon\Gui\Field;
 
 use Mezon\TemplateEngine\TemplateEngine;
+use Mezon\Gui\Field;
 
 /**
  * Class CustomField
@@ -10,13 +11,13 @@ use Mezon\TemplateEngine\TemplateEngine;
  * @subpackage CustomField
  * @author Dodonov A.A.
  * @version v.1.0 (2019/09/13)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, http://aeon.su
  */
 
 /**
  * Custom field control
  */
-class CustomField extends \Mezon\Gui\Field
+class CustomField extends Field
 {
 
     /**

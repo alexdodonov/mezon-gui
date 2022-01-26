@@ -3,6 +3,7 @@
 		"type": "integer"
 	},
 	"title": {
+		"has-label": true,
 		"type": "string",
 		"title": "some title"
 	},
@@ -27,7 +28,7 @@
 		"type": "date",
 		"title": "date"
 	},
-	"invisible_field":{
+	"invisible_field": {
 		"type": "string",
 		"title": "invisible field",
 		"visible": 0

@@ -1,6 +1,8 @@
 <?php
 namespace Mezon\Gui\Field;
 
+use Mezon\Gui\Control;
+
 /**
  * Class TextField
  *
@@ -8,13 +10,13 @@ namespace Mezon\Gui\Field;
  * @subpackage TextField
  * @author Dodonov A.A.
  * @version v.1.0 (2019/09/04)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, http://aeon.su
  */
 
 /**
  * Text field control
  */
-class TextField implements \Mezon\Gui\Control
+class TextField implements Control
 {
 
     /**

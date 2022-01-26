@@ -1,6 +1,8 @@
 <?php
 namespace Mezon\Gui\FormBuilder;
 
+use Mezon\Gui\Field\TextField;
+
 /**
  * Class FormHeader
  *
@@ -8,13 +10,13 @@ namespace Mezon\Gui\FormBuilder;
  * @subpackage FormHeader
  * @author Dodonov A.A.
  * @version v.1.0 (2019/09/04)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, http://aeon.su
  */
 
 /**
  * Form header control
  */
-class FormHeader extends \Mezon\Gui\Field\TextField
+class FormHeader extends TextField
 {
 
     /**

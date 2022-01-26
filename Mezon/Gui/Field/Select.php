@@ -1,6 +1,8 @@
 <?php
 namespace Mezon\Gui\Field;
 
+use Mezon\Gui\Field;
+
 /**
  * Class Select
  *
@@ -8,13 +10,13 @@ namespace Mezon\Gui\Field;
  * @subpackage Select
  * @author Dodonov A.A.
  * @version v.1.0 (2019/09/04)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, http://aeon.su
  */
 
 /**
  * Text area control
  */
-class Select extends \Mezon\Gui\Field
+class Select extends Field
 {
 
     /**

@@ -1,6 +1,8 @@
 <?php
 namespace Mezon\Gui\Field;
 
+use Mezon\Gui\Field;
+
 /**
  * Class InputDate
  *
@@ -8,13 +10,13 @@ namespace Mezon\Gui\Field;
  * @subpackage InputDate
  * @author Dodonov A.A.
  * @version v.1.0 (2019/09/13)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, http://aeon.su
  */
 
 /**
  * Input field control
  */
-class InputDate extends \Mezon\Gui\Field
+class InputDate extends Field
 {
 
     /**

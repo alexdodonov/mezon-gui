@@ -11,6 +11,7 @@ use Mezon\Gui\Field\InputText;
 use Mezon\Gui\Field\Textarea;
 use Mezon\Gui\FormBuilder\RowsField;
 use Mezon\Security\Security;
+use Mezon\FieldsSet;
 
 /**
  * Class FieldsAlgorithms
@@ -19,13 +20,13 @@ use Mezon\Security\Security;
  * @subpackage FieldsAlgorithms
  * @author Dodonov A.A.
  * @version v.1.0 (2019/08/08)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, http://aeon.su
  */
 
 /**
  * Class constructs forms
  */
-class FieldsAlgorithms extends \Mezon\FieldsSet
+class FieldsAlgorithms extends FieldsSet
 {
 
     /**
@@ -276,7 +277,7 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
      * @param string $name
      *            name od the field
      */
-    public function fetchField(array &$record, string $name)
+    public function fetchField(array &$record, string $name):void
     {
         if (isset($_POST[$this->entityName . '-' . $name])) {
             $record[$name] = $this->getSecureValue($name, $_POST[$this->entityName . '-' . $name]);
@@ -304,10 +305,15 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
 
                 $field['session-id'] = $this->sessionId;
 
-                return new $className($field);
+                /** @var Control|Field $control */
+                $control = new $className($field);
+
+                return $control;
             } else {
                 return new InputText($field);
             }
+        } else {
+            throw (new \Exception('Can not define control\'s type', - 1));
         }
     }
 
@@ -322,7 +328,7 @@ class FieldsAlgorithms extends \Mezon\FieldsSet
     {
         if (isset($field['control']) && $field['control'] == 'textarea') {
             $control = new Textarea($field);
-        } elseif ($field['type'] == 'rows') {
+        } elseif (isset($field['type']) && $field['type'] == 'rows') {
             $control = new RowsField($field['type']['rows'], $this->entityName);
         } else {
             $control = $this->constructControl($field);

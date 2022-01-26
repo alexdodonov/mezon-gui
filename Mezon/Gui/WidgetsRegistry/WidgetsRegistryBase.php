@@ -8,7 +8,7 @@ namespace Mezon\Gui\WidgetsRegistry;
  * @subpackage WidgetsRegistryBase
  * @author Dodonov A.A.
  * @version v.1.0 (2019/09/02)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, http://aeon.su
  */
 
 /**

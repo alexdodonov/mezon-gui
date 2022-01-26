@@ -12,7 +12,7 @@ define('SESSION_ID', 'session-id');
  */
 class FormBuilderUnitTest extends TestCase
 {
-    
+
     /**
      * Method returns testing data
      *
@@ -24,7 +24,7 @@ class FormBuilderUnitTest extends TestCase
     {
         return json_decode(file_get_contents(__DIR__ . '/conf/' . $name . '.json'), true);
     }
-    
+
     /**
      * Method constructs FieldsAlgorithms object
      *
@@ -34,13 +34,13 @@ class FormBuilderUnitTest extends TestCase
     {
         return new FieldsAlgorithms($this->getJson('form-builder-setup'), 'entity');
     }
-    
+
     /**
      * Setting on and off the form title flag.
      *
      * @param bool $flag
      */
-    private function formHeader(bool $flag):void
+    private function formHeader(bool $flag): void
     {
         if (! $flag) {
             $_GET['no-header'] = 1;
@@ -48,7 +48,7 @@ class FormBuilderUnitTest extends TestCase
             unset($_GET['no-header']);
         }
     }
-    
+
     /**
      * Testing data for creation form tests
      *
@@ -65,7 +65,7 @@ class FormBuilderUnitTest extends TestCase
             ]
         ];
     }
-    
+
     /**
      * Testing creation form
      *
@@ -81,12 +81,12 @@ class FormBuilderUnitTest extends TestCase
             unset($_GET['form-width']);
         }
         $formBuilder = new FormBuilder($this->getFieldsAlgorithms(), SESSION_ID, 'test-record', $layout);
-        
+
         $this->formHeader(true);
-        
+
         // test body
         $content = $formBuilder->creationForm();
-        
+
         // assertions
         $this->assertStringContainsString('<div class="page-title">', $content, 'No form title was found');
         $this->assertStringContainsString('<form', $content, 'No form tag was found');
@@ -96,7 +96,7 @@ class FormBuilderUnitTest extends TestCase
         $this->assertStringContainsString('<option', $content, 'No option tag was found');
         $this->assertStringContainsString('type="file"', $content, 'No file field was found');
     }
-    
+
     /**
      * Common part of the tests testUpdatingFormWithNoHeader and testUpdatingFormWithHeader
      *
@@ -106,12 +106,12 @@ class FormBuilderUnitTest extends TestCase
     {
         // setup
         $formBuilder = new FormBuilder($this->getFieldsAlgorithms(), SESSION_ID, 'test-record', $this->getJson('layout'));
-        
+
         // test body
         $content = $formBuilder->updatingForm('session-id', [
             'id' => '23'
         ]);
-        
+
         // assertions
         $this->assertStringContainsString('<form', $content, 'No form tag was found');
         $this->assertStringContainsString('<textarea', $content, 'No textarea tag was found');
@@ -119,10 +119,10 @@ class FormBuilderUnitTest extends TestCase
         $this->assertStringContainsString('<select', $content, 'No select tag was found');
         $this->assertStringContainsString('<option', $content, 'No option tag was found');
         $this->assertStringContainsString('type="file"', $content, 'No file field was found');
-        
+
         return $content;
     }
-    
+
     /**
      * Testing updating form with no header
      */
@@ -130,12 +130,12 @@ class FormBuilderUnitTest extends TestCase
     {
         // setup
         $_GET['no-header'] = 1;
-        
+
         $content = $this->updatingFormTestCommonPart();
-        
+
         $this->assertStringNotContainsString('<div class="page-title">', $content, 'No form title was found');
     }
-    
+
     /**
      * Testing updating form with header
      */
@@ -145,12 +145,12 @@ class FormBuilderUnitTest extends TestCase
         if (isset($_GET['no-header'])) {
             unset($_GET['no-header']);
         }
-        
+
         $content = $this->updatingFormTestCommonPart();
-        
+
         $this->assertStringContainsString('<div class="page-title">', $content, 'No form title was found');
     }
-    
+
     /**
      * Testing constructor with no form title
      */
@@ -159,12 +159,12 @@ class FormBuilderUnitTest extends TestCase
         // setup
         $_GET['form-width'] = 7;
         $formBuilder = new FormBuilder($this->getFieldsAlgorithms(), SESSION_ID, 'test-record', []);
-        
+
         $this->formHeader(false);
-        
+
         // test body
         $content = $formBuilder->creationForm();
-        
+
         // assertions
         $this->assertStringNotContainsStringIgnoringCase('<div class="page-title"', $content, 'Form title was found');
     }

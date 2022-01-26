@@ -12,7 +12,7 @@ use Mezon\Transport\Request;
  * @subpackage ListBuilder
  * @author Dodonov A.A.
  * @version v.1.0 (2020/12/19)
- * @copyright Copyright (c) 2020, aeon.org
+ * @copyright Copyright (c) 2020, http://aeon.su
  */
 
 /**

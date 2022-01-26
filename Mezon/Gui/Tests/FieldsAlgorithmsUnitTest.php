@@ -58,6 +58,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
      */
     protected function getFields2(): array
     {
+        // TODO move it to the json config
         return [
             ID_FIELD_NAME => [
                 'type' => INTEGER_TYPE_NAME,
@@ -378,5 +379,23 @@ class FieldsAlgorithmsUnitTest extends TestCase
         // assertions
         $this->assertStringContainsString('<input ', $inputField);
         $this->assertStringContainsString('<textarea ', $textareaField);
+    }
+
+    /**
+     * Testing exception in constructor
+     */
+    public function testExceptionInConstructor(): void
+    {
+        // assertions
+        $this->expectException(\Exception::class);
+        $this->expectExceptionCode(- 1);
+        $this->expectExceptionMessage('Can not define control\'s type');
+
+        // setup and test body
+        new FieldsAlgorithms([
+            [
+                'undefined' => []
+            ]
+        ], 'entity');
     }
 }

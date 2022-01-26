@@ -1,6 +1,8 @@
 <?php
 namespace Mezon\Gui\Field;
 
+use Mezon\Gui\Field;
+
 /**
  * Class InputText
  *
@@ -8,13 +10,13 @@ namespace Mezon\Gui\Field;
  * @subpackage InputText
  * @author Dodonov A.A.
  * @version v.1.0 (2019/09/04)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, http://aeon.su
  */
 
 /**
  * Input field control
  */
-class InputText extends \Mezon\Gui\Field
+class InputText extends Field
 {
 
     /**

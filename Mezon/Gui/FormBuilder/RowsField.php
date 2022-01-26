@@ -11,7 +11,7 @@ use Mezon\Gui\FieldsAlgorithms;
  * @subpackage RowsField
  * @author Dodonov A.A.
  * @version v.1.0 (2019/09/22)
- * @copyright Copyright (c) 2019, aeon.org
+ * @copyright Copyright (c) 2019, http://aeon.su
  */
 
 /**
