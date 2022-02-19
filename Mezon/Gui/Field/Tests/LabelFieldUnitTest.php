@@ -2,6 +2,7 @@
 namespace Mezon\Gui\Field\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Mezon\Gui\Field\LabelField;
 
 /**
  *
@@ -13,10 +14,10 @@ class LabelFieldUnitTest extends TestCase
     /**
      * Testing constructor
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         // setup
-        $field = new \Mezon\Gui\Field\LabelField([
+        $field = new LabelField([
             'text' => 'name'
         ]);
 
@@ -36,7 +37,7 @@ class LabelFieldUnitTest extends TestCase
     public function testGetType(): void
     {
         // setup
-        $field = new \Mezon\Gui\Field\LabelField([
+        $field = new LabelField([
             'text' => 'name'
         ]);
 
@@ -50,7 +51,7 @@ class LabelFieldUnitTest extends TestCase
     public function testFillAllRow(): void
     {
         // setup
-        $field = new \Mezon\Gui\Field\LabelField([
+        $field = new LabelField([
             'text' => 'name'
         ]);
 

@@ -2,6 +2,7 @@
 namespace Mezon\Gui\Field\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Mezon\Gui\Field\Textarea;
 
 /**
  *
@@ -13,10 +14,10 @@ class TextareaUnitTest extends TestCase
     /**
      * Testing constructor
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         // setup
-        $field = new \Mezon\Gui\Field\Textarea(
+        $field = new Textarea(
             [
                 'name' => 'name',
                 'required' => 1,

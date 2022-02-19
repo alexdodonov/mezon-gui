@@ -41,7 +41,7 @@ class FieldsAlgorithms extends FieldsSet
      *
      * @var string
      */
-    private $entityName = false;
+    private $entityName = '';
 
     /**
      * Session Id
@@ -138,7 +138,9 @@ class FieldsAlgorithms extends FieldsSet
                 break;
 
             case ('string'):
-                $result = Security::getStringValue($value);
+                if (is_string($value)) {
+                    $result = Security::getStringValue($value);
+                }
                 break;
 
             case ('file'):
@@ -146,11 +148,15 @@ class FieldsAlgorithms extends FieldsSet
                 break;
 
             case ('date'):
-                $result = $this->getDateValue($value);
+                if (is_string($value)) {
+                    $result = $this->getDateValue($value);
+                }
                 break;
 
             case ('external'):
-                $result = $this->getExternalValue($value);
+                if (is_array($value)) {
+                    $result = $this->getExternalValue($value);
+                }
                 break;
 
             default:
@@ -277,7 +283,7 @@ class FieldsAlgorithms extends FieldsSet
      * @param string $name
      *            name od the field
      */
-    public function fetchField(array &$record, string $name):void
+    public function fetchField(array &$record, string $name): void
     {
         if (isset($_POST[$this->entityName . '-' . $name])) {
             $record[$name] = $this->getSecureValue($name, $_POST[$this->entityName . '-' . $name]);

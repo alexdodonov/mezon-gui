@@ -2,6 +2,7 @@
 namespace Mezon\Gui\Field\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Mezon\Gui\Field\InputDate;
 
 /**
  *
@@ -13,10 +14,10 @@ class InputDateUnitTest extends TestCase
     /**
      * Testing constructor
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         // setup
-        $field = new \Mezon\Gui\Field\InputDate(
+        $field = new InputDate(
             [
                 'name' => 'name',
                 'required' => 1,

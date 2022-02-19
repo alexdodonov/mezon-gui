@@ -2,6 +2,7 @@
 namespace Mezon\Gui\Field\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Mezon\Gui\Field\Select;
 
 /**
  *
@@ -37,10 +38,10 @@ class SelectUnitTest extends TestCase
     /**
      * Testing constructor
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         // setupp
-        $field = new \Mezon\Gui\Field\Select($this->getSettings(), '');
+        $field = new Select($this->getSettings(), '');
 
         // test bodyy
         $content = $field->html();
@@ -58,12 +59,12 @@ class SelectUnitTest extends TestCase
     /**
      * Testing constructor with type wich is defaulted to integer
      */
-    public function testConstructorWithDefaultedType()
+    public function testConstructorWithDefaultedType(): void
     {
         // setup
         $settings = $this->getSettings();
         unset($settings['type']);
-        $field = new \Mezon\Gui\Field\Select($settings, '');
+        $field = new Select($settings, '');
 
         // test body and assertions
         $this->assertEquals('integer', $field->getType());

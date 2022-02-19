@@ -2,6 +2,7 @@
 namespace Mezon\Gui\Field\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Mezon\Gui\FormBuilder\RowsField;
 
 /**
  *
@@ -13,10 +14,10 @@ class RowsFieldUnitTest extends TestCase
     /**
      * Testing constructor
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         // setupp
-        $field = new \Mezon\Gui\FormBuilder\RowsField([
+        $field = new RowsField([
             'title' => [
                 'type' => 'string'
             ]

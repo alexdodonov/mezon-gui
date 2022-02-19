@@ -2,6 +2,7 @@
 namespace Mezon\Gui\Field\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Mezon\Gui\Field\TextField;
 
 /**
  *
@@ -13,10 +14,10 @@ class TextFieldUnitTest extends TestCase
     /**
      * Testing constructor
      */
-    public function testConstructor()
+    public function testConstructor():void
     {
         // setup
-        $field = new \Mezon\Gui\Field\TextField([
+        $field = new TextField([
             'text' => 'name'
         ]);
 
@@ -33,7 +34,7 @@ class TextFieldUnitTest extends TestCase
     public function testFillAllRow(): void
     {
         // setupp
-        $field = new \Mezon\Gui\Field\TextField([
+        $field = new TextField([
             'text' => 'name'
         ]);
 
