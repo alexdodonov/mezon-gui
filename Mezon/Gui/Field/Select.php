@@ -22,7 +22,7 @@ class Select extends Field
     /**
      * Control items
      *
-     * @var array
+     * @var array|callable
      */
     protected $items = [];
 
@@ -40,14 +40,7 @@ class Select extends Field
 
         parent::__construct($fieldDescription, $value);
 
-        $itemsSource = $fieldDescription['items'];
-
-        if (is_string($itemsSource) && function_exists($itemsSource)) {
-            // callback function forms a list of items
-            $this->items = $itemsSource();
-        } else {
-            $this->items = $itemsSource;
-        }
+        $this->items = $fieldDescription['items'];
     }
 
     /**
@@ -58,15 +51,23 @@ class Select extends Field
     public function html(): string
     {
         $content = '<select class="' . $this->class . '"';
-        $content .= $this->required ? ' required="required"' : '';
-        $content .= ' type="text" name="' . $this->getNamePrefix() . $this->name .
-            ($this->batch ? '[{_creation_form_items_counter}]' : '') . '" ';
+        $content .= $this->isRequired() ? ' required="required"' : '';
+        $content .= ' type="text" name="' . $this->getNamePrefix() . $this->getName() .
+            ($this->isBatch() ? '[{_creation_form_items_counter}]' : '') . '" ';
         $content .= $this->disabled ? ' disabled ' : '';
         $content .= $this->toggler === '' ? '' : 'toggler="' . $this->toggler . '" ';
         $content .= $this->toggler === '' ? '' : 'toggle-value="' . $this->toggleValue . '" ';
         $content .= 'value="' . $this->value . '">';
 
-        foreach ($this->items as $id => $title) {
+        $itemSource = $this->items;
+
+        if ((is_string($itemSource) && function_exists($itemSource)) || is_callable($itemSource)) {
+            $items = $itemSource();
+        } else {
+            $items = $itemSource;
+        }
+
+        foreach ($items as $id => $title) {
             $content .= '<option value="' . $id . '">' . $title . '</option>';
         }
 

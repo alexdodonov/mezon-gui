@@ -27,9 +27,9 @@ class InputText extends Field
     public function html(): string
     {
         $content = '<input class="'.$this->class.'"';
-        $content .= $this->required ? ' required="required"' : '';
-        $content .= ' type="text" name="' . $this->getNamePrefix() . $this->name .
-            ($this->batch ? '[{_creation_form_items_counter}]' : '') . '"';
+        $content .= $this->isRequired() ? ' required="required"' : '';
+        $content .= ' type="text" name="' . $this->getNamePrefix() . $this->getName() .
+            ($this->isBatch() ? '[{_creation_form_items_counter}]' : '') . '"';
         $content .= $this->disabled ? ' disabled ' : '';
         $content .= $this->toggler === '' ? '' : 'toggler="' . $this->toggler . '" ';
         $content .= $this->toggler === '' ? '' : 'toggle-value="' . $this->toggleValue . '"';

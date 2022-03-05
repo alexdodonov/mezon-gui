@@ -69,4 +69,27 @@ class SelectUnitTest extends TestCase
         // test body and assertions
         $this->assertEquals('integer', $field->getType());
     }
+
+    /**
+     * Testing constructor when records are fetched from data source
+     */
+    public function testConstructorWithDataSource(): void
+    {
+        // setup
+        $settings = $this->getSettings();
+        $settings['items'] = function (): array {
+            return [
+                '2' => '222',
+                '3' => '333'
+            ];
+        };
+        $field = new Select($settings, '');
+
+        // test body
+        $content = $field->html();
+
+        // assertions
+        $this->assertStringContainsString('<option value="2"', $content);
+        $this->assertStringContainsString('<option value="3"', $content);
+    }
 }

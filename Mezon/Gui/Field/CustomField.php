@@ -50,10 +50,10 @@ class CustomField extends Field
     protected function getFieldTemplate(): string
     {
         // @codeCoverageIgnoreStart
-        $content = file_get_contents('./res/templates/field-' . $this->name . '.tpl');
+        $content = file_get_contents('./res/templates/field-' . $this->getName() . '.tpl');
 
         if ($content === false) {
-            throw (new \Exception('Template field-' . $this->name . '.tpl was not found'));
+            throw (new \Exception('Template field-' . $this->getName() . '.tpl was not found'));
         }
 
         return $content;
@@ -70,12 +70,12 @@ class CustomField extends Field
         return TemplateEngine::printRecord(
             $this->getFieldTemplate(),
             [
-                'name' => $this->name,
+                'name' => $this->getName(),
                 'name-prefix' => $this->namePrefix,
                 'disabled' => $this->disabled ? 1 : 0,
-                'batch' => $this->batch ? 1 : 0,
-                'custom' => $this->custom,
-                'required' => $this->required ? 1 : 0,
+                'batch' => $this->isBatch() ? 1 : 0,
+                'custom' => $this->isCustom(),
+                'required' => $this->isRequired() ? 1 : 0,
                 'toggler' => $this->toggler,
                 'toggle-value' => $this->toggleValue,
                 'class' => $this->class

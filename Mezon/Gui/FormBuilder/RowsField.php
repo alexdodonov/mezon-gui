@@ -57,16 +57,16 @@ class RowsField extends Field
     public function html(): string
     {
         $content = '<div><div class="form-group col-md-12">';
-        $content .= '<button class="btn btn-success col-md-2" onclick="add_element_by_template( this , \'' . $this->name .
+        $content .= '<button class="btn btn-success col-md-2" onclick="add_element_by_template( this , \'' . $this->getName() .
             '\' )">+</button>';
         $content .= '</div></div>';
 
         $content = str_replace('{_creation_form_items_counter}', '0', $content);
 
-        $content .= '<template class="' . $this->name . '"><div>';
+        $content .= '<template class="' . $this->getName() . '"><div>';
         $content .= $this->rowedField;
         $content .= '<div class="form-group col-md-12">';
-        $content .= '<button class="btn btn-success col-md-2" onclick="add_element_by_template( this , \'' . $this->name .
+        $content .= '<button class="btn btn-success col-md-2" onclick="add_element_by_template( this , \'' . $this->getName() .
             '\' );">+</button>';
         $content .= '<button class="btn btn-danger col-md-2" onclick="remove_element_by_template( this );">-</button>';
         $content .= '</div></div>';
