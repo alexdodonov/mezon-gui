@@ -35,9 +35,11 @@ class ListBuilderTestsBase extends TestCase
         return [
             [
                 'id' => 1,
+                'title' => 'title!'
             ],
             [
                 'id' => 2,
+                'title' => 'title!'
             ]
         ];
     }

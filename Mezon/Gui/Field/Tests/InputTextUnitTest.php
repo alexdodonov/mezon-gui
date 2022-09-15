@@ -35,13 +35,12 @@ class InputTextUnitTest extends TestCase
         $content = $field->html();
 
         // assertions
-        $this->assertStringContainsString('<input ', $content);
+        $this->assertStringContainsString('<input class="cls"', $content);
         $this->assertStringContainsString('type="text"', $content);
         $this->assertStringContainsString('name="prefix-name[{_creation_form_items_counter}]"', $content);
         $this->assertStringContainsString('required="required"', $content);
         $this->assertStringContainsString('disabled', $content);
         $this->assertStringContainsString('toggler="toggler-name"', $content);
         $this->assertStringContainsString('toggle-value="3"', $content);
-        $this->assertStringContainsString('class="cls"', $content);
     }
 }

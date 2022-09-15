@@ -2,7 +2,6 @@
 namespace Mezon\Gui\FormBuilder;
 
 use Mezon\Gui\FieldsAlgorithms;
-use Mezon\Gui\Field;
 
 /**
  * Class FormBuilder
@@ -205,12 +204,12 @@ class FormBuilder
     public function creationForm(): string
     {
         if (isset($_GET['no-header'])) {
-            $content = file_get_contents(__DIR__ . '/res/templates/creation_form_no_header.tpl');
+            $content = file_get_contents(__DIR__ . '/Res/Templates/creation_form_no_header.tpl');
         } else {
-            $content = file_get_contents(__DIR__ . '/res/templates/creation_form_header.tpl');
+            $content = file_get_contents(__DIR__ . '/Res/Templates/creation_form_header.tpl');
         }
 
-        $content .= file_get_contents(__DIR__ . '/res/templates/creation_form.tpl');
+        $content .= file_get_contents(__DIR__ . '/Res/Templates/creation_form.tpl');
 
         $backLink = isset($_GET['back-link']) ? $_GET['back-link'] : '../list/';
 
@@ -235,12 +234,12 @@ class FormBuilder
         // TODO $record must object, not array
         // TODO do we need $sessionId because it is setup in the __construct
         if (isset($_GET['no-header'])) {
-            $content = file_get_contents(__DIR__ . '/res/templates/updating_form_no_header.tpl');
+            $content = file_get_contents(__DIR__ . '/Res/Templates/updating_form_no_header.tpl');
         } else {
-            $content = file_get_contents(__DIR__ . '/res/templates/updating_form_header.tpl');
+            $content = file_get_contents(__DIR__ . '/Res/Templates/updating_form_header.tpl');
         }
 
-        $content .= file_get_contents(__DIR__ . '/res/templates/updating_form.tpl');
+        $content .= file_get_contents(__DIR__ . '/Res/Templates/updating_form.tpl');
 
         $this->sessionId = $sessionId;
         $this->fieldsAlgorithms->setSessionId($sessionId);

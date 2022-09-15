@@ -25,7 +25,7 @@ class FieldUnitTest extends TestCase
     public function testNameSetter(): void
     {
         // test body
-        $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/conf/name-setter.json'), true), '');
+        $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/Conf/name-setter.json'), true), '');
 
         // assertions
         $this->assertStringContainsString('prefixfield-name000', $field->html(), 'Invalid field "name" value');
@@ -37,7 +37,7 @@ class FieldUnitTest extends TestCase
     public function testRequiredSetter(): void
     {
         // test body
-        $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/conf/required-setter.json'), true), '');
+        $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/Conf/required-setter.json'), true), '');
 
         // assertions
         $this->assertStringContainsString('prefixfield-name1111select2', $field->html(), 'Invalid field "name" value');
@@ -61,7 +61,7 @@ class FieldUnitTest extends TestCase
     public function testHasLabelSetter(): void
     {
         // test body
-        $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/conf/has-label-setter.json'), true), '');
+        $field = new \Mezon\Gui\Field(json_decode(file_get_contents(__DIR__ . '/Conf/has-label-setter.json'), true), '');
 
         // assertions
         $this->assertTrue($field->hasLabel());

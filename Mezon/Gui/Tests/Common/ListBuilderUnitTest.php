@@ -23,11 +23,6 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
      */
     protected function setUp(): void
     {
-        if (isset($_GET)) {
-            unset($_GET['update-button']);
-            unset($_GET['delete-button']);
-        }
-
         Conf::setConfigStringValue('headers/layer', 'mock');
     }
 

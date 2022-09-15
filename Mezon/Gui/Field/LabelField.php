@@ -25,7 +25,7 @@ class LabelField extends TextField
     public function html(): string
     {
         $content = '<div class="form-group col-md-12">';
-        $content .= '<label class="control-label">' . $this->text . '</label>';
+        $content .= '<label class="control-label">' . $this->value . '</label>';
 
         return $content . '</div>';
     }

@@ -38,6 +38,6 @@ class BootstrapWidgets implements WidgetsRegistryBase
      */
     public static function get(string $name): string
     {
-        return file_get_contents(__DIR__ . '/res/templates/' . $name . '.tpl');
+        return file_get_contents(__DIR__ . '/Res/Templates/' . $name . '.tpl');
     }
 }

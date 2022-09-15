@@ -1,7 +1,10 @@
 {
 	"source": {
 		"directories": [
-			"./Mezon/"
+			"./Mezon/Gui/",
+			"./Mezon/Gui/Field",
+			"./Mezon/Gui/FormBuilder",
+			"./Mezon/Gui/WidgetsRegistry"
 		],
 		"excludes": [
 			"Tests"
@@ -17,21 +20,6 @@
 		"perMutator": "\/tmp\/per-mutator-log.txt"
 	},
 	"mutators": {
-		"@default": true,
-		"DecrementInteger": {
-			"ignore": [
-				"Mezon\\Rules\\AnyRuleFromSet::validate::32"
-			]
-		},
-		"GreaterThan": {
-			"ignore": [
-				"Mezon\\Rules\\AnyRuleFromSet::validate::41"
-			]
-		},
-		"LogicalAnd": {
-			"ignore": [
-				"Mezon\\Rules\\MoreThanOneCharFromSet::validate::54"
-			]
-		}
+		"@default": true
 	}
 }

@@ -2,6 +2,10 @@
 	"id": {
 		"type": "integer"
 	},
+	"label": {
+		"type": "label",
+		"text": "some text"
+	},
 	"title": {
 		"has-label": true,
 		"type": "string",

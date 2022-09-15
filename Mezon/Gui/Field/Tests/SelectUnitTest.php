@@ -40,20 +40,19 @@ class SelectUnitTest extends TestCase
      */
     public function testConstructor(): void
     {
-        // setupp
+        // setup
         $field = new Select($this->getSettings(), '');
 
-        // test bodyy
+        // test body
         $content = $field->html();
 
-        // assertionss
-        $this->assertStringContainsString('<select ', $content);
+        // assertions
+        $this->assertStringContainsString('<select class="cls"', $content);
         $this->assertStringContainsString('name="prefix-name[{_creation_form_items_counter}]"', $content);
         $this->assertStringContainsString('required="required"', $content);
         $this->assertStringContainsString('disabled', $content);
         $this->assertStringContainsString('toggler="toggler-name"', $content);
         $this->assertStringContainsString('toggle-value="3"', $content);
-        $this->assertStringContainsString('class="cls"', $content);
     }
 
     /**

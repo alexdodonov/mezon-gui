@@ -27,7 +27,7 @@ class FormHeader extends TextField
     public function html(): string
     {
         $content = '<div class="form-group col-md-12">';
-        $content .= strlen($this->text) ? '<h3>' . $this->text . '</h3>' : '';
+        $content .= strlen($this->value) ? '<h3>' . $this->value . '</h3>' : '';
 
         return $content . '</div>';
     }

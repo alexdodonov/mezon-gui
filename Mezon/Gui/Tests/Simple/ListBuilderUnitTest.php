@@ -29,79 +29,6 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
     }
 
     /**
-     * Method runs string assertions
-     *
-     * @param array $asserts
-     *            asserts
-     * @param string $content
-     *            content to assert
-     */
-    protected function runAssertions(array $asserts, string $content): void
-    {
-        foreach ($asserts as $assert) {
-            $this->assertStringContainsString($assert, $content);
-        }
-    }
-
-    /**
-     * Data provider for the testSimpleListingForm
-     *
-     * @return array test data
-     */
-    public function simpleListingFormDataProvider(): array
-    {
-        return [
-            // #0, no records
-            [
-                [],
-                [
-                    'class="no-items-title"',
-                    '{action-message}',
-                    'Ни одной записи не найдено',
-                    'Some list title'
-                ]
-            ],
-            // #1, no records
-            [
-                $this->getRecords(),
-                [
-                    '>1<',
-                    '>2<',
-                    '{action-message}',
-                    'transformed!'
-                ]
-            ]
-        ];
-    }
-
-    /**
-     * Testing listing form
-     *
-     * @param array $records
-     *            records to display
-     * @param array $asserts
-     *            asserts
-     * @dataProvider simpleListingFormDataProvider
-     */
-    public function testSimpleListingForm(array $records, array $asserts): void
-    {
-        // setup
-        $listBuilder = new ListBuilder\Simple($this->getFields(), new FakeAdapter($records));
-        $listBuilder->listTitle = 'Some list title';
-        $listBuilder->setRecordTransformer(
-            function (object $record): object {
-                Functional::setField($record, 'transformed', 'transformed!');
-                return $record;
-            });
-
-        // test body
-        $content = $listBuilder->listingForm();
-
-        // assertions
-        $this->runAssertions($asserts, $content);
-    }
-
-    /**
      * Asserting that string contains substrings
      *
      * @param array $needles
@@ -140,13 +67,19 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
                 function (string $result) use ($assert) {
                     $assert($result);
 
-                    $this->assertStringContainsStrings([
-                        '>id<',
-                        '>1<',
-                        '>2<',
-                        'List Title',
-                        'List Description'
-                    ], $result);
+                    $this->assertRegExp('/\/thead[\S\s]*\/td[\S\s]*\/tbody/m', $result);
+
+                    $this->assertStringContainsStrings(
+                        [
+                            'style="text-align: center; width:5%;">id<',
+                            'td style="text-align: center;">1<',
+                            'td style="text-align: center;">2<',
+                            '>title<',
+                            '{action-message}',
+                            'List Title',
+                            'List Description'
+                        ],
+                        $result);
                 }
             ],
             // #1, listingForm, default title and description
@@ -158,15 +91,52 @@ class ListBuilderUnitTest extends ListBuilderTestsBase
                 function (string $result) use ($assert) {
                     $assert($result);
 
+                    $this->assertStringContainsStrings([
+                        'Список записей',
+                        'Выберите необходимое действие'
+                    ], $result);
+                }
+            ],
+            // #2, listingForm, no records
+            [
+                function (): object {
+                    // setup method
+                    $listBuilder = new ListBuilder\Simple($this->getFields(), new FakeAdapter([]));
+                    $listBuilder->listTitle = 'Some list title';
+                    return $listBuilder;
+                },
+                function (string $result) use ($assert) {
+                    $assert($result);
+
                     $this->assertStringContainsStrings(
                         [
-                            '>id<',
-                            '>1<',
-                            '>2<',
-                            'Список записей',
-                            'Выберите необходимое действие'
+                            'class="no-items-title"',
+                            '{action-message}',
+                            'Ни одной записи не найдено',
+                            'Some list title'
                         ],
                         $result);
+                }
+            ],
+            // #3, listingForm, transformation
+            [
+                function (): object {
+                    // setup method
+                    $listBuilder = new ListBuilder\Simple($this->getFields(), new FakeAdapter($this->getRecords()));
+                    $listBuilder->listTitle = 'Some list title';
+                    $listBuilder->setRecordTransformer(
+                        function (object $record): object {
+                            Functional::setField($record, 'transformed', 'transformed!');
+                            return $record;
+                        });
+                    return $listBuilder;
+                },
+                function (string $result) use ($assert) {
+                    $assert($result);
+
+                    $this->assertStringContainsStrings([
+                        'transformed!'
+                    ], $result);
                 }
             ]
         ];

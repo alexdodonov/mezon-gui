@@ -22,59 +22,6 @@ class Simple extends Base
 {
 
     /**
-     * Method compiles listing items cells
-     *
-     * @return string Compiled row
-     */
-    private function listingItemsCells(): string
-    {
-        $content = '';
-
-        foreach (array_keys($this->getFields()) as $name) {
-            if ($name == 'domain_id') {
-                continue;
-            }
-            if ($name == 'id') {
-                $content .= BootstrapWidgets::get('listing-row-centered-cell');
-            } else {
-                $content .= BootstrapWidgets::get('listing-row-cell');
-            }
-            $content = str_replace('{name}', '{' . $name . '}', $content);
-        }
-
-        return $content;
-    }
-
-    /**
-     * Method compiles header cells
-     *
-     * @return string Compiled header
-     */
-    private function listingHeaderCells(): string
-    {
-        $content = '';
-
-        foreach ($this->getFields() as $name => $data) {
-            if ($name == 'domain_id') {
-                continue;
-            }
-
-            $idStyle = $name == 'id' ? 'style="text-align: center; width:5%;"' : '';
-
-            $content .= BootstrapWidgets::get('listing-header-cell');
-            $content = str_replace([
-                '{id-style}',
-                '{title}'
-            ], [
-                $idStyle,
-                $data['title']
-            ], $content);
-        }
-
-        return $content;
-    }
-
-    /**
      * Method compiles listing header
      *
      * @return string Compiled header

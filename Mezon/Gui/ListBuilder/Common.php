@@ -1,7 +1,6 @@
 <?php
 namespace Mezon\Gui\ListBuilder;
 
-use Mezon\Functional\Fetcher;
 use Mezon\Gui\WidgetsRegistry\BootstrapWidgets;
 use Mezon\TemplateEngine\TemplateEngine;
 use Mezon\Transport\Request;
@@ -49,6 +48,20 @@ class Common extends Base
      * @var string
      */
     public $createButtonEndpoint = '';
+
+    /**
+     * Do we need to add update button
+     *
+     * @var boolean
+     */
+    public $updateButton = false;
+
+    /**
+     * Do we need to add delete button
+     *
+     * @var boolean
+     */
+    public $deleteButton = false;
 
     /**
      * Method sets custom actions
@@ -106,13 +119,21 @@ class Common extends Base
     /**
      * Method displays list of possible buttons
      *
-     * @param int $id
-     *            id of the record
      * @return string compiled list buttons
      */
-    private function listOfButtons(int $id): string
+    private function listOfButtons(): string
     {
-        return str_replace('{id}', (string) $id, BootstrapWidgets::get('list-of-buttons'));
+        $content = '';
+
+        if ($this->updateButton || @$_GET['update-button']) {
+            $content = BootstrapWidgets::get('update-button');
+        }
+
+        if ($this->deleteButton || @$_GET['delete-button']) {
+            $content .= BootstrapWidgets::get('delete-button');
+        }
+
+        return $content;
     }
 
     /**
@@ -122,7 +143,8 @@ class Common extends Base
      */
     private function needActions(): bool
     {
-        if (@$_GET['update-button'] == 1 || @$_GET['delete-button'] == 1 || $this->customActions !== '') {
+        if (@$_GET['update-button'] == 1 || @$_GET['delete-button'] == 1 || $this->customActions !== '' ||
+            $this->deleteButton || $this->updateButton) {
             return true;
         }
 
@@ -130,34 +152,20 @@ class Common extends Base
     }
 
     /**
-     * Method compiles listing items cells
+     * Method compiles row actions
      *
-     * @param array|object $record
-     *            record data
      * @return string compiled row
      */
-    private function listingItemsCells($record): string
+    private function listingRowActions(): string
     {
         $content = '';
 
-        foreach (array_keys($this->getFields()) as $name) {
-            if ($name == 'domain_id') {
-                continue;
-            }
-            if ($name == 'id') {
-                $content .= BootstrapWidgets::get('listing-row-centered-cell');
-            } else {
-                $content .= BootstrapWidgets::get('listing-row-cell');
-            }
-            $content = str_replace('{name}', '{' . $name . '}', $content);
-        }
-
         if ($this->needActions()) {
-            $content .= BootstrapWidgets::get('listing-actions');
+            $content = BootstrapWidgets::get('listing-actions');
 
             $content = str_replace(
                 '{actions}',
-                $this->customActions === '' ? $this->listOfButtons(Fetcher::getField($record, 'id')) : $this->customActions,
+                $this->customActions === '' ? $this->listOfButtons() : $this->customActions,
                 $content);
         }
 
@@ -177,7 +185,11 @@ class Common extends Base
 
         foreach ($records as $record) {
             $content .= BootstrapWidgets::get('listing-row');
-            $content = str_replace('{items}', $this->listingItemsCells($record), $content);
+
+            $items = parent::listingItemsCells();
+            $items .= $this->listingRowActions();
+
+            $content = str_replace('{items}', $items, $content);
 
             $record = $this->transformRecord($record);
 
@@ -194,26 +206,9 @@ class Common extends Base
      *
      * @return string compiled header
      */
-    private function listingHeaderCells(): string
+    protected function listingHeaderCells(): string
     {
-        $content = '';
-
-        foreach ($this->getFields() as $name => $data) {
-            if ($name == 'domain_id') {
-                continue;
-            }
-
-            $idStyle = $name == 'id' ? 'style="text-align: center; width:5%;"' : '';
-
-            $content .= BootstrapWidgets::get('listing-header-cell');
-            $content = str_replace([
-                '{id-style}',
-                '{title}'
-            ], [
-                $idStyle,
-                $data['title']
-            ], $content);
-        }
+        $content = parent::listingHeaderCells();
 
         if ($this->needActions()) {
             $content .= BootstrapWidgets::get('listing-header-actions');

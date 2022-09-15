@@ -16,17 +16,17 @@ class RowsFieldUnitTest extends TestCase
      */
     public function testConstructor(): void
     {
-        // setupp
+        // setup
         $field = new RowsField([
             'title' => [
                 'type' => 'string'
             ]
         ], 'author');
 
-        // test bodyy
+        // test body
         $content = $field->html();
 
-        // assertionss
+        // assertions
         $this->assertStringContainsString('add_element_by_template', $content, 'Necessary JavaScripts were not found');
     }
 
@@ -35,14 +35,14 @@ class RowsFieldUnitTest extends TestCase
      */
     public function testFillAllRow(): void
     {
-        // setupp
+        // setup
         $field = new \Mezon\Gui\FormBuilder\RowsField([
             'title' => [
                 'type' => 'string'
             ]
         ], 'author');
 
-        // test body and assertionss
+        // test body and assertions
         $this->assertTrue($field->fillAllRow());
     }
 }

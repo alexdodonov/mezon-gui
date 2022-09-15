@@ -22,7 +22,7 @@ class FormBuilderUnitTest extends TestCase
      */
     protected function getJson(string $name): array
     {
-        return json_decode(file_get_contents(__DIR__ . '/conf/' . $name . '.json'), true);
+        return json_decode(file_get_contents(__DIR__ . '/Conf/' . $name . '.json'), true);
     }
 
     /**
@@ -88,13 +88,13 @@ class FormBuilderUnitTest extends TestCase
         $content = $formBuilder->creationForm();
 
         // assertions
-        $this->assertStringContainsString('<div class="page-title">', $content, 'No form title was found');
-        $this->assertStringContainsString('<form', $content, 'No form tag was found');
-        $this->assertStringContainsString('<textarea', $content, 'No textarea tag was found');
-        $this->assertStringContainsString('<input', $content, 'No input tag was found');
-        $this->assertStringContainsString('<select', $content, 'No select tag was found');
-        $this->assertStringContainsString('<option', $content, 'No option tag was found');
-        $this->assertStringContainsString('type="file"', $content, 'No file field was found');
+        $this->assertStringContainsString('<div class="page-title">', $content);
+        $this->assertStringContainsString('<form', $content);
+        $this->assertStringContainsString('<textarea', $content);
+        $this->assertStringContainsString('<input', $content);
+        $this->assertStringContainsString('<select', $content);
+        $this->assertStringContainsString('<option', $content);
+        $this->assertStringContainsString('type="file"', $content);
     }
 
     /**
@@ -113,12 +113,12 @@ class FormBuilderUnitTest extends TestCase
         ]);
 
         // assertions
-        $this->assertStringContainsString('<form', $content, 'No form tag was found');
-        $this->assertStringContainsString('<textarea', $content, 'No textarea tag was found');
-        $this->assertStringContainsString('<input', $content, 'No input tag was found');
-        $this->assertStringContainsString('<select', $content, 'No select tag was found');
-        $this->assertStringContainsString('<option', $content, 'No option tag was found');
-        $this->assertStringContainsString('type="file"', $content, 'No file field was found');
+        $this->assertStringContainsString('<form', $content);
+        $this->assertStringContainsString('<textarea', $content);
+        $this->assertStringContainsString('<input', $content);
+        $this->assertStringContainsString('<select', $content);
+        $this->assertStringContainsString('<option', $content);
+        $this->assertStringContainsString('type="file"', $content);
 
         return $content;
     }
@@ -133,7 +133,7 @@ class FormBuilderUnitTest extends TestCase
 
         $content = $this->updatingFormTestCommonPart();
 
-        $this->assertStringNotContainsString('<div class="page-title">', $content, 'No form title was found');
+        $this->assertStringNotContainsString('<div class="page-title">', $content);
     }
 
     /**
@@ -148,7 +148,7 @@ class FormBuilderUnitTest extends TestCase
 
         $content = $this->updatingFormTestCommonPart();
 
-        $this->assertStringContainsString('<div class="page-title">', $content, 'No form title was found');
+        $this->assertStringContainsString('<div class="page-title">', $content);
     }
 
     /**
@@ -166,6 +166,6 @@ class FormBuilderUnitTest extends TestCase
         $content = $formBuilder->creationForm();
 
         // assertions
-        $this->assertStringNotContainsStringIgnoringCase('<div class="page-title"', $content, 'Form title was found');
+        $this->assertStringNotContainsStringIgnoringCase('<div class="page-title"', $content);
     }
 }

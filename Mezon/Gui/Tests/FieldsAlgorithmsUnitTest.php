@@ -48,7 +48,7 @@ class FieldsAlgorithmsUnitTest extends TestCase
      */
     protected function getFields1(): array
     {
-        return json_decode(file_get_contents(__DIR__ . '/conf/setup.json'), true);
+        return json_decode(file_get_contents(__DIR__ . '/Conf/setup.json'), true);
     }
 
     /**

@@ -22,6 +22,10 @@ class CreateButtonUnitTest extends ListBuilderTestsBase
      */
     protected function setUp(): void
     {
+        if (isset($_GET)) {
+            $_GET = [];
+        }
+
         Conf::setConfigStringValue('headers/layer', 'mock');
     }
 
@@ -41,6 +45,8 @@ class CreateButtonUnitTest extends ListBuilderTestsBase
         $content = $listBuilder->listingForm();
 
         // assertions
-        $this->assertStringContainsString("/create-endpoint-from-setting/", $content);
+        $this->assertStringContainsString('/create-endpoint-from-setting/', $content);
+        $this->assertStringNotContainsString('../update/1/', $content);
+        $this->assertStringNotContainsString('../delete/1/', $content);
     }
 }

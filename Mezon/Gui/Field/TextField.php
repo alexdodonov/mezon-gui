@@ -2,6 +2,7 @@
 namespace Mezon\Gui\Field;
 
 use Mezon\Gui\Control;
+use Mezon\Gui\Field;
 
 /**
  * Class TextField
@@ -16,15 +17,8 @@ use Mezon\Gui\Control;
 /**
  * Text field control
  */
-class TextField implements Control
+class TextField extends Field implements Control
 {
-
-    /**
-     * Text content
-     *
-     * @var string
-     */
-    protected $text = '';
 
     /**
      * Constructor
@@ -35,7 +29,7 @@ class TextField implements Control
     public function __construct(array $fieldDescription)
     {
         if (isset($fieldDescription['text'])) {
-            $this->text = $fieldDescription['text'];
+            $this->value = $fieldDescription['text'];
         }
     }
 
@@ -46,7 +40,7 @@ class TextField implements Control
      */
     public function html(): string
     {
-        return $this->text;
+        return $this->value;
     }
 
     /**

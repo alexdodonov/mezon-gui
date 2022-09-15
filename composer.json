@@ -44,9 +44,13 @@
 		"test": "php ./vendor/phpunit/phpunit/phpunit",
 		"psalm": "php ./vendor/vimeo/psalm/psalm --show-info=true --no-cache",
 		"psalm-self": "php ./vendor/vimeo/psalm/psalm --config=psalm-self.xml --show-info=true --no-cache",
-		"infection" : "php ./vendor/infection/infection/bin/infection --threads=4 --min-msi=32"
+		"infection" : "php ./vendor/infection/infection/bin/infection --threads=4 --min-msi=75",
+		"debug": "php ./vendor/phpunit/phpunit/phpunit --order-by=random --random-order-seed 1663261638"
 	},
 	"config": {
-		"process-timeout": 0
+		"process-timeout": 0,
+		"allow-plugins": {
+			"infection/extension-installer": true
+		}
 	}
 }

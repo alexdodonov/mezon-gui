@@ -1,0 +1,1 @@
+<a href="../update/{id}/" class="btn btn-warning fa fa-pencil" title="Редактирование"></a>
